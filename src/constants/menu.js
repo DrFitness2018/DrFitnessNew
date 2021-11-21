@@ -42,7 +42,7 @@ const data = [
     subs: [
       {
         id: 'pages-authorization',
-        label: 'Abc',
+        label: 'menu.authorization',
         to: '/user',
         subs: [
           {
@@ -381,6 +381,24 @@ const data = [
     label: 'BMI',
     to: `${adminRoot}/blank-page`,
   },
+
+  {
+    icon: 'iconsminds-dumbbell',
+    label: 'Exercise',
+    to: `${adminRoot}/exercise`,
+    subs: [
+      {
+        icon: 'iconsminds-aerobics',
+        label: 'Exercises to Lean Weight',
+        to: `${adminRoot}/exercise/exerciseLean`,
+      },
+      {
+        icon: 'iconsminds-weight-lift', 
+        label: 'Exercises to Gain Weight',
+        to: `${adminRoot}/exercise/exerciseGain`,
+      },
+    ],
+  },
   // {
   //   id: 'docs',
   //   icon: 'iconsminds-library',
@@ -389,4 +407,5 @@ const data = [
   //   newWindow: true,
   // },
 ];
+
 export default data;

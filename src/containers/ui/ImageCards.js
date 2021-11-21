@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React from 'react';
 import {
   CardText,
@@ -8,85 +9,51 @@ import {
   CardTitle,
   CardImg,
   Badge,
+  Button
 } from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { Colxx } from 'components/common/CustomBootstrap';
 
-const ImageCards = () => {
+const ImageCards = (props) => {
   return (
     <Row>
       <Colxx xxs="12">
         <CardTitle className="mb-4">
-          <IntlMessages id="cards.image-card" />
+          {props.mainTitle}
         </CardTitle>
-        <Row>
           <Colxx xxs="12" xs="6" lg="4">
             <Card className="mb-4">
               <div className="position-relative">
                 <CardImg
                   top
-                  src="/assets/img/cards/thumb-1.jpg"
-                  alt="Card image cap"
+                  src={props.image}
+                  alt=""
                 />
                 <Badge
-                  color="primary"
-                  pill
-                  className="position-absolute badge-top-left"
-                >
-                  NEW
-                </Badge>
-                <Badge
-                  color="secondary"
+                  color="success"
                   pill
                   className="position-absolute badge-top-left-2"
                 >
-                  TRENDING
+                  {props.badge}
                 </Badge>
               </div>
               <CardBody>
+                <CardTitle>
+                  {props.title}
+                </CardTitle>
                 <CardSubtitle className="mb-4">
-                  Homemade Cheesecake with Fresh Berries and Mint
+                  {props.discription}
                 </CardSubtitle>
-                <CardText className="text-muted text-small mb-0 font-weight-light">
-                  09.04.2018
-                </CardText>
+                <div className="d-flex justify-content-end">
+                <Button color="success" className="mb-2"
+                onClick={()=>{props.history.push(props.link)}}
+                >
+                  Start Plan
+              </Button>
+                </div>
               </CardBody>
             </Card>
           </Colxx>
-          <Colxx xxs="12" xs="6" lg="4">
-            <Card className="mb-4">
-              <CardBody>
-                <CardSubtitle className="mb-4">
-                  Homemade Cheesecake with Fresh Berries and Mint
-                </CardSubtitle>
-                <CardText className="text-muted text-small mb-0 font-weight-light">
-                  09.04.2018
-                </CardText>
-              </CardBody>
-              <div className="position-relative">
-                <CardImg
-                  bottom
-                  src="/assets/img/cards/thumb-1.jpg"
-                  alt="Card image cap"
-                />
-                <Badge
-                  color="primary"
-                  pill
-                  className="position-absolute badge-top-left"
-                >
-                  NEW
-                </Badge>
-                <Badge
-                  color="secondary"
-                  pill
-                  className="position-absolute badge-top-left-2"
-                >
-                  TRENDING
-                </Badge>
-              </div>
-            </Card>
-          </Colxx>
-        </Row>
       </Colxx>
     </Row>
   );

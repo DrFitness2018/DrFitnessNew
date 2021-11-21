@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { Suspense } from 'react';
 import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -19,6 +20,11 @@ const Menu = React.lazy(() => import(/* webpackChunkName: "menu" */ './menu'));
 const BlankPage = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './blank-page')
 );
+
+const Exercise = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './exercise')
+);
+
 
 const App = ({ match }) => {
   return (
@@ -59,6 +65,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/blank-page`}
               render={(props) => <BlankPage {...props} />}
+            />
+            <Route
+              path={`${match.url}/exercise`}
+              render={(props) => <Exercise {...props} />}
             />
             <Redirect to="/error" />
           </Switch>

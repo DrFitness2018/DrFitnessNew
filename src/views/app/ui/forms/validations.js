@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import { Row } from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';

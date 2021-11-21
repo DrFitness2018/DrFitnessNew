@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserLayout from 'layout/UserLayout';

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useEffect } from 'react';
 import { Row, Card, CardTitle } from 'reactstrap';
 import { NavLink } from 'react-router-dom';

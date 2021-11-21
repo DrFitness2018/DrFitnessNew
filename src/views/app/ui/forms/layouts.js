@@ -1,3 +1,6 @@
+/* eslint-disable */
+/* eslint-disable */
+/*eslint-disable*/
 import React, { useState } from 'react';
 import {
   Row,

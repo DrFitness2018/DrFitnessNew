@@ -24,6 +24,24 @@ const BlankPage = React.lazy(() =>
 const Exercise = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './exercise')
 );
+const Appointment = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './appointment')
+);
+const Inbox = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './Chat')
+);
+const Diet = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './dietplan')
+);
+const Consult = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './Consultant')
+);
+const Video = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './videoChat')
+);
+const Feedback = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './feedback')
+);
 
 
 const App = ({ match }) => {
@@ -69,6 +87,30 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/exercise`}
               render={(props) => <Exercise {...props} />}
+            />
+            <Route
+              path={`${match.url}/appointment`}
+              render={(props) => <Appointment {...props} />}
+            />
+            <Route
+              path={`${match.url}/chatInbox`}
+              render={(props) => <Inbox {...props} />}
+            />
+            <Route
+              path={`${match.url}/dietplan`}
+              render={(props) => <Diet {...props} />}
+            />
+            <Route
+              path={`${match.url}/Consultant`}
+              render={(props) => <Consult {...props} />}
+            />
+            <Route
+              path={`${match.url}/videoChat`}
+              render={(props) => <Video {...props} />}
+            />
+            <Route
+              path={`${match.url}/feedback`}
+              render={(props) => <Feedback {...props} />}
             />
             <Redirect to="/error" />
           </Switch>

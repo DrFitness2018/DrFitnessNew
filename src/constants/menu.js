@@ -383,6 +383,7 @@ const data = [
   },
 
   {
+    id: 'ex',
     icon: 'iconsminds-dumbbell',
     label: 'Exercise',
     to: `${adminRoot}/exercise`,
@@ -398,6 +399,66 @@ const data = [
         to: `${adminRoot}/exercise/exerciseGain`,
       },
     ],
+  },
+  {
+    id: 'di',
+    icon: 'iconsminds-apple',
+    label: 'Diet Plans',
+    to: `${adminRoot}/dietplan`,
+    subs: [
+      {
+        icon: 'iconsminds-glass-water', 
+        label: 'Diet for Lean Weight',
+        to: `${adminRoot}/dietplan/leanDiet`,
+      },
+      {
+        icon: 'iconsminds-fish',
+        label: 'Diet for Gain Weight',
+        to: `${adminRoot}/dietplan/gainDiet`,
+      },
+    ],
+  },
+  {
+    id: 'cons',
+    icon: 'iconsminds-consulting',
+    label: 'Consultancy',
+    to: `${adminRoot}/Consultant`,
+    subs: [
+      {
+        icon: 'iconsminds-doctor',
+        label: 'Doctors',
+        to: `${adminRoot}/Consultant/doctors`,
+      },
+      {
+        icon: 'iconsminds-female        ',
+        label: 'Fitness Trainers',
+        to: `${adminRoot}/Consultant/gymTrainers`,
+      },
+    ],
+  },
+  {
+    id: 'feed',
+    icon: 'simple-icon-envelope-open    ',
+    label: 'Feedback',
+    to: `${adminRoot}/feedback`,
+  },
+  {
+    id: 'ch',
+    icon: 'simple-icon-speech    ',
+    label: 'Chat',
+    to: `${adminRoot}/chatInbox`,
+  },
+  {
+    id: 'app',
+    icon: 'iconsminds-letter-open    ',
+    label: 'Appointments',
+    to: `${adminRoot}/appointment`,
+  },
+  {
+    id: 'live',
+    icon: 'iconsminds-video-5    ',
+    label: 'Live Consultancy',
+    to: `${adminRoot}/videoChat`,
   },
   // {
   //   id: 'docs',

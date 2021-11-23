@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { adminRoot } from './defaultValues';
 
 const data = [
@@ -390,13 +391,13 @@ const data = [
     subs: [
       {
         icon: 'iconsminds-aerobics',
-        label: 'Exercises to Lean Weight',
-        to: `${adminRoot}/exercise/exerciseLean`,
+        label: 'Exercises to Gain Weight',
+        to: `${adminRoot}/exercise/exerciseGain`,
       },
       {
         icon: 'iconsminds-weight-lift', 
-        label: 'Exercises to Gain Weight',
-        to: `${adminRoot}/exercise/exerciseGain`,
+        label: 'Exercises to Lean Weight',
+        to: `${adminRoot}/exercise/exerciseLean`,
       },
     ],
   },

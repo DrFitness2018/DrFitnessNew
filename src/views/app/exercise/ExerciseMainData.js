@@ -1,6 +1,10 @@
 /*eslint-disable*/ 
 import img1 from '../../../Images/lambi8.jpg'
+import img1L from '../../../Images/lambi7.jpg'
+import LoseMen from '../../../Images/losebellymen.jpg'
+import LoseWoMen from '../../../Images/losebellywomen.jpg'
 import img2 from '../../../Images/fullbody.jpg'
+import yogas from '../../../Images/yoga2.jpg'
 import img3 from '../../../Images/lowerbody.jpg'
 import img4 from '../../../Images/Beginner/abs.jpg'
 import img5 from '../../../Images/Beginner/chest.jpg'
@@ -26,6 +30,22 @@ export const gain = [
         btnlink:'#'
     }
 ]
+export const Lean = [
+    {
+        img:img1L,
+        heading:'Want to Lose weight in 30 Days?',
+        subheading:'Try these Exercises and Lean Weight',
+        btnlink:'#'
+    }
+]
+export const yoga = [
+    {
+        img:yogas,
+        heading:'Yoga to loose weight',
+        subheading:'Daily Yoga 30 Days',
+        btnlink:'#'
+    }
+]
 export const challenges = [
     {
         img:img2,
@@ -39,6 +59,21 @@ export const challenges = [
         subheading:'7X4 CHALLENGE',
         btnlink:'#'
     }
+]
+export const challengesLean = [
+    {
+        img:LoseMen,
+        heading:'Loose Belly Fat',
+        subheading:'For Men',
+        btnlink:'#'
+    },
+    {
+        img:LoseWoMen,
+        heading:'Loose Belly Fat',
+        subheading:'For Women',
+        btnlink:'#'
+    }
+   
 ]
 export const beginner = [
     {

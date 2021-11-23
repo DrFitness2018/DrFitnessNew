@@ -6,7 +6,7 @@ import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import ImageCards from 'containers/ui/ImageCards';
 import ImageLambi from '../../../Images/lambi7.jpg'
-import { Advance, beginner, challenges, gain, Intermediate } from './ExerciseMainData';
+import { Lean, challengesLean, yoga  } from './ExerciseMainData';
 
 const ExerciseLean = ({ match }) => {
   return (
@@ -18,7 +18,7 @@ const ExerciseLean = ({ match }) => {
         </Colxx>
       </Row>
       <Row>
-          {gain.map((item) => {
+          {Lean.map((item) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
@@ -30,7 +30,7 @@ const ExerciseLean = ({ match }) => {
 
       </Row>
       <Row>
-          {challenges.map((item) => {
+          {challengesLean.map((item) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
@@ -41,32 +41,9 @@ const ExerciseLean = ({ match }) => {
         
 
       </Row>
+
       <Row>
-          {beginner.map((item) => {
-            return (
-
-              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
-            );
-          })}
-
-        
-
-      </Row>
-      <Row>
-          {Intermediate.map((item) => {
-            return (
-
-              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
-            );
-          })}
-
-        
-
-      </Row>
-      <Row>
-          {Advance.map((item) => {
+          {yoga.map((item) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'

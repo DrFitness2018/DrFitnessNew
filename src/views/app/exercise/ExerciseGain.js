@@ -4,7 +4,11 @@ import { Row } from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
-
+import { Advance, beginner, challenges, gain, Intermediate } from './ExerciseMainData';
+// import { Colxx, Separator } from 'components/common/CustomBootstrap';
+// import Breadcrumb from 'containers/navs/Breadcrumb';
+import ImageCards from 'containers/ui/ImageCards';
+import ImageLambi from '../../../Images/lambi7.jpg'
 const ExerciseGain = ({ match }) => {
   return (
     <>
@@ -15,11 +19,64 @@ const ExerciseGain = ({ match }) => {
         </Colxx>
       </Row>
       <Row>
-        <Colxx xxs="12" className="mb-4">
-          <p>
-          ExerciseGain
-          </p>
-        </Colxx>
+          {gain.map((item) => {
+            return (
+
+              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            );
+          })}
+
+        
+
+      </Row>
+      <Row>
+          {challenges.map((item) => {
+            return (
+
+              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            );
+          })}
+
+        
+
+      </Row>
+      <Row>
+          {beginner.map((item) => {
+            return (
+
+              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            );
+          })}
+
+        
+
+      </Row>
+      <Row>
+          {Intermediate.map((item) => {
+            return (
+
+              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            );
+          })}
+
+        
+
+      </Row>
+      <Row>
+          {Advance.map((item) => {
+            return (
+
+              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            );
+          })}
+
+        
+
       </Row>
     </>
   );

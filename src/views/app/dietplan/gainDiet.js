@@ -10,10 +10,9 @@ import {
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import GlideComponent from 'components/carousel/GlideComponent';
-import img1 from '../../../Images/Foods/diet/gain30days.jpg';
-import img1P from '../../../Images/Foods/diet/lean30days.jpg';
-import img1C from '../../../Images/Foods/diet/bal.jpg';
-
+import img1 from '../../../assets/Images/Foods/diet/gain30days.jpg';
+import img1P from '../../../assets/Images/Foods/diet/lean30days.jpg';
+import img1C from '../../../assets/Images/Foods/diet/bal1.jpg';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { CardHeader, Nav, NavItem, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';

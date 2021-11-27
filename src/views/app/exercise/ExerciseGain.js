@@ -9,6 +9,7 @@ import { Advance, beginner, challenges, gain, Intermediate } from './ExerciseMai
 // import Breadcrumb from 'containers/navs/Breadcrumb';
 import ImageCards from 'containers/ui/ImageCards';
 import ImageLambi from '../../../Images/lambi7.jpg'
+import GlideComponent from 'components/carousel/GlideComponent';
 const ExerciseGain = ({ match }) => {
   return (
     <>
@@ -43,16 +44,28 @@ const ExerciseGain = ({ match }) => {
 
       </Row>
       <Row>
+      <GlideComponent
+            settings={{
+              gap: 10,
+              perView: 2,
+              type: 'carousel',
+              breakpoints: {
+                600: { perView: 1 },
+                1400: { perView: 2 },
+              },
+            }}
+          >
           {beginner.map((item) => {
             return (
-
+              <>
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
                 title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+            </>
             );
           })}
 
         
-
+</GlideComponent>
       </Row>
       <Row>
           {Intermediate.map((item) => {

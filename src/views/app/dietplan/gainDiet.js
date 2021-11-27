@@ -1,18 +1,24 @@
 /*eslint-disable*/
 import React, { useState } from 'react';
-import { Collapse, Row, Button, ButtonGroup, Badge, FormGroup, CustomInput } from 'reactstrap';
+import {
+  Collapse,
+  Row,
+  Button,
+  FormGroup,
+  CustomInput,
+} from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import GlideComponent from 'components/carousel/GlideComponent';
-import img1L from '../../../Images/lambi7.jpg';
-import img1P from '../../../Images/lambi8.jpg';
-import img1C from '../../../Images/lambi5.jpg';
-// import img1L from '../../../'
+import img1 from '../../../Images/Foods/diet/gain30days.jpg';
+import img1P from '../../../Images/Foods/diet/lean30days.jpg';
+import img1C from '../../../Images/Foods/diet/bal.jpg';
+
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { CardHeader, Nav, NavItem, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import {DietDay1} from "./dietMainData"
+import { DietDay1 } from './dietMainData';
 // import ImageCardList from 'containers/ui/ImageCardList';
 
 const GainDiet = ({ match }) => {
@@ -49,22 +55,22 @@ const GainDiet = ({ match }) => {
               );
             })} */}
             <BasicCarouselItem
-              title="ABC"
-              img={img1L}
-              detail="Very Good"
+              title="Gain Weight"
+              img={img1}
+              detail="A 30 Days Meal Plan for Weight Gain"
               badges="Trending"
               btn={() => setCollapse(!collapse)}
             />
             <BasicCarouselItem
-              title="ABC"
+              title="Lean Weight"
               img={img1P}
-              detail="Very Good"
+              detail="A 30 Days Meal Plan for Weight Lean"
               badges="Trending"
             />
             <BasicCarouselItem
-              title="ABC"
+              title="Balanced Diet"
               img={img1C}
-              detail="Very Good"
+              detail="A Balanced Diet Plan For every One"
               badges="Trending"
             />
           </GlideComponent>
@@ -168,7 +174,9 @@ const GainDiet = ({ match }) => {
                                     height: '70px',
                                     borderRadius: '50%',
                                   }}
-                                  onClick={()=>{setCollapseD(!collapseD) }}
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                  }}
                                 >
                                   Day1
                                 </Button>
@@ -245,20 +253,19 @@ const GainDiet = ({ match }) => {
                         </Colxx>
                         <Colxx>
                           <div className="mt-4 container">
-                            
-          <Collapse isOpen={collapseD}>
-            {
-              DietDay1.map((diets,id)=>{
-                  return(
-                    <>
-                             <ImageCardList FoodTime={diets.FoodTime} img={diets.img} Description={diets.Description} />
-
-                    </>
-
-                  )
-              })
-            }
-          </Collapse>
+                            <Collapse isOpen={collapseD}>
+                              {DietDay1.map((diets, id) => {
+                                return (
+                                  <>
+                                    <ImageCardList
+                                      FoodTime={diets.FoodTime}
+                                      img={diets.img}
+                                      Description={diets.Description}
+                                    />
+                                  </>
+                                );
+                              })}
+                            </Collapse>
                           </div>
                         </Colxx>
                       </Row>
@@ -317,15 +324,17 @@ const BasicCarouselItem = ({ title, img, detail, badges, btn }) => {
         </div>
         <div className="w-50">
           <CardBody>
-            <h6 className="mb-4">{title}</h6>
-            <footer>
+            <center><h6 className="mb-4 ">{title}</h6></center>
+            <Button color="outline-primary" onClick={btn} className="mb-1">
+              Start Plan
+            </Button>
+            <footer className="mt-2">
               <p className="text-muted text-small mb-0 font-weight-light">
                 {detail}
               </p>
+      
             </footer>
-            <Button color="primary" onClick={btn} className="mb-1">
-              Start
-            </Button>
+       
           </CardBody>
         </div>
       </Card>
@@ -337,8 +346,7 @@ const ImageCardList = (props) => {
   return (
     <Row>
       <Colxx xxs="12">
-        <CardTitle className="mb-4">
-        </CardTitle>
+        <CardTitle className="mb-4"></CardTitle>
         <Row>
           <Colxx xxs="12">
             <Card className="d-flex flex-row mb-3">
@@ -346,28 +354,26 @@ const ImageCardList = (props) => {
                 <img
                   alt="Thumbnail"
                   src={props.img}
-                  className="list-thumbnail responsive  border-0 card-img-left"
+                  className="list-thumbnail responsive border-0 card-img-left"
+                  style={{objectFit:'cover'}}
                 />
               </NavLink>
               <div className="pl-2 d-flex flex-grow-1 min-width-zero">
-                
                 <div className="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
-                <p className="mb-1 text-muted text-small w-15 w-sm-100">
-                      {props.FoodTime}
+                  <p className="mb-1 text-muted text-small w-15 w-sm-100">
+                    {props.FoodTime}
                   </p>
                   <NavLink to="#" location={{}} className="w-100 w-sm-100">
                     <p className="list-item-heading mb-1 ">
-                    {props.Description}
+                      {props.Description}
                     </p>
                   </NavLink>
-               
-        
                 </div>
-                {/* <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
+                <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
                   <FormGroup className="mb-0">
                     <CustomInput type="checkbox" id="check1" label="" />
                   </FormGroup>
-                </div> */}
+                </div>
               </div>
             </Card>
           </Colxx>

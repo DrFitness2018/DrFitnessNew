@@ -12,16 +12,16 @@ const ExerciseLean = ({ match }) => {
   return (
     <>
       <Row>
-        <Colxx xxs="12">
+        <Colxx xxs="12" >
           <Breadcrumb heading="Exercise" match={match} />
           <Separator className="mb-5" />
         </Colxx>
       </Row>
       <Row>
+
           {Lean.map((item) => {
             return (
-
-              <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
+              <ImageCards   mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
                 title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
             );
           })}

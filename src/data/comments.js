@@ -51,6 +51,14 @@ export const comments = [
     key: 6,
   },
 ];
+export const Feedbacks = [
+  {
+    thumb: '/assets/img/profiles/l-1.jpg',
+    name:'tulaib',
+    email:'tulluahsid@gmail.com',
+    message:'Simply Enjoying the App. Very Easy Interface Love your App.'
+  },
+];
 
 export const commentWithLikesData = [
   {

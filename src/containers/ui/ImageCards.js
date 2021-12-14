@@ -11,11 +11,15 @@ import {
   Badge,
   Button
 } from 'reactstrap';
+import {Link,useHistory} from 'react-router-dom'
+// import { useHistory } from 'react-router-dom';
 import IntlMessages from 'helpers/IntlMessages';
 import { Colxx } from 'components/common/CustomBootstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
 
 const ImageCards = (props) => {
+  const history = useHistory();
+
   return (
     <>
      
@@ -46,11 +50,13 @@ const ImageCards = (props) => {
               {props.discription}
             </CardSubtitle>
             <div className="d-flex justify-content-end">
-              <Button color="success" className="mb-2"
-                onClick={() => { props.history.push(props.link) }}
-              >
+              <Link to={`/app/exercise/exerciseInnerPage`}>
+              <Button color="success" className="mb-2" onClick={()=>{
+                console.log(history,"<-props")
+              }}>
                 Start Plan
               </Button>
+                </Link>
             </div>
           </CardBody>
         </Card>

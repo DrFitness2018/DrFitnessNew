@@ -10,6 +10,7 @@ import { Advance, beginner, challenges, gain, Intermediate } from './ExerciseMai
 import ImageCards from 'containers/ui/ImageCards';
 import ImageLambi from '../../../Images/lambi7.jpg'
 import GlideComponent from 'components/carousel/GlideComponent';
+import ExInner from "./ExerciseInnerPage"
 const ExerciseGain = ({ match }) => {
   return (
     <>

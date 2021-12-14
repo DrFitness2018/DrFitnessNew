@@ -27,7 +27,7 @@ export const gain = [
         img:img1,
         heading:'Want to gain weight in 30 Days?',
         subheading:'Try these Exercises and Gain Weight',
-        btnlink:'#'
+        btnlink:'exerciseInnerPage'
     }
 ]
 export const Lean = [
@@ -51,7 +51,7 @@ export const challenges = [
         img:img2,
         heading:'Full Body Workout',
         subheading:'7X4 CHALLENGE',
-        btnlink:'#'
+        btnlink:'./exerciseInnerPage'
     },
     {
         img:img3,

@@ -24,13 +24,14 @@ import Timer from './Timer';
 
 const ExerciseInnerPage = ({ match }) => {
     
-    
-    
+    const WeightGainMonth = [Day1,Day2,Day3]
+    console.log("WeightMonth =",WeightGainMonth)
     const [collapse, setCollapse] = useState(true);
     const [collapseD, setCollapseD] = useState(false);
     const [activeFirstTab, setActiveFirstTab] = useState('1');
     const [activeSecondTab, setActiveSecondTab] = useState('1');
     const [letsPlay] = useSound(play);
+  
     const LinksBan = [
       {
         subLinkName: "Exercises",
@@ -43,7 +44,7 @@ const ExerciseInnerPage = ({ match }) => {
 
     const [DayName,setDayName] = useState('')
     const [DayObj,setDayObj] = useState(Day1)
-
+    const Buttons = ['Day1','Day2','Day3','Day4','Day5','Day6','Day7']
 
   return (
     <>
@@ -156,7 +157,7 @@ const ExerciseInnerPage = ({ match }) => {
                                   color="outline-primary "
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   onClick={() => {
@@ -171,7 +172,7 @@ const ExerciseInnerPage = ({ match }) => {
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
@@ -188,7 +189,7 @@ const ExerciseInnerPage = ({ match }) => {
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
@@ -204,40 +205,51 @@ const ExerciseInnerPage = ({ match }) => {
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDayName('Day4')
+                                    setDayObj(Day4)
+                                  }}
                                 >
                                   Day4
                                 </Button>
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDayName('Day5')
+                                    setDayObj(Day5)
+                                  }}
                                 >
                                   Day5
                                 </Button>
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  
                                 >
                                   Day6
                                 </Button>
                                 <Button
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
@@ -253,7 +265,7 @@ const ExerciseInnerPage = ({ match }) => {
                         <Colxx>
                           <div className="mt-4 container">
                             <Collapse isOpen={collapseD}>
-                              {Day1.map((exer, id) => {
+                              {DayObj.map((exer, id) => {
                                 return (
                                   <>
                                     <ImageCardList
@@ -269,13 +281,13 @@ const ExerciseInnerPage = ({ match }) => {
                               <Button 
                                 onClick={() => {
                                     letsPlay()
-                                    setModalShow(true)}
+                                    setModalShow(true)
+                                  }
                                   }
                               className='mb-4'
                               color="outline-primary">
                               Start Exercise
                               </Button>
-                              
                             </div>
                           
                             </Collapse>
@@ -343,7 +355,7 @@ const ImageCardList = (props) => {
                   />
                 </NavLink>
                 <div className="pl-2 d-flex flex-grow-1 min-width-zero">
-                  <div className="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center">
+                  <div className="card-body align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero align-items-lg-center ">
                     <p className="mb-1 text-small w-15 w-sm-100 list-item-heading">
                       {props.FoodTime}
                     </p>
@@ -381,9 +393,6 @@ const ImageCardList = (props) => {
 
   function MyVerticallyCenteredModals(props) {
 
-    // const [daycount, setDayCounter] = useState(2);
-    // var item = Day1.find(item => item.id === daycount);
-  
     const [question, setQuestion] = useState(null);
     const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber  ');
   
@@ -392,21 +401,10 @@ const ImageCardList = (props) => {
     const [count, setCounter] = useState();
     
     // const [c,sc] = useStickyState(0,'count')
-  
-    // useEffect(() => {
-    //   letsPlay();
-    // }, [letsPlay]);
-  
+
     console.log("DayObj --- >",props.dayObj)
     useEffect(() => {
-
-        // if(props.day === 'Day1'){
-        //     setQuestion(Day1[questionNumber - 1]);
-        // }
-        // else if(props.day === 'Day2'){
-        //     setQuestion(Day2[questionNumber - 1]);
-        // }
-        setQuestion(props.dayObj[questionNumber - 1]);
+      setQuestion(props.dayObj[questionNumber - 1]);
     }, [props.dayObj, questionNumber]);
 
 
@@ -416,48 +414,18 @@ const ImageCardList = (props) => {
       {
         seclefts();
       }
-    }, [count,seclefts])
-  
-    // const delay = (duration, callback) => {
-    //   setTimeout(() => {
-    //     callback();
-    //   }, duration);
-    // };
-  
+   
+    }, [count,seclefts,questionNumber])
   
     const abc = (Value) => {
       setCounter(Value);
     };
   
-    // const daycounter = () => {
-    //   setDayCounter(daycount + 1);
-    // };
-  
-    // console.log("counter of day-->", daycount);
-  
     const handleClick = () => {
-      // delay(5000, () => {
-      //     delay(1000, () => {
-  
       setQuestionNumber((prev) => prev + 1);
-      //   });
-      // })
     };
   
-    // const countChekr = () => {
-    //   if (count === 1) {
-    //     // console.log("finished");
-  
-    //   } else {
-    //     console.log("no start");
-    //   }
-    // };
-  
     let totalLen = Day1.length;
-    // question =Day1.find(item => item.id === daycount);
-    // var item = Day1.find(item => item.id === daycount);
-  
-    // console.log("len", Day1.length);
     
     return (
       <Modal
@@ -469,7 +437,7 @@ const ImageCardList = (props) => {
       >
         <ModalHeader closeButton>
           <div id="contained-modal-title-vcenter">
-            {props.day} <h6> Exercise No {questionNumber}</h6>
+            {props.day } <h6> Exercise No {questionNumber}</h6>
           </div>
         </ModalHeader>
         <ModalBody>

@@ -45,7 +45,7 @@ const ExerciseGain = ({ match }) => {
 
       </Row>
       <Row>
-      <GlideComponent
+      {/* <GlideComponent
             settings={{
               gap: 10,
               perView: 2,
@@ -66,7 +66,7 @@ const ExerciseGain = ({ match }) => {
           })}
 
         
-</GlideComponent>
+</GlideComponent> */}
       </Row>
       <Row>
           {Intermediate.map((item) => {

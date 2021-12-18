@@ -25,7 +25,7 @@ const ExerciseGain = ({ match }) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+                title={item?.heading}  showweeksndays={item?.showweeknday} discription={item?.subheading} link={item?.btnlink} />
             );
           })}
 
@@ -37,7 +37,7 @@ const ExerciseGain = ({ match }) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+                title={item?.heading}  showweeksndays={item?.showweeknday} discription={item?.subheading} link={item?.btnlink} />
             );
           })}
 
@@ -73,7 +73,7 @@ const ExerciseGain = ({ match }) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+                title={item?.heading} showweeksndays={item?.showweeknday} discription={item?.subheading} link={item?.btnlink} />
             );
           })}
 
@@ -85,7 +85,9 @@ const ExerciseGain = ({ match }) => {
             return (
 
               <ImageCards mainTitle="Dr Fitness Gain Challenge" image={item?.img} badge='Dr Fitness Recommended'
-                title={item?.heading} discription={item?.subheading} link={item?.btnlink} />
+                title={item?.heading} discription={item?.subheading} link={item?.btnlink}
+                showweeksndays={item?.showweeknday}
+                />
             );
           })}
 

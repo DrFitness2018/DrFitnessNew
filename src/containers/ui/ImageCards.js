@@ -19,7 +19,7 @@ import GlideComponent from 'components/carousel/GlideComponent';
 
 const ImageCards = (props) => {
   const history = useHistory();
-
+  console.log(props?.showweeknday )
   return (
     <>
      
@@ -50,7 +50,8 @@ const ImageCards = (props) => {
               {props.discription}
             </CardSubtitle>
             <div className="d-flex justify-content-end">
-              <Link to={`/app/exercise/exerciseInnerPage`}>
+              <Link to={{pathname:`/app/exercise/exerciseInnerPage`
+              ,data:{showweeknday:props?.showweeksndays}}}>
               <Button color="success" className="mb-2" onClick={()=>{
                 console.log(history,"<-props")
               }}>

@@ -22,10 +22,13 @@ import { Modal } from "reactstrap";
 import { Avatar } from '@material-ui/core';
 import Timer from './Timer';
 
-const ExerciseInnerPage = ({ match }) => {
-    
+const ExerciseInnerPage = (props) => {
+    const match = props?.match;
+    const showweekdays = props?.location?.data?.showweeknday;
+
+    console.log(showweekdays,"Testing Show true")
+
     const WeightGainMonth = [Day1,Day2,Day3]
-    console.log("WeightMonth =",WeightGainMonth)
     const [collapse, setCollapse] = useState(true);
     const [collapseD, setCollapseD] = useState(false);
     const [activeFirstTab, setActiveFirstTab] = useState('1');
@@ -42,7 +45,7 @@ const ExerciseInnerPage = ({ match }) => {
     
     const [modalShow, setModalShow] = useState(false);
 
-    const [DayName,setDayName] = useState('')
+    const [DayName,setDayName] = useState('Day1')
     const [DayObj,setDayObj] = useState(Day1)
     const Buttons = ['Day1','Day2','Day3','Day4','Day5','Day6','Day7']
 
@@ -66,70 +69,106 @@ const ExerciseInnerPage = ({ match }) => {
             <div className="p-4 border mt-4">
               <Colxx xxs="12" xs="6" lg="12">
                 <Card className="mb-4 ">
-                  <CardHeader className="pl-0 pr-0">
-                    <Nav tabs className=" card-header-tabs  ml-0 mr-0">
-                      <NavItem className="w-20 text-center">
-                        <NavLink
-                          to="#"
-                          location={{}}
-                          className={classnames({
-                            active: activeSecondTab === '1',
-                            'nav-link': true,
-                          })}
-                          onClick={() => {
-                            setActiveSecondTab('1');
-                          }}
-                        >
-                          Week 1
-                        </NavLink>
-                      </NavItem>
-                      <NavItem className=" w-20 text-center">
-                        <NavLink
-                          to="#"
-                          location={{}}
-                          className={classnames({
-                            active: activeSecondTab === '2',
-                            'nav-link': true,
-                          })}
-                          onClick={() => {
-                            setActiveSecondTab('2');
-                          }}
-                        >
-                          Week 2
-                        </NavLink>
-                      </NavItem>
-                      <NavItem className=" w-20 text-center">
-                        <NavLink
-                          to="#"
-                          location={{}}
-                          className={classnames({
-                            active: activeSecondTab === '3',
-                            'nav-link': true,
-                          })}
-                          onClick={() => {
-                            setActiveSecondTab('3');
-                          }}
-                        >
-                          Week 3
-                        </NavLink>
-                      </NavItem>
-                      <NavItem className="w-20  text-center">
-                        <NavLink
-                          to="#"
-                          location={{}}
-                          className={classnames({
-                            active: activeSecondTab === '4',
-                            'nav-link': true,
-                          })}
-                          onClick={() => {
-                            setActiveSecondTab('4');
-                          }}
-                        >
-                          Week 4
-                        </NavLink>
-                      </NavItem>
-                    </Nav>
-                  </CardHeader>
+
+                    {showweekdays ? 
+                    (
+                      <>
+                          {DayObj.map((exer, id) => {
+                            return (
+                              <>
+                                <ImageCardList
+                                  FoodTime={exer.exerciseName}
+                                  img={exer.gifImage}
+                                  Description={exer.description}
+                                  Reps={exer.Reps}
+                                />
+                                
+                              </>
+
+                            );
+
+                          })
+                          }
+                          <div className='text-center '>
+                              <Button 
+                                onClick={() => {
+                                    letsPlay()
+                                    setModalShow(true)
+                                  }
+                                  }
+                              className='mb-4'
+                              color="outline-primary">
+                              Start Exercise
+                              </Button>
+                            </div>
+                            </>
+                            )
+                     : 
+                      <CardHeader className="pl-0 pr-0">
+                      <Nav tabs className=" card-header-tabs  ml-0 mr-0">
+                        <NavItem className="w-20 text-center">
+                          <NavLink
+                            to="#"
+                            location={{}}
+                            className={classnames({
+                              active: activeSecondTab === '1',
+                              'nav-link': true,
+                            })}
+                            onClick={() => {
+                              setActiveSecondTab('1');
+                            }}
+                          >
+                            Week 1
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className=" w-20 text-center">
+                          <NavLink
+                            to="#"
+                            location={{}}
+                            className={classnames({
+                              active: activeSecondTab === '2',
+                              'nav-link': true,
+                            })}
+                            onClick={() => {
+                              setActiveSecondTab('2');
+                            }}
+                          >
+                            Week 2
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className=" w-20 text-center">
+                          <NavLink
+                            to="#"
+                            location={{}}
+                            className={classnames({
+                              active: activeSecondTab === '3',
+                              'nav-link': true,
+                            })}
+                            onClick={() => {
+                              setActiveSecondTab('3');
+                            }}
+                          >
+                            Week 3
+                          </NavLink>
+                        </NavItem>
+                        <NavItem className="w-20  text-center">
+                          <NavLink
+                            to="#"
+                            location={{}}
+                            className={classnames({
+                              active: activeSecondTab === '4',
+                              'nav-link': true,
+                            })}
+                            onClick={() => {
+                              setActiveSecondTab('4');
+                            }}
+                          >
+                            Week 4
+                          </NavLink>
+                        </NavItem>
+                      </Nav>
+                    </CardHeader>
+                  }
 
                   <TabContent activeTab={activeSecondTab}>
                     <TabPane tabId="1">
@@ -139,7 +178,11 @@ const ExerciseInnerPage = ({ match }) => {
                             {/* <CardTitle className="mb-4">
                           Homemade Cheesecake with Fresh Berries and Mint
                         </CardTitle> */}
-                            <div className="mb-4 " style={{ width: '100%' }}>
+                           {showweekdays ? 
+                          ""
+                          : 
+                          <>
+                           <div className="mb-4 " style={{ width: '100%' }}>
                               <div
                                 className="mb-2"
                                 style={{
@@ -154,7 +197,7 @@ const ExerciseInnerPage = ({ match }) => {
                               >
                                 <Button
                                   className="default mb-2 mr-2"
-                                  color="outline-primary "
+                                  color="outline-primary"
                                   style={{
                                     width: '8%',
                                     height: '80px',
@@ -260,6 +303,8 @@ const ExerciseInnerPage = ({ match }) => {
                               </div>
                             </div>
                             <div></div>
+                          </> 
+                          }
                           </CardBody>
                         </Colxx>
                         <Colxx>

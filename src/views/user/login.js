@@ -35,6 +35,9 @@ const validateEmail = (value) => {
 const Login = ({ history, loading, error, loginUserAction }) => {
   const [email] = useState('demo@gogo.com');
   const [password] = useState('gogo123');
+  function handleClick() {
+    history.push('/app/dashboards/default');
+  }
 
   useEffect(() => {
     if (error) {
@@ -76,7 +79,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
               <IntlMessages id="user.login-title" />
             </CardTitle>
 
-            <Formik initialValues={initialValues} onSubmit={onUserLogin}>
+            <Formik initialValues={initialValues} >
               {({ errors, touched }) => (
                 <Form className="av-tooltip tooltip-label-bottom">
                   <FormGroup className="form-group has-float-label">
@@ -120,6 +123,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                         loading ? 'show-spinner' : ''
                       }`}
                       size="lg"
+                      onClick={handleClick()}
                     >
                       <span className="spinner d-inline-block">
                         <span className="bounce1" />

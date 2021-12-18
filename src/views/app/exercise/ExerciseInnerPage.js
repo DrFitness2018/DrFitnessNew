@@ -45,12 +45,22 @@ import useSound from 'use-sound';
 import { Modal } from 'reactstrap';
 import { Avatar } from '@material-ui/core';
 import Timer from './Timer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getResetValue } from 'redux/store/actions/exerciseInnerAction';
 
 const ExerciseInnerPage = (props) => {
-  const match = props?.match;
-  const showweekdays = props?.location?.data?.showweeknday;
+    const match = props?.match;
+    const showweekdays = props?.location?.data?.showweeknday;
+    const dispatch = useDispatch();
+    
+    let reset = useSelector((state) => state?.Exer?.reset);
+    
+    useEffect(() => {
+      dispatch(getResetValue(reset)); 
+    },[reset])
 
-  console.log(showweekdays, 'Testing Show true');
+    console.log(reset)
+    console.log(showweekdays,"Testing Show true")
 
   const Week1Gain = [Day1, Day2, Day3, Day4, Day5, Day6, Day7];
   const Week2Gain = [Day8, Day9, Day10, Day11, Day12, Day13, Day14];

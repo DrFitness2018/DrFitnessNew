@@ -47,7 +47,12 @@ const ExerciseInnerPage = (props) => {
 
     const [DayName,setDayName] = useState('Day1')
     const [DayObj,setDayObj] = useState(Day1)
-    const Buttons = ['Day1','Day2','Day3','Day4','Day5','Day6','Day7']
+    const [Days,setDays] = useState(0)
+    const [D,setD] = useState(1)
+    
+    const handleCallback = (childData) =>{
+      setDays(childData)
+  }
 
   return (
     <>
@@ -64,6 +69,8 @@ const ExerciseInnerPage = (props) => {
                               onHide={() => setModalShow(false)}
                               day={DayName}
                               dayObj = {DayObj}
+            parentCallback ={handleCallback}
+
                             />
         <Collapse isOpen={collapse}>
             <div className="p-4 border mt-4">
@@ -197,7 +204,8 @@ const ExerciseInnerPage = (props) => {
                               >
                                 <Button
                                   className="default mb-2 mr-2"
-                                  color="outline-primary"
+
+                                  color="outline-primary "
                                   style={{
                                     width: '8%',
                                     height: '80px',
@@ -205,10 +213,9 @@ const ExerciseInnerPage = (props) => {
                                   }}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
-                                    setDayName('Day1')
-                                    setDayObj(Day1)
+                                    setDayName('Day1');
+                                    setDayObj(Day1);
                                   }}
-
                                 >
                                   Day1
                                 </Button>
@@ -219,12 +226,13 @@ const ExerciseInnerPage = (props) => {
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
+                                  disabled={Days === 7 ? false : true}
                                   color="outline-primary"
                                   onClick={() => {
                                     setCollapseD(!collapseD);
-                                    setDayName('Day2')
-                                    setDayObj(Day2)
-                                    
+                                    setDayName('Day2');
+                                    setDayObj(Day2);
+                                    setD(0)
                                   }}
                                 >
                                   Day2
@@ -237,10 +245,11 @@ const ExerciseInnerPage = (props) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  disabled={Days === 14 ? false : true}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
-                                    setDayName('Day3')
-                                    setDayObj(Day3)
+                                    setDayName('Day3');
+                                    setDayObj(Day3);
                                   }}
                                 >
                                   Day3
@@ -253,10 +262,11 @@ const ExerciseInnerPage = (props) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  disabled={Days === 21 ? false : true}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
-                                    setDayName('Day4')
-                                    setDayObj(Day4)
+                                    setDayName('Day4');
+                                    setDayObj(Day4);
                                   }}
                                 >
                                   Day4
@@ -269,10 +279,11 @@ const ExerciseInnerPage = (props) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  disabled={Days === 28 ? false : true}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
-                                    setDayName('Day5')
-                                    setDayObj(Day5)
+                                    setDayName('Day5');
+                                    setDayObj(Day5);
                                   }}
                                 >
                                   Day5
@@ -284,8 +295,8 @@ const ExerciseInnerPage = (props) => {
                                     borderRadius: '50%',
                                   }}
                                   className="default mb-2 mr-2"
+                                  disabled={Days === 35 ? false : true}
                                   color="outline-primary"
-                                  
                                 >
                                   Day6
                                 </Button>
@@ -295,6 +306,7 @@ const ExerciseInnerPage = (props) => {
                                     height: '80px',
                                     borderRadius: '50%',
                                   }}
+                                  disabled={Days === 42 ? false : true}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                 >
@@ -439,15 +451,19 @@ const ImageCardList = (props) => {
   function MyVerticallyCenteredModals(props) {
 
     const [question, setQuestion] = useState(null);
-    const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber  ');
+    // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber  ');
+    const [questionNumber, setQuestionNumber] = useState(1);
   
     const [timeOut, setTimeOut] = useState(false);
     const [seclefts] = useSound(secleft);
     const [count, setCounter] = useState();
+    const [daysCount,setdaysCount] = useState(1);
     
     // const [c,sc] = useStickyState(0,'count')
 
-    console.log("DayObj --- >",props.dayObj)
+    props.parentCallback(daysCount)
+
+
     useEffect(() => {
       setQuestion(props.dayObj[questionNumber - 1]);
     }, [props.dayObj, questionNumber]);

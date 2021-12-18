@@ -23,7 +23,7 @@ export function configureStore(initialState) {
       const nextRootReducer = require('./reducers');
       store.replaceReducer(nextRootReducer);
     });
-  }
+  }     
 
   return store;
 }

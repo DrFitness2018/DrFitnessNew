@@ -21,11 +21,21 @@ import useSound from "use-sound";
 import { Modal } from "reactstrap";
 import { Avatar } from '@material-ui/core';
 import Timer from './Timer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getResetValue } from 'redux/store/actions/exerciseInnerAction';
 
 const ExerciseInnerPage = (props) => {
     const match = props?.match;
     const showweekdays = props?.location?.data?.showweeknday;
+    const dispatch = useDispatch();
+    
+    let reset = useSelector((state) => state?.Exer?.reset);
+    
+    useEffect(() => {
+      dispatch(getResetValue(reset)); 
+    },[reset])
 
+    console.log(reset)
     console.log(showweekdays,"Testing Show true")
 
     const WeightGainMonth = [Day1,Day2,Day3]
@@ -53,7 +63,7 @@ const ExerciseInnerPage = (props) => {
     const handleCallback = (childData) =>{
       setDays(childData)
   }
-
+  
   return (
     <>
       <Row>

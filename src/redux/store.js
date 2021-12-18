@@ -23,7 +23,7 @@ export function configureStore(initialState) {
     composeEnhancers(applyMiddleware(thunk))
   );
 
-  // sagaMiddleware.run(sagas);
+  // sagaMiddleware.run(sagas);   
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {

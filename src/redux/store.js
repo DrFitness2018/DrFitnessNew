@@ -1,21 +1,29 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+/* eslint-disable */
+
+import { createStore, applyMiddleware } from 'redux';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
+
 import reducers from './reducers';
-import sagas from './sagas';
+// import sagas from './sagas';
 
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware];
+// const middlewares = [sagaMiddleware];
 
 // eslint-disable-next-line import/prefer-default-export
 export function configureStore(initialState) {
   const store = createStore(
     reducers,
     initialState,
-    compose(applyMiddleware(...middlewares))
+    // applyMiddleware(thunk)
+    composeEnhancers(applyMiddleware(thunk))
   );
 
-  sagaMiddleware.run(sagas);
+  // sagaMiddleware.run(sagas);
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {

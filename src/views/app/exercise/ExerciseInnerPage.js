@@ -45,6 +45,8 @@ import useSound from 'use-sound';
 import { Modal } from 'reactstrap';
 import { Avatar } from '@material-ui/core';
 import Timer from './Timer';
+import { useDispatch, useSelector } from 'react-redux';
+import { getResetValue } from 'redux/store/actions/exerciseInnerAction';
 
 const ExerciseInnerPage = (props) => {
   const match = props?.match;
@@ -70,6 +72,17 @@ const ExerciseInnerPage = (props) => {
       subLink: '/diets',
     },
   ];
+
+  const dispatch = useDispatch();
+    
+    let reset = useSelector((state) => state?.Exer?.reset);
+    
+    useEffect(() => {
+      dispatch(getResetValue(reset)); 
+    },[reset])
+
+    reset=56
+    console.log(reset)
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -285,7 +298,7 @@ const ExerciseInnerPage = (props) => {
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
-                                      disabled={Days === 21 ? false : true}
+                                      disabled={Days >=18 ? false : true}
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day4');
@@ -302,7 +315,7 @@ const ExerciseInnerPage = (props) => {
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
-                                      disabled={Days === 28 ? false : true}
+                                      disabled={Days >=25 ? false : true}
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day5');
@@ -318,7 +331,7 @@ const ExerciseInnerPage = (props) => {
                                         borderRadius: '50%',
                                       }}
                                       className="default mb-2 mr-2"
-                                      disabled={Days === 35 ? false : true}
+                                      disabled={Days >=32 ? false : true}
                                       color="outline-primary"
                                       onClick={() => {
                                         setCollapseD(!collapseD);
@@ -334,7 +347,7 @@ const ExerciseInnerPage = (props) => {
                                         height: '80px',
                                         borderRadius: '50%',
                                       }}
-                                      disabled={Days === 42 ? false : true}
+                                      disabled={Days >=39 ? false : true}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
                                       onClick={() => {

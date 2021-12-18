@@ -29,7 +29,7 @@ const GainDiet = ({ match }) => {
     <>
       <Row>
         <Colxx xxs="12">
-          <Breadcrumb heading="menu.blank-page" match={match} />
+          <Breadcrumb heading="Diet Plans" match={match} />
           <Separator className="mb-5" />
         </Colxx>
       </Row>

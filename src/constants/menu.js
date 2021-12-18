@@ -408,11 +408,6 @@ const data = [
     to: `${adminRoot}/dietplan`,
     subs: [
       {
-        icon: 'iconsminds-glass-water', 
-        label: 'Diet for Lean Weight',
-        to: `${adminRoot}/dietplan/leanDiet`,
-      },
-      {
         icon: 'iconsminds-fish',
         label: 'Diet for Gain Weight',
         to: `${adminRoot}/dietplan/gainDiet`,

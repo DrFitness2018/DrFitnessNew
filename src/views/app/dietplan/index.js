@@ -3,9 +3,6 @@ import React, { Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 
-const Dlean = React.lazy(() =>
-  import(/* webpackChunkName: "menu-level-3" */ './leanDiet')
-);
 const Dgain = React.lazy(() =>
   import(/* webpackChunkName: "menu-level-3" */ './gainDiet')
 );
@@ -16,12 +13,7 @@ const ExerciseMenu = ({ match }) => (
       <Redirect
         exact
         from={`${match.url}/`}
-        to={`${match.url}/leanDiet`}
-      />
-     
-      <Route
-        path={`${match.url}/leanDiet`}
-        render={(props) => <Dlean {...props} />}
+        to={`${match.url}/gainDiet`}
       />
       <Route
         path={`${match.url}/gainDiet`}

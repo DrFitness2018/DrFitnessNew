@@ -19,20 +19,21 @@ export const localeOptions = [
 ];
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBBksq-Asxq2M4Ot-75X19IyrEYJqNBPcg',
-  authDomain: 'gogo-react-login.firebaseapp.com',
-  databaseURL: 'https://gogo-react-login.firebaseio.com',
-  projectId: 'gogo-react-login',
-  storageBucket: 'gogo-react-login.appspot.com',
-  messagingSenderId: '216495999563',
+  apiKey: "AIzaSyBFBipAW-m2-_Guud6i_sQr5T_759gB38s",
+  authDomain: "drfitness-394fb.firebaseapp.com",
+  projectId: "drfitness-394fb",
+  storageBucket: "drfitness-394fb.appspot.com",
+  messagingSenderId: "159169281920",
+  appId: "1:159169281920:web:efc41f411bf79ac2fb4b65",
+  measurementId: "G-RY7YJGX2WR"
 };
 
 export const currentUser = {
   id: 1,
-  title: 'Sarah Kortney',
+  title: 'Wahaj Shera ',
   img: '/assets/img/profiles/l-1.jpg',
   date: 'Last seen today 15:24',
-  role: UserRole.Admin,
+    role: UserRole.Admin,
 };
 
 export const adminRoot = '/app';

@@ -9,6 +9,7 @@ import AppLayout from 'layout/AppLayout';
 const Dashboards = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './dashboards')
 );
+
 const Pages = React.lazy(() =>
   import(/* webpackChunkName: "pages" */ './pages')
 );

@@ -212,7 +212,7 @@ const ExerciseInnerPage = (props) => {
                   )}
 
                   <TabContent activeTab={activeSecondTab}>
-                    <TabPane tabId="1">
+                    <TabPane tabId={activeSecondTab}>
                       <Row>
                         <Colxx sm="12" lg="12">
                           <CardBody>
@@ -250,7 +250,7 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day1');
-                                        setDayObj(Week1Gain[0]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[0] : activeSecondTab==='2' ? Week2Gain[0] : activeSecondTab==='3' ? Week3Gain[0] : activeSecondTab==='4' ? Week4Gain[0] : '');
                                       }}
                                     >
                                       Day1
@@ -267,7 +267,7 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day2');
-                                        setDayObj(Week1Gain[1]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[1] : activeSecondTab==='2' ? Week2Gain[1] : activeSecondTab==='3' ? Week3Gain[1] : activeSecondTab==='4' ? Week4Gain[1] : '');
                                         setD(0);
                                       }}
                                     >
@@ -285,7 +285,8 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day3');
-                                        setDayObj(Week1Gain[2]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[2] : activeSecondTab==='2' ? Week2Gain[2] : activeSecondTab==='3' ? Week3Gain[2] : activeSecondTab==='4' ? Week4Gain[2] : '');
+
                                       }}
                                     >
                                       Day3
@@ -302,7 +303,8 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day4');
-                                        setDayObj(Week1Gain[3]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[3] : activeSecondTab==='2' ? Week2Gain[3] : activeSecondTab==='3' ? Week3Gain[3] : activeSecondTab==='4' ? Week4Gain[3] : '');
+
                                       }}
                                     >
                                       Day4
@@ -319,7 +321,8 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day5');
-                                        setDayObj(Week1Gain[4]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[4] : activeSecondTab==='2' ? Week2Gain[4] : activeSecondTab==='3' ? Week3Gain[4] : activeSecondTab==='4' ? Week4Gain[4] : '');
+
                                       }}
                                     >
                                       Day5
@@ -335,8 +338,9 @@ const ExerciseInnerPage = (props) => {
                                       color="outline-primary"
                                       onClick={() => {
                                         setCollapseD(!collapseD);
-                                        setDayName('Day5');
-                                        setDayObj(Week1Gain[5]);
+                                        setDayName('Day6');
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[5] : activeSecondTab==='2' ? Week2Gain[5] : activeSecondTab==='3' ? Week3Gain[5] : activeSecondTab==='4' ? Week4Gain[5] : '');
+
                                       }}
                                     >
                                       Day6
@@ -352,8 +356,8 @@ const ExerciseInnerPage = (props) => {
                                       color="outline-primary"
                                       onClick={() => {
                                         setCollapseD(!collapseD);
-                                        setDayName('Day5');
-                                        setDayObj(Week1Gain[6]);
+                                        setDayName('Day7');
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[6] : activeSecondTab==='2' ? Week2Gain[6] : activeSecondTab==='3' ? Week3Gain[6] : activeSecondTab==='4' ? Week4Gain[6] : '');
                                       }}
                                     >
                                       Day7
@@ -394,35 +398,6 @@ const ExerciseInnerPage = (props) => {
                               </div>
                             </Collapse>
                           </div>
-                        </Colxx>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="2">
-                      <Row>
-                        <Colxx sm="12">
-                          <CardBody>
-                            <CardTitle className="mb-4">
-                              Wedding Cake with Flowers Macarons and Blueberries
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
-                          </CardBody>
-                        </Colxx>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <Row>
-                        <Colxx sm="12">
-                          <CardBody>
-                            <CardTitle className="mb-4">
-                              Cheesecake with Chocolate Cookies and Cream
-                              Biscuits
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
-                          </CardBody>
                         </Colxx>
                       </Row>
                     </TabPane>

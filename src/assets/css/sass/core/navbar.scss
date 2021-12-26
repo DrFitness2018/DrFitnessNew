@@ -132,14 +132,14 @@
     .logo {
       width: 100%;
       height: 100%;
-      background: url($logo-path) no-repeat;
+      // background: url($logo-path) no-repeat;
       background-position: center center;
     }
 
     .logo-mobile {
       width: 100%;
       height: 100%;
-      background: url($logo-path-mobile) no-repeat;
+      // background: url($logo-path-mobile) no-repeat;
       background-position: center center;
       background-size: contain;
     }

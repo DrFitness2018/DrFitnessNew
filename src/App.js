@@ -38,6 +38,9 @@ import(/* webpackChunkName: "views-error" */ './views/unauthorized')
 const Login = React.lazy(() =>
 import(/* webpackChunkName: "views-error" */ './views/user/login')
 );
+const HomePage = React.lazy(() =>
+import(/* webpackChunkName: "views-error" */ './views/Home')
+);
 
 const App = ({ locale }) => {
   const direction = getDirection();
@@ -71,6 +74,13 @@ const App = ({ locale }) => {
                 />
                 <Route
                   path="/"
+                  exact
+                  render={(props) => (
+                        <HomePage {...props} />
+                  )}
+                />
+                <Route
+                  path="/login"
                   exact
                   render={(props) => (
                     <UserLayout>

@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { CardHeader, Nav, NavItem, TabContent, TabPane } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios'
+// import { useSelector, useDispatch} from 'redux';
 import classnames from 'classnames';
 import {
   Day1,
@@ -73,16 +75,7 @@ const ExerciseInnerPage = (props) => {
     },
   ];
 
-  const dispatch = useDispatch();
-    
-    let reset = useSelector((state) => state?.Exer?.reset);
-    
-    useEffect(() => {
-      dispatch(getResetValue(reset)); 
-    },[reset])
 
-    reset=56
-    console.log(reset)
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -286,6 +279,7 @@ const ExerciseInnerPage = (props) => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day3');
                                         setDayObj(activeSecondTab ==='1' ? Week1Gain[2] : activeSecondTab==='2' ? Week2Gain[2] : activeSecondTab==='3' ? Week3Gain[2] : activeSecondTab==='4' ? Week4Gain[2] : '');
+                                        setD(0);
 
                                       }}
                                     >
@@ -304,6 +298,7 @@ const ExerciseInnerPage = (props) => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day4');
                                         setDayObj(activeSecondTab ==='1' ? Week1Gain[3] : activeSecondTab==='2' ? Week2Gain[3] : activeSecondTab==='3' ? Week3Gain[3] : activeSecondTab==='4' ? Week4Gain[3] : '');
+                                        setD(0);
 
                                       }}
                                     >
@@ -322,6 +317,7 @@ const ExerciseInnerPage = (props) => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day5');
                                         setDayObj(activeSecondTab ==='1' ? Week1Gain[4] : activeSecondTab==='2' ? Week2Gain[4] : activeSecondTab==='3' ? Week3Gain[4] : activeSecondTab==='4' ? Week4Gain[4] : '');
+                                        setD(0);
 
                                       }}
                                     >
@@ -340,6 +336,7 @@ const ExerciseInnerPage = (props) => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day6');
                                         setDayObj(activeSecondTab ==='1' ? Week1Gain[5] : activeSecondTab==='2' ? Week2Gain[5] : activeSecondTab==='3' ? Week3Gain[5] : activeSecondTab==='4' ? Week4Gain[5] : '');
+                                        setD(0);
 
                                       }}
                                     >
@@ -358,6 +355,8 @@ const ExerciseInnerPage = (props) => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day7');
                                         setDayObj(activeSecondTab ==='1' ? Week1Gain[6] : activeSecondTab==='2' ? Week2Gain[6] : activeSecondTab==='3' ? Week3Gain[6] : activeSecondTab==='4' ? Week4Gain[6] : '');
+                                        setD(0);
+                                      
                                       }}
                                     >
                                       Day7
@@ -453,25 +452,32 @@ const ImageCardList = (props) => {
   );
 };
 
-//   function MyVerticallyCenteredModals(props) {
-//     return(
-//         <Modal isOpen={props.show} centered size='sm' style={{boxShadow:'none'}}>
-//             <ModalHeader>Abc 123</ModalHeader>
-//             <ModalBody>Hello</ModalBody>
-//         </Modal>
-//     )
-//   }
-
 function MyVerticallyCenteredModals(props) {
+  
+
   const [question, setQuestion] = useState(null);
   // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber');
-  const [questionNumber, setQuestionNumber] = useState(1);
-
+  
   const [timeOut, setTimeOut] = useState(false);
   const [seclefts] = useSound(secleft);
   const [count, setCounter] = useState();
   const [daysCount, setdaysCount] = useState(1);
+  
+  // const exerciseNumber = useSelector((state) => state?.Exer?.reset);
+  
+  const dispatch = useDispatch();
+  
+  let exerciseNumber = useSelector((state) => state?.Exer?.reset);
+  const [questionNumber, setQuestionNumber] =  useState(1);
 
+  useEffect(() => {
+    dispatch(getResetValue(questionNumber)); 
+  },[dispatch,questionNumber,exerciseNumber])
+
+  console.log("redux",exerciseNumber)
+
+
+  // console.log(exerciseNumber,"redux wawla")
   props.parentCallback(daysCount);
 
   useEffect(() => {
@@ -484,9 +490,12 @@ function MyVerticallyCenteredModals(props) {
       seclefts();
       return;
     }
-    if (daysCount === props.dayObj.length + 1) {
+    if (daysCount + 1 === props.dayObj.length + 1 ) {
       setQuestionNumber(1);
       // console.log("len -",props.dayObj.length)
+    }
+    else{
+      return  
     }
   }, [count, seclefts, questionNumber]);
 
@@ -500,8 +509,8 @@ function MyVerticallyCenteredModals(props) {
     setdaysCount(daysCount + 1);
   };
   const handleClickLast = () => {
-    setQuestionNumber((prev) => prev + 1);
-    setdaysCount(daysCount + 1);
+    setQuestionNumber(1);
+    setdaysCount(1);
   };
 
   let totalLen = props.dayObj.length;
@@ -519,13 +528,10 @@ function MyVerticallyCenteredModals(props) {
       style={{ boxShadow: 'none' }}
     >
       <ModalHeader closeButton>
-        <div id="contained-modal-title-vcenter">
-          {props.day}
-          <h6> Exercise No {questionNumber}</h6>
-        </div>
+       
       </ModalHeader>
       <ModalBody>
-        {questionNumber === totalLen ? (
+        {questionNumber === totalLen + 1 ? (
           <div
             className="appoinmentCards d-flex justify-content-center"
             style={{ flexDirection: 'column ' }}
@@ -547,11 +553,25 @@ function MyVerticallyCenteredModals(props) {
                 </span>{' '}
                 sec
               </h4>
+              {/* <Button
+                      variant="success"
+                      style={{ width: '100%', marginTop: 2 }}
+                      onClick={() => {
+                        handleClickLast();
+                        // daycounter();
+                      }}
+                    >
+                      Finish
+                    </Button> */}
             </div>
           </div>
         ) : (
           <div>
             <>
+            <div id="contained-modal-title-vcenter">
+          {props.day}
+          <h6> Exercise No {questionNumber}</h6>
+        </div>
               <div
                 className="appoinmentCards d-flex justify-content-center"
                 style={{ flexDirection: 'column ' }}
@@ -630,8 +650,7 @@ function MyVerticallyCenteredModals(props) {
                     <Button variant="outline-info" style={{ width: '100%' }}>
                       Skip
                     </Button>
-                    { daysCount <= totalLen - 2 ?
-                    (
+                   
                       <Button
                       variant="success"
                       style={{ width: '100%', marginTop: 2 }}
@@ -642,19 +661,8 @@ function MyVerticallyCenteredModals(props) {
                     >
                       Next Exercise
                     </Button>
-                    )  : (
-                      <Button
-                      variant="success"
-                      style={{ width: '100%', marginTop: 2 }}
-                      onClick={() => {
-                        handleClickLast();
-                        // daycounter();
-                      }}
-                    >
-                      Finish
-                    </Button>
-                    )
-                    }
+                    
+                     
                   </div>
                 </div>
               </div>

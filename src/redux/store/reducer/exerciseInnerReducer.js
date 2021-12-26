@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import { exercisesConst } from "../constant/exerciseInnerConst";
 const initialState = {
-    reset:0
+    reset:1
 }
 export const ExercisesReducer = (state=initialState,{type,payload})=>{
     switch (type) {

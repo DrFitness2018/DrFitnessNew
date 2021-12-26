@@ -377,10 +377,10 @@ const data = [
     ],
   },
   {
-    id: 'blankpage',
+    id: 'angle',
     icon: 'iconsminds-bucket',
-    label: 'BMI',
-    to: `${adminRoot}/blank-page`,
+    label: 'Angle Checker',
+    to: `${adminRoot}/angleChecker`,
   },
 
   {

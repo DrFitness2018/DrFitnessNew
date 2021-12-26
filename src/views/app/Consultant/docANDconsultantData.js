@@ -12,7 +12,7 @@ import LabConsultantImg12 from "../../../Images/lap-consul/rahenuma.jpg";
 import LabConsultantImg13 from "../../../Images/lap-consul/sharmin.jpg";
 import tr1 from "../../../Images/tr1.jpg";
 import tr4 from "../../../Images/tr4.jpg";
-import tr5 from "../../../Images/tr5.jpg";
+import tr5 from "../../../Images/trfe.jpg";
 
 export const LabConsultantsData = [
     {
@@ -39,6 +39,14 @@ export const LabConsultantsData = [
       sex:'Female',
       star:1,
     },
+    {
+      imgSrc: LabConsultantImg3,
+      label: "DR. Tulaib",
+      details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
+      fee:2000,
+      sex:'Male',
+      star:5,
+    },
 
   ];
   export const Trainer = [
@@ -60,7 +68,7 @@ export const LabConsultantsData = [
     },
     {
       imgSrc: tr5,
-      label: "Trainer ",
+      label: "Alexa",
       fee:6000,
       star:2,
       sex:'Female',

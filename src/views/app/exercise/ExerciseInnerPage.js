@@ -489,15 +489,13 @@ const ImageCardList = (props) => {
 
 function MyVerticallyCenteredModals(props) {
   const [question, setQuestion] = useState(null);
-  // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber  ');
+  // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber');
   const [questionNumber, setQuestionNumber] = useState(1);
 
   const [timeOut, setTimeOut] = useState(false);
   const [seclefts] = useSound(secleft);
   const [count, setCounter] = useState();
   const [daysCount, setdaysCount] = useState(1);
-
-  // const [c,sc] = useStickyState(0,'count')
 
   props.parentCallback(daysCount);
 
@@ -521,14 +519,18 @@ function MyVerticallyCenteredModals(props) {
     setCounter(Value);
   };
   console.log('dayscount->', daysCount);
+
   const handleClick = () => {
+    setQuestionNumber((prev) => prev + 1);
+    setdaysCount(daysCount + 1);
+  };
+  const handleClickLast = () => {
     setQuestionNumber((prev) => prev + 1);
     setdaysCount(daysCount + 1);
   };
 
   let totalLen = props.dayObj.length;
 
-  // console.log("question",question)
   console.log('questionNumer', questionNumber);
   console.log('Totalen len', totalLen);
 
@@ -619,7 +621,6 @@ function MyVerticallyCenteredModals(props) {
                 <div
                   style={{
                     display: 'flex',
-                    // backgroundColor: "lightgreen",
                     width: '100%',
                     flexWrap: 'wrap',
                     alignItems: 'center',
@@ -644,7 +645,6 @@ function MyVerticallyCenteredModals(props) {
                   <div
                     style={{
                       display: 'flex',
-                      //  backgroundColor: "lightgrey",
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       flexWrap: 'wrap',
@@ -655,7 +655,9 @@ function MyVerticallyCenteredModals(props) {
                     <Button variant="outline-info" style={{ width: '100%' }}>
                       Skip
                     </Button>
-                    <Button
+                    { daysCount <= totalLen - 2 ?
+                    (
+                      <Button
                       variant="success"
                       style={{ width: '100%', marginTop: 2 }}
                       onClick={() => {
@@ -665,18 +667,23 @@ function MyVerticallyCenteredModals(props) {
                     >
                       Next Exercise
                     </Button>
+                    )  : (
+                      <Button
+                      variant="success"
+                      style={{ width: '100%', marginTop: 2 }}
+                      onClick={() => {
+                        handleClickLast();
+                        // daycounter();
+                      }}
+                    >
+                      Finish
+                    </Button>
+                    )
+                    }
                   </div>
                 </div>
               </div>
             </>
-            {/* <div
-                  className="appoinmentCards d-flex justify-content-center"
-                  style={{ flexDirection: "column " }}
-                >
-                  <h2>Congratulations! You have Completed Todays Exercises</h2>
-                  <h4>Total No of Exercises: {totalLen}</h4>
-                  <h4>Total Time Spend: {totalLen * 30} seconds</h4>
-                  </div> */}
           </div>
         )}
       </ModalBody>

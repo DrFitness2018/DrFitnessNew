@@ -11,6 +11,7 @@ import {
   FormGroup,
   Row,
   TabContent,
+  Table,
   TabPane,
 } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
@@ -26,6 +27,7 @@ const Appointment = ({ match }) => {
 
   const Appointments = [
     {
+      id: 1,
       imgSrc: src,
       label: 'DR. SHAHEDA ANWAR',
       details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
@@ -37,6 +39,7 @@ const Appointment = ({ match }) => {
       status: 'pending',
     },
     {
+      id: 2,
       imgSrc: src1,
       label: 'DR. ASLAM PATHAN',
       details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
@@ -48,6 +51,46 @@ const Appointment = ({ match }) => {
       status: 'approved',
     },
     {
+      id: 3,
+      imgSrc: src1,
+      label: 'DR. ASLAM PATHAN',
+      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+      fee: 10000,
+      star: 1,
+      sex: 'Male',
+      Day: 'monday',
+      time: '2:00-2:00pm',
+      status: 'approved',
+    },
+    {
+      id: 1,
+
+      imgSrc: src1,
+      label: 'DR. ASLAM PATHAN',
+      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+      fee: 10000,
+      star: 1,
+      sex: 'Male',
+      Day: 'monday',
+      time: '2:00-2:00pm',
+      status: 'approved',
+    },
+    {
+      id: 1,
+
+      imgSrc: src2,
+      label: 'DR. Tullu ',
+      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+      fee: 4000,
+      star: 1,
+      sex: 'Male',
+      Day: 'monday',
+      time: '2:00-2:00pm',
+      status: 'rejected',
+    },
+    {
+      id: 1,
+
       imgSrc: src2,
       label: 'DR. Tullu ',
       details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
@@ -71,7 +114,7 @@ const Appointment = ({ match }) => {
         <Colxx xxs="12" className="mb-4">
           <Card>
             <CardBody>
-              <CardTitle>Appointments </CardTitle>
+              <CardTitle>Appointments Status</CardTitle>
               <div className="mb-4 text-center">
                 <ButtonGroup>
                   <Button
@@ -126,22 +169,59 @@ const Appointment = ({ match }) => {
                 <TabPane tabId="2">
                   <Row>
                     <Colxx sm="12" lg="12">
-                      {Appointments &&
-                        Appointments.filter(
-                          (item) => item.status === 'approved'
-                        ).map((item, index) => {
-                          return (
-                            <ImageCardList
-                              mainTitle={item.label}
-                              image={item?.imgSrc}
-                              badge="Dr Fitness Recommended"
-                              day={item.Day}
-                              fee={item.fee}
-                              time={item.time}
-                              status={item.status}
-                            />
-                          );
-                        })}{' '}
+                      <Card className="mb-4">
+                        <CardBody>
+                          <CardTitle>Approved By Doctor/Trainer</CardTitle>
+                          <Table hover responsive>
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Doctor Name</th>
+                                <th>Appoitment Date</th>
+                                <th>Appoitment Time</th>
+                                <th>Status</th>
+                                <th>Fee</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            {Appointments &&
+                              Appointments.filter(
+                                (item) => item.status === 'approved'
+                              ).map((item, index) => {
+                                return (
+                                  <>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">{item.id}</th>
+                                        <td>
+                                          <img
+                                            src={item?.imgSrc}
+                                            width="50px"
+                                            height="50px"
+                                            style={{ borderRadius: '50%' }}
+                                          />
+                                        </td>
+                                        <td className="pt-50">{item.label}</td>
+                                        <td>{item.Day}</td>
+                                        <td>{item.time}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.fee}</td>
+                                        <td>{
+                                          item.status === 'pending' ? (
+                                            <Button>Cancel</Button>
+                                          ) :
+                                          <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Chat</Button>
+                                        }
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </>
+                                );
+                              })}{' '}
+                          </Table>
+                        </CardBody>
+                      </Card>
                     </Colxx>
                   </Row>
                 </TabPane>
@@ -216,6 +296,13 @@ const ImageCardList = (props) => {
                     {props.fee}.Rs
                   </p>
                 </div>
+                {props.status === 'pending' ? (
+                  <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
+                    <Button>Cancel</Button>
+                  </div>
+                ) : (
+                  ''
+                )}
               </div>
             </Card>
           </Colxx>

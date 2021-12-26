@@ -33,6 +33,9 @@ const Inbox = React.lazy(() =>
 const Diet = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './dietplan')
 );
+const AngleChecker = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './AngleChecker')
+);
 const Consult = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './Consultant')
 );
@@ -83,6 +86,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/blank-page`}
               render={(props) => <BlankPage {...props} />}
+            />
+            <Route
+              path={`${match.url}/angleChecker`}
+              render={(props) => <AngleChecker {...props} />}
             />
             <Route
               path={`${match.url}/exercise`}

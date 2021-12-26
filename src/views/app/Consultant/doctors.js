@@ -1,6 +1,6 @@
 /*eslint-disable*/
-import React from 'react';
-import { Badge, Button, Card, CardBody, CardImg, CardSubtitle, CardText, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Badge, Button, ButtonGroup, Card, CardBody, CardImg, CardSubtitle, CardText, Row, TabContent, TabPane } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import {LabConsultantsData} from './docANDconsultantData'
@@ -9,6 +9,8 @@ import { Link, NavLink } from 'react-router-dom';
 import Rating from 'components/common/Rating';
 
 const Doctors = ({ match }) => {
+  const [selectedRadio, setSelectedRadio] = useState('');
+  const [activeSecondTab, setActiveSecondTab] = useState('1');
   return (
     <>
       <Row>
@@ -18,14 +20,81 @@ const Doctors = ({ match }) => {
         </Colxx>
       </Row>
       <Row>
-        
-        {LabConsultantsData.map((item) => {
+        <Colxx>
+      <div className="mb-4 text-center">
+                <ButtonGroup>
+                  <Button
+                    color="success"
+                    outline
+                    onClick={() => setSelectedRadio('1')}
+                    active={selectedRadio === '1'}
+                  >
+                    Female
+                  </Button>
+                  <Button
+                    color="success"
+                    outline
+                    onClick={() => setSelectedRadio('2')}
+                    active={selectedRadio === '2'}
+                  >
+                    Male{' '}
+                  </Button>
+                </ButtonGroup>
+              </div>
+              <TabContent activeTab={selectedRadio}>
+                <TabPane tabId="1">
+                  <Row>
+                    <Colxx sm="12" lg="12">
+                      {LabConsultantsData &&
+                        LabConsultantsData.filter(
+                          (item) => item.sex === 'Female'
+                        ).map((item, index) => {
+                          return (
+                            <UserCards
+                              mainTitle={item.label}
+                              image={item?.imgSrc}
+                              badge="Dr Fitness Recommended"
+                              day={item.details}
+                              fee={item.fee}
+                              rating={item.star} 
+                              // status={item.status}
+                            />
+                          );
+                        })}
+                    </Colxx>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="2">
+                  <Row>
+                    <Colxx sm="12" lg="12">
+                      {LabConsultantsData &&
+                        LabConsultantsData.filter(
+                          (item) => item.sex === 'Male'
+                        ).map((item, index) => {
+                          return (
+                            <UserCards
+                              mainTitle={item.label}
+                              image={item?.imgSrc}
+                              badge="Dr Fitness Recommended"
+                              day={item.details}
+                              fee={item.fee}
+                              rating={item.star} 
+                              // status={item.status}
+                            />
+                          );
+                        })}{' '}
+                    </Colxx>
+                  </Row>
+                </TabPane>
+              </TabContent>
+        {/* {LabConsultantsData.map((item) => {
             return (
 
               <UserCards  mainTitle={item.label} image={item?.imgSrc} badge='Dr Fitness Recommended' 
                 details ={item.details} fee ={item.fee} rating={item.star} />
             );
-          })}
+          })} */}
+          </Colxx>
       </Row>
     </>
   );

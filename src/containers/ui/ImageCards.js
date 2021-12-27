@@ -22,8 +22,8 @@ const ImageCards = (props) => {
   console.log(props?.showweeknday )
   return (
     <>
-     
-      <Colxx xxs="4" xs="6" lg="4">
+ 
+      <Colxx xxs="12" xs="6" lg="5">
    
         <Card className="mb-4">
           <div className="position-relative">
@@ -35,7 +35,7 @@ const ImageCards = (props) => {
               alt=""
             />
             <Badge
-              color="success"
+              color={props.bColor}
               pill
               className="position-absolute badge-top-left-2"
             >
@@ -51,7 +51,7 @@ const ImageCards = (props) => {
             </CardSubtitle>
             <div className="d-flex justify-content-end">
               <Link to={{pathname:`/app/exercise/exerciseInnerPage`
-              ,data:{showweeknday:props?.showweeksndays}}}>
+              ,data:{showweeknday:props?.showweeksndays , heading1:props?.heading1s}}}>
               <Button color="success" className="mb-2" onClick={()=>{
                 console.log(history,"<-props")
               }}>

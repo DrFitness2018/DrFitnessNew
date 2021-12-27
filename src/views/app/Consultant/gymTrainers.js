@@ -6,10 +6,10 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import {Trainer} from './docANDconsultantData'
 import ImageCards from 'containers/ui/ImageCards';
 import { Link, NavLink } from 'react-router-dom';
-import Rating from 'components/common/Rating';
+import Rating from 'components/common/Rating';  
 
 const Trainers = ({ match }) => {
-  const [selectedRadio, setSelectedRadio] = useState('');
+  const [selectedRadio, setSelectedRadio] = useState('0');
   const [activeSecondTab, setActiveSecondTab] = useState('1');
   return (
     <>
@@ -23,6 +23,14 @@ const Trainers = ({ match }) => {
         <Colxx>
       <div className="mb-4 text-center">
                 <ButtonGroup>
+                  <Button
+                    color="success"
+                    outline
+                    onClick={() => setSelectedRadio('0')}
+                    active={selectedRadio === '1'}
+                  >
+                    All
+                  </Button>
                   <Button
                     color="success"
                     outline
@@ -42,9 +50,28 @@ const Trainers = ({ match }) => {
                 </ButtonGroup>
               </div>
               <TabContent activeTab={selectedRadio}>
+                <TabPane tabId="0">
+                  <Row>
+                    {/* <Colxx sm="12" lg="12 "> */}
+                      {Trainer.map((item, index) => {
+                          return (
+                            <UserCards
+                              mainTitle={item.label}
+                              image={item?.imgSrc}
+                              badge="Dr Fitness Recommended"
+                              day={item.details}
+                              fee={item.fee}
+                              rating={item.star} 
+                              // status={item.status}
+                            />
+                          );
+                        })}
+                    {/* </Colxx> */}
+                  </Row>
+                </TabPane>
                 <TabPane tabId="1">
                   <Row>
-                    <Colxx sm="12" lg="12 ">
+                    {/* <Colxx sm="12" lg="12 "> */}
                       {Trainer &&
                         Trainer.filter(
                           (item) => item.sex === 'Female'
@@ -61,12 +88,12 @@ const Trainers = ({ match }) => {
                             />
                           );
                         })}
-                    </Colxx>
+                    {/* </Colxx> */}
                   </Row>
                 </TabPane>
                 <TabPane tabId="2">
                   <Row>
-                    <Colxx sm="12" lg="12">
+                    {/* <Colxx sm="12" lg="12"> */}
                       {Trainer &&
                         Trainer.filter(
                           (item) => item.sex === 'Male'
@@ -83,7 +110,7 @@ const Trainers = ({ match }) => {
                             />
                           );
                         })}{' '}
-                    </Colxx>
+                    {/* </Colxx> */}
                   </Row>
                 </TabPane>
               </TabContent>

@@ -45,6 +45,9 @@ const Video = React.lazy(() =>
 const Feedback = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './feedback')
 );
+const Profile = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './Profile')
+);
 
 
 const App = ({ match }) => {
@@ -102,6 +105,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/chatInbox`}
               render={(props) => <Inbox {...props} />}
+            />
+            <Route
+              path={`${match.url}/profile`}
+              render={(props) => <Profile {...props} />}
             />
             <Route
               path={`${match.url}/dietplan`}

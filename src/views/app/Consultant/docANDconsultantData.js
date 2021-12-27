@@ -2,6 +2,7 @@
 import LabConsultantImg1 from "../../../Images/lap-consul/1.JPG";
 import LabConsultantImg2 from "../../../Images/lap-consul/2.JPG";
 import LabConsultantImg3 from "../../../Images/lap-consul/3.JPG";
+import LabConsultantImg4 from "../../../Images/lap-consul/male.jpg";
 import LabConsultantImg6 from "../../../Images/lap-consul/6.JPG";
 import LabConsultantImg7 from "../../../Images/lap-consul/7.JPG";
 import LabConsultantImg8 from "../../../Images/lap-consul/8.JPG";
@@ -40,7 +41,7 @@ export const LabConsultantsData = [
       star:1,
     },
     {
-      imgSrc: LabConsultantImg3,
+      imgSrc: LabConsultantImg4,
       label: "DR. Tulaib",
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
       fee:2000,

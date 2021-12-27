@@ -53,6 +53,7 @@ import { getResetValue } from 'redux/store/actions/exerciseInnerAction';
 const ExerciseInnerPage = (props) => {
   const match = props?.match;
   const showweekdays = props?.location?.data?.showweeknday;
+  const heading1s = props?.location?.data?.heading1;
 
   console.log(showweekdays, 'Testing Show true');
 
@@ -112,9 +113,13 @@ const ExerciseInnerPage = (props) => {
                 <Card className="mb-4 ">
                   {showweekdays ? (
                     <>
+                          <div className="mt-2 container">
+                           <CardTitle style={{fontWeight:'bolder'}}>{heading1s}</CardTitle>
+
                       {DayObj.map((exer, id) => {
                         return (
                           <>
+                          
                             <ImageCardList
                               FoodTime={exer.exerciseName}
                               img={exer.gifImage}
@@ -136,7 +141,9 @@ const ExerciseInnerPage = (props) => {
                           Start Exercise
                         </Button>
                       </div>
+</div>
                     </>
+
                   ) : (
                     <CardHeader className="pl-0 pr-0">
                       <Nav tabs className=" card-header-tabs  ml-0 mr-0">
@@ -218,9 +225,11 @@ const ExerciseInnerPage = (props) => {
                               <>
                                 <div
                                   className="mb-4 "
-                                  style={{ width: '100%' }}
+                                  style={{ width: '100%' ,display:'flex',justifyContent:'center',  
+                                  overflow: 'auto',
+                                  whiteSpace: 'nowrap'}}
                                 >
-                                  <div
+                                  {/* <div
                                     className="mb-2"
                                     style={{
                                       display: 'flex',
@@ -231,7 +240,7 @@ const ExerciseInnerPage = (props) => {
                                       flexWrap: 'wrap',
                                       // backgroundColor: 'lightpink',
                                     }}
-                                  >
+                                  > */}
                                     <Button
                                       className="default mb-2 mr-2"
                                       color="outline-primary "
@@ -239,6 +248,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px'
                                       }}
                                       onClick={() => {
                                         setCollapseD(!collapseD);
@@ -253,6 +264,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       disabled={Days >= 7 ? false : true}
@@ -271,6 +284,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -290,6 +305,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -309,6 +326,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -328,6 +347,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       disabled={Days >=32 ? false : true}
@@ -347,6 +368,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       disabled={Days >=39 ? false : true}
                                       className="default mb-2 mr-2"
@@ -362,14 +385,14 @@ const ExerciseInnerPage = (props) => {
                                       Day7
                                     </Button>
                                   </div>
-                                </div>
-                                <div></div>
+                                {/* </div> */}
                               </>
                             )}
                           </CardBody>
                         </Colxx>
                         <Colxx>
-                          <div className="mt-4 container">
+                          <div className="mt-0 container">
+                           <CardTitle>{heading1s}</CardTitle>
                             <Collapse isOpen={collapseD}>
                               {DayObj.map((exer, id) => {
                                 return (
@@ -420,8 +443,8 @@ const ImageCardList = (props) => {
         <CardTitle className="mb-4"></CardTitle>
         <Row>
           <Colxx xxs="12">
-            <Card className="d-flex flex-row mb-3">
-              <NavLink to="#" location={{}} className="d-flex">
+            <Card className="d-flex flex-column  mb-3">
+              <NavLink to="#" location={{}} className="d-flex justify-content-center ">
                 <img
                   alt="Thumbnail"
                   src={props.img}
@@ -438,12 +461,13 @@ const ImageCardList = (props) => {
                     <p className="mb-1 text-muted ">{props.Description}</p>
                   </NavLink>
                 </div>
-                <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
+             
+              </div>
+              <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
                   <FormGroup className="mb-0">
-                    <p className="list-item-heading mb-1 ">Reps {props.Reps}</p>
+                    <p className="list-item-heading mb-1 ">No of Reps {props.Reps}</p>
                   </FormGroup>
                 </div>
-              </div>
             </Card>
           </Colxx>
         </Row>
@@ -566,15 +590,15 @@ function MyVerticallyCenteredModals(props) {
             </div>
           </div>
         ) : (
-          <div>
+          <div >
             <>
             <div id="contained-modal-title-vcenter">
           {props.day}
           <h6> Exercise No {questionNumber}</h6>
         </div>
               <div
-                className="appoinmentCards d-flex justify-content-center"
-                style={{ flexDirection: 'column ' }}
+                className="d-flex justify-content-center align-items-center"
+                style={{ flexDirection: 'column ', }}
               >
                 <div>
                   <Avatar
@@ -647,7 +671,7 @@ function MyVerticallyCenteredModals(props) {
                       width: '30%',
                     }}
                   >
-                    <Button variant="outline-info" style={{ width: '100%' }}>
+                    <Button variant="primary" outline style={{ width: '100%' }}>
                       Skip
                     </Button>
                    

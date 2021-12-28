@@ -16,11 +16,12 @@ import IntlMessages from 'helpers/IntlMessages';
 import { Colxx } from 'components/common/CustomBootstrap';
 import { adminRoot } from 'constants/defaultValues';
 import Basic from 'containers/wizard/Basic';
+// import logo from '../../assets/logos/logoMuqqa1.png'
 
 const Register = ({ history }) => {
-  const [email] = useState('demo@gogo.com');
-  const [password] = useState('gogo123');
-  const [name] = useState('Sarah Kortney');
+  const [email] = useState('wahajshera79@gmail.com');
+  const [password] = useState('fitness123');
+  const [name] = useState('Abdul Wahaj Shera');
 
   const onUserRegister = () => {
     if (email !== '' && password !== '') {
@@ -50,6 +51,8 @@ const Register = ({ history }) => {
           <div className="form-side">
             <NavLink to="/" className="white">
               <span className="logo-single" />
+              {/* <span><img src={logo} /></span> */}
+              {/* <br/><br/><br/> */}
             </NavLink>
             
             <Form>

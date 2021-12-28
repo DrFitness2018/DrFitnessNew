@@ -29,6 +29,8 @@ import profileimg4 from '../assets/img/profiles/shahzaib.PNG';
 import logo from '../assets/logos/logoMuqqa1.png'
 import opsimg from '../assets/img/landing-page/lockdown2.png'
 import lckmobimg from '../assets/img/landing-page/lockdown1.png'
+import Register from '../assets/img/landing-page/applications/Register.PNG'
+import Trainer from '../assets/img/landing-page/applications/Trainer.PNG'
 import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
 import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
 
@@ -210,9 +212,9 @@ const layouts = [
 
 const applications = [
   {
-    title: 'Survey',
+    title: 'Register',
     path: `${adminRoot}/applications/survey`,
-    img: '/assets/img/landing-page/applications/survey.jpg',
+    img: Register,
   },
   {
     title: 'Chat',
@@ -220,9 +222,9 @@ const applications = [
     img: '/assets/img/landing-page/applications/chat.jpg',
   },
   {
-    title: 'Todo',
+    title: 'Trainers',
     path: `${adminRoot}/applications/todo`,
-    img: '/assets/img/landing-page/applications/todo.jpg',
+    img: Trainer,
   },
 ];
 

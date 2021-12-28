@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="container-fluid">
           <Row>
             <Colxx xxs="12" sm="6">
-              <p className="mb-0 text-muted">ColoredStrategies 2021</p>
+              <p className="mb-0 text-muted">Dr.FitnessStrategies 2021</p>
             </Colxx>
             <Colxx className="col-sm-6 d-none d-sm-block">
               <ul className="breadcrumb pt-0 pr-0 float-right">
@@ -21,7 +21,7 @@ const Footer = () => {
                 </li>
                 <li className="breadcrumb-item mb-0">
                   <NavLink className="btn-link" to="#" location={{}}>
-                    Purchase
+                    Dr. Fitness
                   </NavLink>
                 </li>
                 <li className="breadcrumb-item mb-0">

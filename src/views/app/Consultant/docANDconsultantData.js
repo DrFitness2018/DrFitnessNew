@@ -10,9 +10,9 @@ import LabConsultantImg10 from "../../../Images/lap-consul/10.JPG";
 import LabConsultantImg11 from "../../../Images/lap-consul/11.JPG";
 import LabConsultantImg12 from "../../../Images/lap-consul/rahenuma.jpg";
 import LabConsultantImg13 from "../../../Images/lap-consul/sharmin.jpg";
-import tr1 from "../../../Images/tr1.jpg";
-import tr4 from "../../../Images/tr4.jpg";
-import tr5 from "../../../Images/tr5.jpg";
+import tr1 from "../../../Images/tr1new.jpg";
+import tr4 from "../../../Images/tr4new.jpg";
+import tr5 from "../../../Images/profile2new.jpg";
 
 export const LabConsultantsData = [
     {
@@ -54,15 +54,15 @@ export const LabConsultantsData = [
       imgSrc: tr4,
       label: "Trainer Adam",
       fee:2000,
-      star:1,
+      star:3,
       sex:'Male',
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
     },
     {
       imgSrc: tr5,
-      label: "Trainer ",
+      label: "Trainer Melina",
       fee:6000,
-      star:2,
+      star:5,
       sex:'Female',
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
     },

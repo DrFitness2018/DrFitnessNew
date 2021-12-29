@@ -11,15 +11,9 @@ import LabConsultantImg10 from "../../../Images/lap-consul/10.JPG";
 import LabConsultantImg11 from "../../../Images/lap-consul/11.JPG";
 import LabConsultantImg12 from "../../../Images/lap-consul/rahenuma.jpg";
 import LabConsultantImg13 from "../../../Images/lap-consul/sharmin.jpg";
-<<<<<<< HEAD
 import tr1 from "../../../Images/tr1new.jpg";
 import tr4 from "../../../Images/tr4new.jpg";
 import tr5 from "../../../Images/profile2new.jpg";
-=======
-import tr1 from "../../../Images/tr1.jpg";
-import tr4 from "../../../Images/tr4.jpg";
-import tr5 from "../../../Images/trfe.jpg";
->>>>>>> 7caa46f4a65f6de79a20621852263f2dd7fb9f54
 
 export const LabConsultantsData = [
     {
@@ -75,11 +69,7 @@ export const LabConsultantsData = [
     },
     {
       imgSrc: tr5,
-<<<<<<< HEAD
       label: "Trainer Melina",
-=======
-      label: "Alexa",
->>>>>>> 7caa46f4a65f6de79a20621852263f2dd7fb9f54
       fee:6000,
       star:5,
       sex:'Female',

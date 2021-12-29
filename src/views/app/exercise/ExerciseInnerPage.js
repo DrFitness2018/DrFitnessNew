@@ -481,6 +481,7 @@ function MyVerticallyCenteredModals(props) {
 
   const [question, setQuestion] = useState(null);
   // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber');
+  // const [questionNumber, setQuestionNumber] = useState(1);
   
   const [timeOut, setTimeOut] = useState(false);
   const [seclefts] = useSound(secleft);
@@ -489,16 +490,16 @@ function MyVerticallyCenteredModals(props) {
   
   // const exerciseNumber = useSelector((state) => state?.Exer?.reset);
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
-  let exerciseNumber = useSelector((state) => state?.Exer?.reset);
+  // let exerciseNumber = useSelector((state) => state?.Exer?.reset);
   const [questionNumber, setQuestionNumber] =  useState(1);
 
-  useEffect(() => {
-    dispatch(getResetValue(questionNumber)); 
-  },[dispatch,questionNumber,exerciseNumber])
+  // useEffect(() => {
+  //   dispatch(getResetValue(questionNumber)); 
+  // },[dispatch,questionNumber,exerciseNumber])
 
-  console.log("redux",exerciseNumber)
+  // console.log("redux",exerciseNumber)
 
 
   // console.log(exerciseNumber,"redux wawla")

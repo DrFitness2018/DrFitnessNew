@@ -91,6 +91,7 @@ const ExerciseGain = ({ match }) => {
                   image={item?.img}
                   badge="Hot"
               bColor = "danger"
+              showweeksndays={item?.showweeknday}
                   heading1s={item?.heading1}
                   title={item?.heading}
                   discription={item?.subheading}

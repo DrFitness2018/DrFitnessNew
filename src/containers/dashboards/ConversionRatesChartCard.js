@@ -13,14 +13,14 @@ import { AreaChart } from 'components/charts';
 
 import { conversionChartData } from 'data/charts';
 
-const ConversionRatesChartCard = () => {
+const   ConversionRatesChartCard = () => {
   return (
     <Card className="dashboard-filled-line-chart">
       <CardBody>
         <div className="float-left float-none-xs">
           <div className="d-inline-block">
             <h5 className="d-inline">
-              <IntlMessages id="dashboards.conversion-rates" />
+            Revenue Earned in $
             </h5>
             <span className="text-muted text-small d-block">
               <IntlMessages id="dashboards.per-session" />

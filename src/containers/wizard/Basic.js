@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { Card, CardBody, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Card, CardBody, CardTitle, Form, FormGroup, Input, Label } from 'reactstrap';
 import { Wizard, Steps, Step } from 'react-albus';
 import { injectIntl } from 'react-intl';
 import IntlMessages from 'helpers/IntlMessages';
@@ -280,14 +280,9 @@ const Basic = ({ intl }) => {
                   <IntlMessages id="wizard.content-thanks" />
                 </h2> */}
 
-                <h2>
-                  BMI result :::
-                </h2>
-
-                <Weight bmi ={bmi} /> 
-
                 <p>
-                  <IntlMessages id="wizard.registered" />
+                <Weight bmi ={bmi} check={chkdisease} disease={disease} chkinjury={chkinjury} injury={injury} /> 
+                  {/* <IntlMessages id="wizard.registered" /> */}
                 </p>
               </div>
             </Step>
@@ -312,122 +307,139 @@ function Weight(props) {
 
   if (props.bmi <= 18.5) {
     return (
-      <div
-      style={{
-        display: "flex",
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-        textAlign: "center",
-        maxWidth: "70%"
-      }}
-    >
-      <h2
-        style={{
-          fontWeight: "normal",
-          color:'#121212',
-
-          fontSize: "22px",
-        }}
-      >
-        According to your <span style={{color:'#63d471'}}> BMI ({props.bmi})</span> Your Weight is Too Low, we sugess
-        you to Gain some weight
-      </h2>
-      <h4
-        style={{
-          fontWeight: "normal",
-          color:'#121212',
-          fontSize: "22px",
-        }}
-      >
-        Don't know how to Gain? <span style={{color:'#63d471'}}> Follow our Exercise and Diet plan Accordingly</span>
-      </h4>
-      <Link to='/userDash' className="btn btn-outline-success">
-        Let's See
-      </Link>
+      
+      <div>
+      <CardTitle className='p-0'>
+        BMI {props.bmi}
+      </CardTitle>
+      <CardBody  className='p-0'>
+        <p>
+      Your Weight is Too Low, we sugess you to Gain some weight 
+        </p>
+        {
+        props.check === 'yes' ?  (
+          <>
+        <p>
+          You specify this disease 
+          <span style={{color:'green'}}> {props.disease}</span> We recommend you to consult doctor before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+        {
+        props.chkinjury === 'yes' ?  (
+          <>
+        <p>
+          You specify this Injury 
+          <span style={{color:'green'}}> {props.injury}</span> We recommend you to consult doctor/trainer before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+     { props.check === 'yes' || props.chkinjury === 'yes'  ? (
+        <Link to='/app/Consultant/doctors' className="btn btn-outline-success">
+        See Cosnultant
+      </Link> 
+     ): 
+       <Link to='/app/exercise/exerciseGain' className="btn btn-outline-success">
+       See Gain Diet Plans and Exercises
+   </Link> 
+      }
+     
+      </CardBody>
     </div>
     );
   } else if (props.bmi <= 24.9) {
     return (
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          textAlign: "center",
-        maxWidth: "70%"
-
-        }}
-      >
-        <h2
-          style={{
-            fontWeight: "normal",
-            fontSize: "22px",
-          color:'#121212',
-
-          }}
-        >
-          According to your <span style={{color:'#63d471'}}> BMI ({props.bmi})</span> Your Weight is Normal, we sugess
-          you to Maintain weight
-        </h2>
-        <h4
-          style={{
-            fontWeight: "normal",
-          color:'#121212',
-
-            fontSize: "22px",
-          }}
-        >
-        Don't know how to Maintain? <span style={{color:'#63d471'}}> Follow our Exercise and Diet plan Accordingly</span>
-        </h4>
-        <Link to='/userDash' className="btn btn-outline-light">
-          Let's See
-        </Link>
-      </div>
+      <div>
+      <CardTitle className='p-0'>
+        BMI {props.bmi}
+      </CardTitle>
+      <CardBody  className='p-0'>
+        <p>
+      Your Weight is Normal, we sugesst you to Maintain weight 
+        </p>
+        {
+        props.check === 'yes' ?  (
+          <>
+        <p>
+          You specify this disease 
+          <span style={{color:'green'}}> {props.disease}</span> We recommend you to consult doctor before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+        {
+        props.chkinjury === 'yes' ?  (
+          <>
+        <p>
+          You specify this Injury 
+          <span style={{color:'green'}}> {props.injury}</span> We recommend you to consult doctor/trainer before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+     { props.check === 'yes' || props.chkdisease === 'yes' ? (
+        <Link to='/app/Consultant/doctors' className="btn btn-outline-success">
+        See Cosnultant
+      </Link> 
+     ): 
+       <Link to='/app/exercise/exerciseGain' className="btn btn-outline-success">
+       See Gain Diet Plans and Exercises
+   </Link> 
+      }
+     
+      </CardBody>
+    </div>
     );
   } else {
     return (
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          textAlign: "center",
-        maxWidth: "70%",
-        // backgroundColor:'red'
-
-        }}
-      >
-        <h2
-          style={{
-            fontWeight: "normal",
-          color:'#121212',
-
-            fontSize: "22px",
-          }}
-        >
-          According to your <span style={{color:'#63d471'}}> BMI ({props.bmi})</span> Your Weight is Too much, we sugess
-          you to Lean some weight
-        </h2>
-        <h4
-          style={{
-            fontWeight: "normal",
-          color:'#121212',
-
-            fontSize: "22px",
-          }}
-        >
-        Don't know how to Lean? <span style={{color:'#63d471'}}> Follow our Exercise and Diet plan Accordingly</span>
-        </h4>
-        <Link to='/userDash' className="btn btn-outline-success">
-          Let's See
-        </Link>
-      </div>
+      <div>
+      <CardTitle className='p-0'>
+        BMI {props.bmi}
+      </CardTitle>
+      <CardBody  className='p-0'>
+        <p>
+      Your Weight is Too Much, we sugess you to Lean some weight 
+        </p>
+        {
+        props.check === 'yes' ?  (
+          <>
+        <p>
+          You specify this disease 
+          <span style={{color:'green'}}> {props.disease}</span> We recommend you to consult doctor before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+        {
+        props.chkinjury === 'yes' ?  (
+          <>
+        <p>
+          You specify this Injury 
+          <span style={{color:'green'}}> {props.injury}</span> We recommend you to consult doctor/trainer before 
+          trying any of our exercises.
+        </p>
+          </>
+        ):""
+      }
+     { props.check === 'yes' || props.chkdisease === 'yes' ? (
+        <Link to='/app/Consultant/doctors' className="btn btn-outline-success">
+          See Cosnultant
+      </Link> 
+     ): 
+     <Link to='/app/exercise/exerciseGain' className="btn btn-outline-success">
+       See Gain Diet Plans and Exercises 
+   </Link> 
+      }
+     
+      </CardBody>
+    </div>
     );
   }
 }

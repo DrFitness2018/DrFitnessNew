@@ -267,7 +267,7 @@ export const conversionChartData = {
   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   datasets: [
     {
-      label: '',
+      label: '$',
       data: [65, 60, 68, 60, 58, 63, 60],
       borderColor: colors.themeColor2,
       pointBackgroundColor: colors.foregroundColor,

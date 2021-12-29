@@ -6,7 +6,7 @@ import VideoBg from "../Image/bgVideo.mp4";
 import '../Main/overlay.css'
 
 const Video = () => (
-  <video className="home-video" autoPlay muted loop>
+  <video className="home-video"  autoPlay muted loop>
     <source src={VideoBg} type="video/mp4" />
   </video>
 );

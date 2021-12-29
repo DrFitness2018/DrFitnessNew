@@ -31,6 +31,7 @@ import opsimg from '../assets/img/landing-page/lockdown2.png'
 import lckmobimg from '../assets/img/landing-page/lockdown1.png'
 import Register from '../assets/img/landing-page/applications/Register.PNG'
 import Trainer from '../assets/img/landing-page/applications/Trainer.PNG'
+import Video from '../views/HomePage/Main/Video.js'
 import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
 import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
 
@@ -478,8 +479,8 @@ const Home = () => {
                   <div className="home-text">
                     <div className="display-1">
                       <b>
-                      WORK HARDER <br />
-                      GET STRONGER
+                        WORK HARDER <br />
+                        GET STRONGER
                       </b>
                     </div>
                     <p className="white mb-5">
@@ -647,8 +648,8 @@ const Home = () => {
             {/* <p>sdsafjhasjkfhasjkfhasjkfhasjkfhasjkfhasjkfhasj</p> */}
           </div>
 
-          <div className="section mb-0">
-            <div className="container" id="layouts">
+          <div className="section">
+            <div className=" w-100" id="" >
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>ANALYTICS</h1>
@@ -659,6 +660,8 @@ const Home = () => {
                     They are clean and slick. They function well and look good
                     at the same time.
                   </p>
+                  {/* <div className='mt-0 pb-0 mb-0 pt-0' style={{backgroundColor:'red'}}><p>sdasfasfasgd</p></div> */}
+                  {/* <Video/> */}
                 </div>
               </div>
 
@@ -749,12 +752,12 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="section mb-0">
+          <div className="section" >
             <div className="container" id="components">
               <div className="row mb-5">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   {/* <h1>Components</h1> */}
-                  <h1>Expert Trainers</h1>
+                  <h1>Development Team</h1>
                   {/* <p>
                     We used most popular and well managed open source components
                     with bootstrap components. Combined them into even more
@@ -871,20 +874,20 @@ const Home = () => {
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>Enjoying so Far?</h1>
+                  <h1>Ready to try Dr. Fitness workout?</h1>
                   <p>
-                    Purchase Gogo to get a fresh start with your new project.
+                    Fitness is not just a goal, It's a Lifestyle!
                   </p>
                 </div>
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
                   <div className="text-center mb-3">
                     <a
-                      className="btn btn-secondary btn-xl"
+                      className="btn btn-primary btn-xl"
                       target="_blank"
                       rel="noopener noreferrer"
                       href={buyUrl}
                     >
-                      BUY NOW
+                      Become Our Member Now
                     </a>
                   </div>
                 </div>

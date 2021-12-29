@@ -28,7 +28,6 @@ const ChatApp = ({
   currentUser,
   selectedUser,
   selectedUserId,
-
   getContactsAction,
   getConversationsAction,
   changeConversationAction,

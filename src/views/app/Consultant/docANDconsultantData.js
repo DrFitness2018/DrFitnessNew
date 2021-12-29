@@ -2,6 +2,7 @@
 import LabConsultantImg1 from "../../../Images/lap-consul/1.JPG";
 import LabConsultantImg2 from "../../../Images/lap-consul/2.JPG";
 import LabConsultantImg3 from "../../../Images/lap-consul/3.JPG";
+import LabConsultantImg4 from "../../../Images/lap-consul/male.jpg";
 import LabConsultantImg6 from "../../../Images/lap-consul/6.JPG";
 import LabConsultantImg7 from "../../../Images/lap-consul/7.JPG";
 import LabConsultantImg8 from "../../../Images/lap-consul/8.JPG";
@@ -10,9 +11,15 @@ import LabConsultantImg10 from "../../../Images/lap-consul/10.JPG";
 import LabConsultantImg11 from "../../../Images/lap-consul/11.JPG";
 import LabConsultantImg12 from "../../../Images/lap-consul/rahenuma.jpg";
 import LabConsultantImg13 from "../../../Images/lap-consul/sharmin.jpg";
+<<<<<<< HEAD
 import tr1 from "../../../Images/tr1new.jpg";
 import tr4 from "../../../Images/tr4new.jpg";
 import tr5 from "../../../Images/profile2new.jpg";
+=======
+import tr1 from "../../../Images/tr1.jpg";
+import tr4 from "../../../Images/tr4.jpg";
+import tr5 from "../../../Images/trfe.jpg";
+>>>>>>> 7caa46f4a65f6de79a20621852263f2dd7fb9f54
 
 export const LabConsultantsData = [
     {
@@ -39,6 +46,14 @@ export const LabConsultantsData = [
       sex:'Female',
       star:1,
     },
+    {
+      imgSrc: LabConsultantImg4,
+      label: "DR. Tulaib",
+      details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
+      fee:2000,
+      sex:'Male',
+      star:5,
+    },
 
   ];
   export const Trainer = [
@@ -60,7 +75,11 @@ export const LabConsultantsData = [
     },
     {
       imgSrc: tr5,
+<<<<<<< HEAD
       label: "Trainer Melina",
+=======
+      label: "Alexa",
+>>>>>>> 7caa46f4a65f6de79a20621852263f2dd7fb9f54
       fee:6000,
       star:5,
       sex:'Female',

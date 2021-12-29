@@ -33,6 +33,9 @@ const Inbox = React.lazy(() =>
 const Diet = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './dietplan')
 );
+const AngleChecker = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './AngleChecker')
+);
 const Consult = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './Consultant')
 );
@@ -41,6 +44,9 @@ const Video = React.lazy(() =>
 );
 const Feedback = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './feedback')
+);
+const Profile = React.lazy(() =>
+  import(/* webpackChunkName: "blank-page" */ './Profile')
 );
 
 
@@ -85,6 +91,10 @@ const App = ({ match }) => {
               render={(props) => <BlankPage {...props} />}
             />
             <Route
+              path={`${match.url}/angleChecker`}
+              render={(props) => <AngleChecker {...props} />}
+            />
+            <Route
               path={`${match.url}/exercise`}
               render={(props) => <Exercise {...props} />}
             />
@@ -95,6 +105,10 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/chatInbox`}
               render={(props) => <Inbox {...props} />}
+            />
+            <Route
+              path={`${match.url}/profile`}
+              render={(props) => <Profile {...props} />}
             />
             <Route
               path={`${match.url}/dietplan`}

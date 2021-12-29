@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 import { CardHeader, Nav, NavItem, TabContent, TabPane } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios'
+// import { useSelector, useDispatch} from 'redux';
 import classnames from 'classnames';
 import {
   Day1,
@@ -51,6 +53,7 @@ import { getResetValue } from 'redux/store/actions/exerciseInnerAction';
 const ExerciseInnerPage = (props) => {
   const match = props?.match;
   const showweekdays = props?.location?.data?.showweeknday;
+  const heading1s = props?.location?.data?.heading1;
 
   console.log(showweekdays, 'Testing Show true');
 
@@ -73,16 +76,7 @@ const ExerciseInnerPage = (props) => {
     },
   ];
 
-  const dispatch = useDispatch();
-    
-    let reset = useSelector((state) => state?.Exer?.reset);
-    
-    useEffect(() => {
-      dispatch(getResetValue(reset)); 
-    },[reset])
 
-    reset=56
-    console.log(reset)
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -119,9 +113,13 @@ const ExerciseInnerPage = (props) => {
                 <Card className="mb-4 ">
                   {showweekdays ? (
                     <>
+                          <div className="mt-2 container">
+                           <CardTitle style={{fontWeight:'bolder'}}>{heading1s}</CardTitle>
+
                       {DayObj.map((exer, id) => {
                         return (
                           <>
+                          
                             <ImageCardList
                               FoodTime={exer.exerciseName}
                               img={exer.gifImage}
@@ -143,7 +141,9 @@ const ExerciseInnerPage = (props) => {
                           Start Exercise
                         </Button>
                       </div>
+</div>
                     </>
+
                   ) : (
                     <CardHeader className="pl-0 pr-0">
                       <Nav tabs className=" card-header-tabs  ml-0 mr-0">
@@ -212,7 +212,7 @@ const ExerciseInnerPage = (props) => {
                   )}
 
                   <TabContent activeTab={activeSecondTab}>
-                    <TabPane tabId="1">
+                    <TabPane tabId={activeSecondTab}>
                       <Row>
                         <Colxx sm="12" lg="12">
                           <CardBody>
@@ -225,9 +225,11 @@ const ExerciseInnerPage = (props) => {
                               <>
                                 <div
                                   className="mb-4 "
-                                  style={{ width: '100%' }}
+                                  style={{ width: '100%' ,display:'flex',justifyContent:'center',  
+                                  overflow: 'auto',
+                                  whiteSpace: 'nowrap'}}
                                 >
-                                  <div
+                                  {/* <div
                                     className="mb-2"
                                     style={{
                                       display: 'flex',
@@ -238,7 +240,7 @@ const ExerciseInnerPage = (props) => {
                                       flexWrap: 'wrap',
                                       // backgroundColor: 'lightpink',
                                     }}
-                                  >
+                                  > */}
                                     <Button
                                       className="default mb-2 mr-2"
                                       color="outline-primary "
@@ -246,11 +248,13 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px'
                                       }}
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day1');
-                                        setDayObj(Week1Gain[0]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[0] : activeSecondTab==='2' ? Week2Gain[0] : activeSecondTab==='3' ? Week3Gain[0] : activeSecondTab==='4' ? Week4Gain[0] : '');
                                       }}
                                     >
                                       Day1
@@ -260,6 +264,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       disabled={Days >= 7 ? false : true}
@@ -267,7 +273,7 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day2');
-                                        setDayObj(Week1Gain[1]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[1] : activeSecondTab==='2' ? Week2Gain[1] : activeSecondTab==='3' ? Week3Gain[1] : activeSecondTab==='4' ? Week4Gain[1] : '');
                                         setD(0);
                                       }}
                                     >
@@ -278,6 +284,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -285,7 +293,9 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day3');
-                                        setDayObj(Week1Gain[2]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[2] : activeSecondTab==='2' ? Week2Gain[2] : activeSecondTab==='3' ? Week3Gain[2] : activeSecondTab==='4' ? Week4Gain[2] : '');
+                                        setD(0);
+
                                       }}
                                     >
                                       Day3
@@ -295,6 +305,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -302,7 +314,9 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day4');
-                                        setDayObj(Week1Gain[3]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[3] : activeSecondTab==='2' ? Week2Gain[3] : activeSecondTab==='3' ? Week3Gain[3] : activeSecondTab==='4' ? Week4Gain[3] : '');
+                                        setD(0);
+
                                       }}
                                     >
                                       Day4
@@ -312,6 +326,8 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
@@ -319,7 +335,9 @@ const ExerciseInnerPage = (props) => {
                                       onClick={() => {
                                         setCollapseD(!collapseD);
                                         setDayName('Day5');
-                                        setDayObj(Week1Gain[4]);
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[4] : activeSecondTab==='2' ? Week2Gain[4] : activeSecondTab==='3' ? Week3Gain[4] : activeSecondTab==='4' ? Week4Gain[4] : '');
+                                        setD(0);
+
                                       }}
                                     >
                                       Day5
@@ -329,14 +347,18 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       className="default mb-2 mr-2"
                                       disabled={Days >=32 ? false : true}
                                       color="outline-primary"
                                       onClick={() => {
                                         setCollapseD(!collapseD);
-                                        setDayName('Day5');
-                                        setDayObj(Week1Gain[5]);
+                                        setDayName('Day6');
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[5] : activeSecondTab==='2' ? Week2Gain[5] : activeSecondTab==='3' ? Week3Gain[5] : activeSecondTab==='4' ? Week4Gain[5] : '');
+                                        setD(0);
+
                                       }}
                                     >
                                       Day6
@@ -346,27 +368,31 @@ const ExerciseInnerPage = (props) => {
                                         width: '8%',
                                         height: '80px',
                                         borderRadius: '50%',
+                                        minWidth:'70px',
+                                        minHeight:'70px',
                                       }}
                                       disabled={Days >=39 ? false : true}
                                       className="default mb-2 mr-2"
                                       color="outline-primary"
                                       onClick={() => {
                                         setCollapseD(!collapseD);
-                                        setDayName('Day5');
-                                        setDayObj(Week1Gain[6]);
+                                        setDayName('Day7');
+                                        setDayObj(activeSecondTab ==='1' ? Week1Gain[6] : activeSecondTab==='2' ? Week2Gain[6] : activeSecondTab==='3' ? Week3Gain[6] : activeSecondTab==='4' ? Week4Gain[6] : '');
+                                        setD(0);
+                                      
                                       }}
                                     >
                                       Day7
                                     </Button>
                                   </div>
-                                </div>
-                                <div></div>
+                                {/* </div> */}
                               </>
                             )}
                           </CardBody>
                         </Colxx>
                         <Colxx>
-                          <div className="mt-4 container">
+                          <div className="mt-0 container">
+                           <CardTitle>{heading1s}</CardTitle>
                             <Collapse isOpen={collapseD}>
                               {DayObj.map((exer, id) => {
                                 return (
@@ -397,35 +423,6 @@ const ExerciseInnerPage = (props) => {
                         </Colxx>
                       </Row>
                     </TabPane>
-                    <TabPane tabId="2">
-                      <Row>
-                        <Colxx sm="12">
-                          <CardBody>
-                            <CardTitle className="mb-4">
-                              Wedding Cake with Flowers Macarons and Blueberries
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
-                          </CardBody>
-                        </Colxx>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <Row>
-                        <Colxx sm="12">
-                          <CardBody>
-                            <CardTitle className="mb-4">
-                              Cheesecake with Chocolate Cookies and Cream
-                              Biscuits
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
-                          </CardBody>
-                        </Colxx>
-                      </Row>
-                    </TabPane>
                   </TabContent>
                 </Card>
               </Colxx>
@@ -446,8 +443,8 @@ const ImageCardList = (props) => {
         <CardTitle className="mb-4"></CardTitle>
         <Row>
           <Colxx xxs="12">
-            <Card className="d-flex flex-row mb-3">
-              <NavLink to="#" location={{}} className="d-flex">
+            <Card className="d-flex flex-column  mb-3">
+              <NavLink to="#" location={{}} className="d-flex justify-content-center ">
                 <img
                   alt="Thumbnail"
                   src={props.img}
@@ -464,12 +461,13 @@ const ImageCardList = (props) => {
                     <p className="mb-1 text-muted ">{props.Description}</p>
                   </NavLink>
                 </div>
-                <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
+             
+              </div>
+              <div className="custom-control custom-checkbox pl-1 align-self-center pr-4">
                   <FormGroup className="mb-0">
-                    <p className="list-item-heading mb-1 ">Reps {props.Reps}</p>
+                    <p className="list-item-heading mb-1 ">No of Reps {props.Reps}</p>
                   </FormGroup>
                 </div>
-              </div>
             </Card>
           </Colxx>
         </Row>
@@ -478,27 +476,32 @@ const ImageCardList = (props) => {
   );
 };
 
-//   function MyVerticallyCenteredModals(props) {
-//     return(
-//         <Modal isOpen={props.show} centered size='sm' style={{boxShadow:'none'}}>
-//             <ModalHeader>Abc 123</ModalHeader>
-//             <ModalBody>Hello</ModalBody>
-//         </Modal>
-//     )
-//   }
-
 function MyVerticallyCenteredModals(props) {
-  const [question, setQuestion] = useState(null);
-  // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber  ');
-  const [questionNumber, setQuestionNumber] = useState(1);
+  
 
+  const [question, setQuestion] = useState(null);
+  // const [questionNumber, setQuestionNumber] = useStickyState(1,'questionNumber');
+  
   const [timeOut, setTimeOut] = useState(false);
   const [seclefts] = useSound(secleft);
   const [count, setCounter] = useState();
   const [daysCount, setdaysCount] = useState(1);
+  
+  // const exerciseNumber = useSelector((state) => state?.Exer?.reset);
+  
+  const dispatch = useDispatch();
+  
+  let exerciseNumber = useSelector((state) => state?.Exer?.reset);
+  const [questionNumber, setQuestionNumber] =  useState(1);
 
-  // const [c,sc] = useStickyState(0,'count')
+  useEffect(() => {
+    dispatch(getResetValue(questionNumber)); 
+  },[dispatch,questionNumber,exerciseNumber])
 
+  console.log("redux",exerciseNumber)
+
+
+  // console.log(exerciseNumber,"redux wawla")
   props.parentCallback(daysCount);
 
   useEffect(() => {
@@ -511,9 +514,12 @@ function MyVerticallyCenteredModals(props) {
       seclefts();
       return;
     }
-    if (daysCount === props.dayObj.length + 1) {
+    if (daysCount + 1 === props.dayObj.length + 1 ) {
       setQuestionNumber(1);
       // console.log("len -",props.dayObj.length)
+    }
+    else{
+      return  
     }
   }, [count, seclefts, questionNumber]);
 
@@ -521,14 +527,18 @@ function MyVerticallyCenteredModals(props) {
     setCounter(Value);
   };
   console.log('dayscount->', daysCount);
+
   const handleClick = () => {
     setQuestionNumber((prev) => prev + 1);
     setdaysCount(daysCount + 1);
   };
+  const handleClickLast = () => {
+    setQuestionNumber(1);
+    setdaysCount(1);
+  };
 
   let totalLen = props.dayObj.length;
 
-  // console.log("question",question)
   console.log('questionNumer', questionNumber);
   console.log('Totalen len', totalLen);
 
@@ -542,13 +552,10 @@ function MyVerticallyCenteredModals(props) {
       style={{ boxShadow: 'none' }}
     >
       <ModalHeader closeButton>
-        <div id="contained-modal-title-vcenter">
-          {props.day}
-          <h6> Exercise No {questionNumber}</h6>
-        </div>
+       
       </ModalHeader>
       <ModalBody>
-        {questionNumber === totalLen ? (
+        {questionNumber === totalLen + 1 ? (
           <div
             className="appoinmentCards d-flex justify-content-center"
             style={{ flexDirection: 'column ' }}
@@ -570,14 +577,28 @@ function MyVerticallyCenteredModals(props) {
                 </span>{' '}
                 sec
               </h4>
+              {/* <Button
+                      variant="success"
+                      style={{ width: '100%', marginTop: 2 }}
+                      onClick={() => {
+                        handleClickLast();
+                        // daycounter();
+                      }}
+                    >
+                      Finish
+                    </Button> */}
             </div>
           </div>
         ) : (
-          <div>
+          <div >
             <>
+            <div id="contained-modal-title-vcenter">
+          {props.day}
+          <h6> Exercise No {questionNumber}</h6>
+        </div>
               <div
-                className="appoinmentCards d-flex justify-content-center"
-                style={{ flexDirection: 'column ' }}
+                className="d-flex justify-content-center align-items-center"
+                style={{ flexDirection: 'column ', }}
               >
                 <div>
                   <Avatar
@@ -619,7 +640,6 @@ function MyVerticallyCenteredModals(props) {
                 <div
                   style={{
                     display: 'flex',
-                    // backgroundColor: "lightgreen",
                     width: '100%',
                     flexWrap: 'wrap',
                     alignItems: 'center',
@@ -644,7 +664,6 @@ function MyVerticallyCenteredModals(props) {
                   <div
                     style={{
                       display: 'flex',
-                      //  backgroundColor: "lightgrey",
                       justifyContent: 'space-between',
                       alignItems: 'center',
                       flexWrap: 'wrap',
@@ -652,10 +671,11 @@ function MyVerticallyCenteredModals(props) {
                       width: '30%',
                     }}
                   >
-                    <Button variant="outline-info" style={{ width: '100%' }}>
+                    <Button variant="primary" outline style={{ width: '100%' }}>
                       Skip
                     </Button>
-                    <Button
+                   
+                      <Button
                       variant="success"
                       style={{ width: '100%', marginTop: 2 }}
                       onClick={() => {
@@ -665,18 +685,12 @@ function MyVerticallyCenteredModals(props) {
                     >
                       Next Exercise
                     </Button>
+                    
+                     
                   </div>
                 </div>
               </div>
             </>
-            {/* <div
-                  className="appoinmentCards d-flex justify-content-center"
-                  style={{ flexDirection: "column " }}
-                >
-                  <h2>Congratulations! You have Completed Todays Exercises</h2>
-                  <h4>Total No of Exercises: {totalLen}</h4>
-                  <h4>Total Time Spend: {totalLen * 30} seconds</h4>
-                  </div> */}
           </div>
         )}
       </ModalBody>

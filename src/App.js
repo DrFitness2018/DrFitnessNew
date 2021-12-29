@@ -39,7 +39,11 @@ const Login = React.lazy(() =>
 import(/* webpackChunkName: "views-error" */ './views/user/login')
 );
 const HomePage = React.lazy(() =>
+<<<<<<< HEAD
   import(/* webpackChunkName: "dashboards" */ './views/home')
+=======
+import(/* webpackChunkName: "views-error" */ './views/Home')
+>>>>>>> 7caa46f4a65f6de79a20621852263f2dd7fb9f54
 );
 
 const App = ({ locale }) => {

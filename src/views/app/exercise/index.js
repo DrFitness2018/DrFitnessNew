@@ -9,6 +9,9 @@ const Exlean = React.lazy(() =>
 const ExGain = React.lazy(() =>
   import(/* webpackChunkName: "menu-level-3" */ './ExerciseGain')
 );
+const ExInnerPage = React.lazy(() =>
+  import(/* webpackChunkName: "menu-level-3" */ './ExerciseInnerPage')
+);
 
 const ExerciseMenu = ({ match }) => (
   <Suspense fallback={<div className="loading" />}>
@@ -26,6 +29,10 @@ const ExerciseMenu = ({ match }) => (
       <Route
         path={`${match.url}/exerciseGain`}
         render={(props) => <ExGain {...props} />}
+      />
+      <Route
+        path={`${match.url}/exerciseInnerPage`}
+        render={(props) => <ExInnerPage {...props} />}
       />
       <Redirect to="/error" />
     </Switch>

@@ -17,14 +17,23 @@ import { Card, CardBody, CardTitle } from 'reactstrap';
 import { CardHeader, Nav, NavItem, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { DietDay1 } from './dietMainData';
+import { Day1, Day2 , Day3, Day4 ,Day5,Day6,Day7,Day8,Day9,Day10,Day11,Day12,Day13,Day14, 
+  Day15, Day16, Day17, Day18, Day19, Day20, Day21,Day22, Day23, Day24, Day25, Day26, Day27, Day28 } from './dietMainData';
 // import ImageCardList from 'containers/ui/ImageCardList';
 
+
 const GainDiet = ({ match }) => {
+  
+  const Week1GainDiet = [Day1, Day2, Day3, Day4, Day5, Day6, Day7];
+  const Week2GainDiet = [Day8, Day9, Day10, Day11, Day12, Day13, Day14];
+  const Week3GainDiet = [Day15, Day16, Day17, Day18, Day19, Day20, Day21];
+  const Week4GainDiet = [Day22, Day23, Day24, Day25, Day26, Day27, Day28];
+
   const [collapse, setCollapse] = useState(false);
   const [collapseD, setCollapseD] = useState(false);
   const [activeFirstTab, setActiveFirstTab] = useState('1');
   const [activeSecondTab, setActiveSecondTab] = useState('1');
+  const [ diestdayobj,setDiestdayobj] =useState(Day1);
   return (
     <>
       <Row>
@@ -65,6 +74,7 @@ const GainDiet = ({ match }) => {
               img={img1P}
               detail="A 30 Days Meal Plan for Weight Lean"
               badges="Trending"
+              btn={() => setCollapse(!collapse)}
             />
             <BasicCarouselItem
               title="Balanced Diet"
@@ -175,6 +185,8 @@ const GainDiet = ({ match }) => {
                                   }}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
+                                    setDiestdayobj(Day1);
+
                                   }}
                                 >
                                   Day1
@@ -187,6 +199,10 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day2);
+                                  }}
                                 >
                                   Day2
                                 </Button>
@@ -198,6 +214,11 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day3);
+
+                                  }}
                                 >
                                   Day3
                                 </Button>
@@ -209,6 +230,11 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day4);
+
+                                  }}
                                 >
                                   Day4
                                 </Button>
@@ -220,6 +246,11 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day5);
+
+                                  }}
                                 >
                                   Day5
                                 </Button>
@@ -231,6 +262,11 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day6);
+
+                                  }}
                                 >
                                   Day6
                                 </Button>
@@ -242,6 +278,10 @@ const GainDiet = ({ match }) => {
                                   }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day7);
+                                  }}
                                 >
                                   Day7
                                 </Button>
@@ -253,9 +293,312 @@ const GainDiet = ({ match }) => {
                         <Colxx>
                           <div className="mt-4 container">
                             <Collapse isOpen={collapseD}>
-                              {DietDay1.map((diets, id) => {
+                              {diestdayobj.map((diets, id) => {
                                 return (
                                   <>
+
+                                    <ImageCardList
+                                      FoodTime={diets.FoodTime}
+                                      img={diets.img}
+                                      Description={diets.Description}
+                                    />
+                                 
+                                  </>
+                                );
+                              })}
+                            </Collapse>
+                          </div>
+                        </Colxx>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="2">
+                    <Row>
+                        <Colxx sm="12" lg="12">
+                          <CardBody>
+                            {/* <CardTitle className="mb-4">
+                          Homemade Cheesecake with Fresh Berries and Mint
+                        </CardTitle> */}
+                            <div className="mb-4 " style={{ width: '100%' }}>
+                              <div
+                                className="mb-2"
+                                style={{
+                                  display: 'flex',
+                                  // width: '100%',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  flexDirection: 'row',
+                                  flexWrap: 'wrap',
+                                  // backgroundColor: 'lightpink',
+                                }}
+                              >
+                                <Button
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary active"
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day8);
+                                  }}
+                                >
+                                  Day1
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day9);
+                                  }}
+                                >
+                                  Day2
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day10);
+                                  }}
+                                >
+                                  Day3
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day11);
+                                  }}
+                                >
+                                  Day4
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day12);
+                                  }}
+                                >
+                                  Day5
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day13);
+                                  }}
+                                >
+                                  Day6
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day14);
+                                  }}
+                                >
+                                  Day7
+                                </Button>
+                              </div>
+                            </div>
+                            <div></div>
+                          </CardBody>
+                        </Colxx>
+                        <Colxx>
+                          <div className="mt-4 container">
+                            <Collapse isOpen={collapseD}>
+                              {diestdayobj.map((diets, id) => {
+                                return (
+                                  <>
+
+                                    <ImageCardList
+                                      FoodTime={diets.FoodTime}
+                                      img={diets.img}
+                                      Description={diets.Description}
+                                    />
+                                 
+                                 </>
+                                );
+                              })}
+                            </Collapse>
+                          </div>
+                        </Colxx>
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="3">
+                    <Row>
+                        <Colxx sm="12" lg="12">
+                          <CardBody>
+                            {/* <CardTitle className="mb-4">
+                          Homemade Cheesecake with Fresh Berries and Mint
+                        </CardTitle> */}
+                            <div className="mb-4 " style={{ width: '100%' }}>
+                              <div
+                                className="mb-2"
+                                style={{
+                                  display: 'flex',
+                                  // width: '100%',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  flexDirection: 'row',
+                                  flexWrap: 'wrap',
+                                  // backgroundColor: 'lightpink',
+                                }}
+                              >
+                                <Button
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary active"
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day15);
+                                  }}
+                                >
+                                  Day1
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day16);
+                                  }}
+                                >
+                                  Day2
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day17);
+                                  }}
+                                >
+                                  Day3
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day18);
+                                  }}
+                                >
+                                  Day4
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day19);
+                                  }}
+                                >
+                                  Day5
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day20);
+                                  }}
+                                >
+                                  Day6
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day21);
+                                  }}
+                                >
+                                  Day7
+                                </Button>
+                              </div>
+                            </div>
+                            <div></div>
+                          </CardBody>
+                        </Colxx>
+                        <Colxx>
+                          <div className="mt-4 container">
+                            <Collapse isOpen={collapseD}>
+                              {diestdayobj.map((diets, id) => {
+                                return (
+                                  <>
+
                                     <ImageCardList
                                       FoodTime={diets.FoodTime}
                                       img={diets.img}
@@ -269,32 +612,153 @@ const GainDiet = ({ match }) => {
                         </Colxx>
                       </Row>
                     </TabPane>
-                    <TabPane tabId="2">
-                      <Row>
-                        <Colxx sm="12">
+                    <TabPane tabId="4">
+                    <Row>
+                        <Colxx sm="12" lg="12">
                           <CardBody>
-                            <CardTitle className="mb-4">
-                              Wedding Cake with Flowers Macarons and Blueberries
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
+                            {/* <CardTitle className="mb-4">
+                          Homemade Cheesecake with Fresh Berries and Mint
+                        </CardTitle> */}
+                            <div className="mb-4 " style={{ width: '100%' }}>
+                              <div
+                                className="mb-2"
+                                style={{
+                                  display: 'flex',
+                                  // width: '100%',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                  flexDirection: 'row',
+                                  flexWrap: 'wrap',
+                                  // backgroundColor: 'lightpink',
+                                }}
+                              >
+                                <Button
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary active"
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day22);
+                                  }}
+                                >
+                                  Day1
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day23);
+                                  }}
+                                >
+                                  Day2
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day24);
+                                  }}
+                                >
+                                  Day3
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day25);
+                                  }}
+                                >
+                                  Day4
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day26);
+                                  }}
+                                >
+                                  Day5
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day27);
+                                  }}
+                                >
+                                  Day6
+                                </Button>
+                                <Button
+                                  style={{
+                                    width: '8%',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                  }}
+                                  className="default mb-2 mr-2"
+                                  color="outline-primary"
+                                  onClick={() => {
+                                    setCollapseD(!collapseD);
+                                    setDiestdayobj(Day28);
+                                  }}
+                                >
+                                  Day7
+                                </Button>
+                              </div>
+                            </div>
+                            <div></div>
                           </CardBody>
                         </Colxx>
-                      </Row>
-                    </TabPane>
-                    <TabPane tabId="3">
-                      <Row>
-                        <Colxx sm="12">
-                          <CardBody>
-                            <CardTitle className="mb-4">
-                              Cheesecake with Chocolate Cookies and Cream
-                              Biscuits
-                            </CardTitle>
-                            <Button outline size="sm" color="primary">
-                              Edit
-                            </Button>
-                          </CardBody>
+                        <Colxx>
+                          <div className="mt-4 container">
+                            <Collapse isOpen={collapseD}>
+                              {diestdayobj.map((diets, id) => {
+                                return (
+                                  <>
+
+                                    <ImageCardList
+                                      FoodTime={diets.FoodTime}
+                                      img={diets.img}
+                                      Description={diets.Description}
+                                    />
+                                 </>
+                                );
+                              })}
+                            </Collapse>
+                          </div>
                         </Colxx>
                       </Row>
                     </TabPane>

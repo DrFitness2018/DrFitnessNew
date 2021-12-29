@@ -28,6 +28,8 @@ export const firebaseConfig = {
   measurementId: "G-RY7YJGX2WR"
 };
 
+
+// firebase.initializeApp(firebaseConfig);
 export const currentUser = {
   id: 1,
   title: 'Wahaj Shera ',

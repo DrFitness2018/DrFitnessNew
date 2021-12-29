@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import imglogo from '../../Images/logoMuqqa.png'
 
 import {
   UncontrolledDropdown,
@@ -276,8 +277,9 @@ const TopNav = ({
         </div> */}
       </div>
       <NavLink className="navbar-logo" to={adminRoot}>
-        <span className="logo d-none d-xs-block" />
-        <span className="logo-mobile d-block d-xs-none" />
+        {/* <span className="logo d-none d-xs-block" />
+        <span className="logo-mobile d-block d-xs-none" /> */}
+          <img className='logo' src={imglogo} height='70px' width='160px'></img>
       </NavLink>
 
       <div className="navbar-right">

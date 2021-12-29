@@ -179,14 +179,14 @@
         display: inline-block;
         width: 120px;
         height: 40px;
-        background: url($lp-logo-path);
+        // background: url($lp-logo-path);
         background-repeat: no-repeat;
       }
 
       .dark {
         width: 120px;
         height: 40px;
-        background: url($lp-logo-path-pinned);
+        // background: url($lp-logo-path-pinned);
         background-repeat: no-repeat;
         display: none;
       }

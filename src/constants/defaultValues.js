@@ -39,7 +39,7 @@ export const currentUser = {
 };
 
 export const adminRoot = '/app';
-export const buyUrl = 'https://1.envato.market/k4z0';
+export const buyUrl = '/user/register';
 export const searchPath = `${adminRoot}/pages/miscellaneous/search`;
 export const servicePath = 'https://api.coloredstrategies.com';
 

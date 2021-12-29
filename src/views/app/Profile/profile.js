@@ -41,7 +41,7 @@
 /* eslint-disable */
 // import { NotificationManager } from 'components/common/react-notifications';
 import React, { useEffect } from 'react';
-import {  ButtonGroup, CardBody, Col, Row, Table } from 'reactstrap';
+import {  ButtonGroup, CardBody, Col, CustomInput, InputGroup, InputGroupAddon, Row, Table } from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import Select from 'react-select';
 import CustomSelectInput from 'components/common/CustomSelectInput';
@@ -59,6 +59,11 @@ import IconCards from 'containers/ui/IconCards';
 import { Colxx } from 'components/common/CustomBootstrap';
 import Appoint from '../appointment/appointment';
 export default function Profile({match}) {
+
+
+
+
+  
   const CurrentProduct = '';
 
 
@@ -89,9 +94,9 @@ export default function Profile({match}) {
           <Form>
             <Row className="h-100">
               <Col lg={12} className="mb-3">
-                <div className="patient-img-container center-childrens p-4">
+                <div className="d-flex p-3">
                   {/* <img
-                  src={
+                  src={  
                     user?.display_picture === '' ? logo : user?.display_picture
                   }
                   alt=""
@@ -102,171 +107,91 @@ export default function Profile({match}) {
                     alt=""
                     width="200px"
                     height="200px"
-                    style={{ objectFit: 'contain', objectFit: 'cover' }}
+                    style={{ objectFit: 'contain', objectFit: 'cover' , borderRadius:'50%'}}
                   />
                 </div>
+                     <Label>
+                      Change Profile Picture
+                    </Label>
+                    <InputGroup className="mb-3">
+                <InputGroupAddon addonType="prepend">Upload</InputGroupAddon>
+                <CustomInput
+                  type="file"
+                  id="exampleCustomFileBrowser1"
+                  name="customFile"
+                />
+              </InputGroup>
               </Col>
 
               {thisView ? (
                 <>
                   <Col lg={4}>
-                    <FormGroup>
+                  <FormGroup className="form-group has-float-label">
                       <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Name
-                        </h6>
+                        Name
                       </Label>
-
-                      <span>
-                        {/* <p>{CurrentProduct?.name.toUpperCase()}</p> */}
-                        <p>Tulaib</p>
-                      </span>
+                      <Field className="form-control" name="name" value="Tulaib" disabled />
+                    </FormGroup>
+                  </Col>
+                
+                  <Col lg={4}>
+                  <FormGroup className="form-group has-float-label">
+                      <Label>
+                        Email
+                      </Label>
+                      <Field className="form-control" name="email" value="Tullu@gmail.com" disabled />
+                    </FormGroup>
+                  </Col>
+                  <Col lg={4}>
+                  <FormGroup className="form-group has-float-label">
+                      <Label>
+                        Password
+                      </Label>
+                      <Field className="form-control" name="password" value="***" disabled />
+                    </FormGroup>
+                  </Col>
+                  <Col lg={4}>
+                  <FormGroup className="form-group has-float-label">
+                      <Label>
+                        Age
+                      </Label>
+                      <Field className="form-control" name="age" value="22" disabled />
                     </FormGroup>
                   </Col>
 
                   <Col lg={4}>
-                    <FormGroup>
+                  <FormGroup className="form-group has-float-label">
                       <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Email
-                        </h6>
+                        Height
                       </Label>
-
-                      <span>
-                        {/* <p>{CurrentProduct?.email}</p> */}
-                        <p>tulaib@gmail.com</p>
-                      </span>
-                    </FormGroup>
-                  </Col>
-                  <Col lg={4}>
-                    <FormGroup>
-                      <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Password
-                        </h6>
-                      </Label>
-                      <span>
-                        <p type="password">tulu</p>
-                      </span>
-                    </FormGroup>
-                  </Col>
-                  <Col lg={4}>
-                    <FormGroup>
-                      <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Age
-                        </h6>
-                      </Label>
-
-                      <span>
-                        {/* <p>{CurrentProduct?.age}</p> */}
-                        <p>24</p>
-                      </span>
+                      <Field className="form-control" name="feet" value="5.7 ft" disabled />
                     </FormGroup>
                   </Col>
 
                   <Col lg={4}>
-                    <FormGroup>
+                  <FormGroup className="form-group has-float-label">
                       <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Height
-                        </h6>
+                        Weight
                       </Label>
-                      <span>
-                        {/* <p>{CurrentProduct?.age}</p> */}
-                        <p>34</p>
-                      </span>
+                      <Field className="form-control" name="weight" value="55.5 kg" disabled />
                     </FormGroup>
                   </Col>
 
                   <Col lg={4}>
-                    <FormGroup>
+                  <FormGroup className="form-group has-float-label">
                       <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Weight
-                        </h6>
+                        Gender
                       </Label>
-                      <span>
-                        {/* <p>{CurrentProduct?.weight}</p> */}
-                        <p>70 Kg</p>
-                      </span>
+                      <Field className="form-control" name="Gender" value="M" disabled />
                     </FormGroup>
                   </Col>
 
                   <Col lg={4}>
-                    <FormGroup>
+                  <FormGroup className="form-group has-float-label">
                       <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          Gender
-                        </h6>
+                        BMI
                       </Label>
-                      <span>
-                        {/* <p>{CurrentProduct?.gender}</p> */}
-                        <p>Male</p>
-                      </span>
-                    </FormGroup>
-                  </Col>
-
-                  <Col lg={4}>
-                    <FormGroup>
-                      <Label>
-                        <h6
-                          style={{
-                            fontWeight: '700',
-                            fontSize: '0.9rem',
-                          }}
-                        >
-                          BMI
-                        </h6>
-                      </Label>
-                      <span>
-                        {/* {CurrentProduct?.certification ? (
-                          <img
-                            src={CurrentProduct?.product_image}
-                            alt=""
-                            width="20%"
-                            height="100%"
-                          />
-                        ) : (
-                          <p>{'N/A'}</p>
-                        )} */}
-                        <p>N/A</p>
-                      </span>
+                      <Field className="form-control" name="bmi" value="20" disabled />
                     </FormGroup>
                   </Col>
                 </>
@@ -488,9 +413,17 @@ export default function Profile({match}) {
           </Colxx>
           <Colxx xxs="6" sm="4" md="3" lg="2">
             <IconCard
-              title="Total Revenue  "
+              title="Total Fees Paid"
               icon="iconsminds-dollar"
-              value="56"
+              value="$100"
+              className="mb-4"
+            />
+          </Colxx>
+          <Colxx xxs="6" sm="4" md="3" lg="2">
+            <IconCard
+              title="BMI  "
+              icon="iconsminds-jump-rope"
+              value="21.1"
               className="mb-4"
             />
           </Colxx>

@@ -8,38 +8,39 @@ import Login from './containers/LoginPage/index'
 import Signup from './containers/RegisterPage/index'
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedInUser } from '../../../redux/ChatRedux/actions';
+import Chat from '../applications/chat'
 
 const Inbox = ({ match }) => {
   const auth = useSelector(state => state?.auth);
   const dispatch = useDispatch()
 
 
-  useEffect(() => {
-    if(!auth?.authenticated){
-      dispatch(isLoggedInUser())
-    }
-  }, []);
+  // useEffect(() => {
+  //   if(!auth?.authenticated){
+  //     dispatch(isLoggedInUser())
+  //   }
+  // }, []);
   return (
     <>
-      <Row>
+      {/* <Row>
         <Colxx xxs="12">
-          <Breadcrumb heading="menu.blank-page" match={match} />
+          <Breadcrumb heading="Inbox" match={match} />
           <Separator className="mb-5" />
-          {/* <Signup /> */}
+          <Signup />
         <Login />
         </Colxx>
-      </Row>
-      <Row>
-      <Colxx xxs="12">
+      </Row> */}
+
+      {/* <Row> */}
 
         {/* <Colxx xxs="12" className="mb-4">
           <p>
             Inbox
           </p>
         </Colxx> */}
-        <Home />
-        </Colxx>
-      </Row>
+        {/* <Home /> */}
+        <Chat/>
+      {/* </Row> */}
     </>
   );
 };

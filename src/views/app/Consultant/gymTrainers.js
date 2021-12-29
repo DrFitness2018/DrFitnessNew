@@ -27,7 +27,7 @@ const Trainers = ({ match }) => {
                     color="success"
                     outline
                     onClick={() => setSelectedRadio('0')}
-                    active={selectedRadio === '1'}
+                    active={selectedRadio === '0'}
                   >
                     All
                   </Button>

@@ -164,24 +164,20 @@ const GainDiet = ({ match }) => {
                         </CardTitle> */}
                             <div className="mb-4 " style={{ width: '100%' }}>
                               <div
-                                className="mb-2"
-                                style={{
-                                  display: 'flex',
-                                  // width: '100%',
-                                  justifyContent: 'center',
-                                  alignItems: 'center',
-                                  flexDirection: 'row',
-                                  flexWrap: 'wrap',
-                                  // backgroundColor: 'lightpink',
-                                }}
+                                className="mb-4 "
+                                style={{ width: '100%' ,display:'flex',justifyContent:'center',  
+                                overflow: 'auto',
+                                whiteSpace: 'nowrap'}}
                               >
                                 <Button
                                   className="default mb-2 mr-2"
                                   color="outline-primary active"
                                   style={{
                                     width: '8%',
-                                    height: '70px',
+                                    height: '80px',
                                     borderRadius: '50%',
+                                    minWidth:'70px',
+                                    minHeight:'70px'
                                   }}
                                   onClick={() => {
                                     setCollapseD(!collapseD);
@@ -192,11 +188,13 @@ const GainDiet = ({ match }) => {
                                   Day1
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {
@@ -207,11 +205,13 @@ const GainDiet = ({ match }) => {
                                   Day2
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {
@@ -223,11 +223,13 @@ const GainDiet = ({ match }) => {
                                   Day3
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {
@@ -239,11 +241,13 @@ const GainDiet = ({ match }) => {
                                   Day4
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {
@@ -255,11 +259,13 @@ const GainDiet = ({ match }) => {
                                   Day5
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {
@@ -271,11 +277,13 @@ const GainDiet = ({ match }) => {
                                   Day6
                                 </Button>
                                 <Button
-                                  style={{
-                                    width: '8%',
-                                    height: '70px',
-                                    borderRadius: '50%',
-                                  }}
+                                     style={{
+                                      width: '8%',
+                                      height: '80px',
+                                      borderRadius: '50%',
+                                      minWidth:'70px',
+                                      minHeight:'70px'
+                                    }}
                                   className="default mb-2 mr-2"
                                   color="outline-primary"
                                   onClick={() => {

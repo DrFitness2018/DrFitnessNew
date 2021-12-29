@@ -869,9 +869,9 @@ const Home = () => {
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>Enjoying so Far?</h1>
+                  <h1>Ready to Try Dr. Fitness Workout?</h1>
                   <p>
-                    Purchase Gogo to get a fresh start with your new project.
+                    Fitness is not just a Goal, It's a Lifestyle!
                   </p>
                 </div>
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
@@ -882,7 +882,7 @@ const Home = () => {
                       rel="noopener noreferrer"
                       href={buyUrl}
                     >
-                      BUY NOW
+                      Become Our Member Now
                     </a>
                   </div>
                 </div>

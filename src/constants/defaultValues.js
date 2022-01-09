@@ -32,10 +32,10 @@ export const firebaseConfig = {
 // firebase.initializeApp(firebaseConfig);
 export const currentUser = {
   id: 1,
-  title: 'Sarah Kortney',
+  title: 'Wahaj Shera ',
   img: '/assets/img/profiles/l-1.jpg',
   date: 'Last seen today 15:24',
-  role: UserRole.Admin,
+    role: UserRole.Admin,
 };
 
 export const adminRoot = '/app';

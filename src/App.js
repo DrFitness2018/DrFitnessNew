@@ -84,7 +84,7 @@ const App = ({ locale }) => {
                   exact
                   render={(props) => (
                     <UserLayout>
-                      <div className="container">
+                      <div className='container'>
                         <Login {...props} />
                       </div>
                     </UserLayout>

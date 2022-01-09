@@ -870,14 +870,14 @@ const Home = () => {
                 </div>
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
                   <div className="text-center mb-3">
-                    <a
-                      className="btn btn-secondary btn-xl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={buyUrl}
+                    <Button
+                    // onClick={buyUrl}
                     >
+                      <Link to={buyUrl}
+                      style={{color:'white'}}>
                       Become Our Member Now
-                    </a>
+                      </Link>
+                      </Button>
                   </div>
                 </div>
               </div>

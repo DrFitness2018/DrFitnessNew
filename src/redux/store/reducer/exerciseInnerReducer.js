@@ -1,14 +1,26 @@
 /*eslint-disable*/
-import { exercisesConst } from "../constant/exerciseInnerConst";
+import { exercisesConst,deleteCollection,insertCollection,updateCollection,viewCollection } from "../constant/exerciseInnerConst";
 const initialState = {
-    reset:1
+    reset:1,
+    insert:[],
+    update:[],
+    delete:[],
+    view:[]
 }
-export const ExercisesReducer = (state=initialState,{type,payload})=>{
+const ExercisesReducer = (state=initialState,{type,payload})=>{
     switch (type) {
         case exercisesConst.RESET_DAY:
             return {...state,reset:payload}
-            break;
+        case deleteCollection.DELETE_COLLECTION:
+            return {...state,delete:payload}
+        case insertCollection.INSERT_COLLECTION:
+            return {...state,insert:payload}
+        case updateCollection.UPDATE_COLLECTION:
+            return {...state,update:payload}
+        case viewCollection.VIEW_COLLECTION:
+            return {...state,view:payload}
         default:
-            break;
+            return state            
     }
 }
+export default ExercisesReducer

@@ -1,6 +1,6 @@
 /*eslint-disable*/
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik'; 
 import { Row, Card, CardBody, FormGroup, Label, Button, CardTitle } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
@@ -9,8 +9,13 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import { Feedbacks } from '../../../../src/data/comments';
 import { NavLink } from 'react-router-dom';
 import { adminRoot } from 'constants/defaultValues';
+import {db} from '../../../firebase'
+import {addDoc, collection, deleteDoc, doc, getDocs, updateDoc} from "firebase/firestore"
+import { useDispatch, useSelector } from 'react-redux';
+import { InserCollection, ViewCollection } from 'redux/store/actions/exerciseInnerAction';
 
 const Feedback = ({ match }) => {
+
   return (
     <>
       <Row>
@@ -32,19 +37,53 @@ export default Feedback;
 
 
 const FormikBasicFormLevel = () => {
+  const feedbackinsert = useSelector(state => state?.ExercisesReducer?.insert);
+  const feedbackview = useSelector(state => state?.ExercisesReducer?.view);
+
+  const dispatch = useDispatch()
+
+  const [feedback,setfeedback] = useState([]);
+  const feedbackCollection = collection(db,"feedback");
+  const [feedbackData,setfeedbackData] = useState({ 
+  name: '',
+  email: '',
+  message:''}
+  )
+
+  useEffect(()=>{
+    const getFeedback = async ()=>{
+      const data = await getDocs(feedbackCollection);
+      setfeedback(data.docs.map((docs)=>({
+        ...docs.data(),
+        id : docs.id 
+      })));
+    }
+    getFeedback()
+  },[])
+
+  useEffect(() => {
+    dispatch(ViewCollection("feedback"))
+    
+  }, [feedbackData])
+
+  console.log(feedbackview,"Testing Redux View")
+
   const onSubmit = (values) => {
-    
-    // fetch('http://localhost:3000/Feedbacks',{
-    //   method:'POST',
-    //   headers:{"Content-Type":"application/json"},
-    //   body:JSON.stringify(values)
-    // }).then(()=>{
-    //   console.log("added")
-    //   console.log(Feedbacks)
-    // })
-    
+    setfeedbackData('')
+    dispatch(InserCollection("feedback",values))
   };
 
+  const updateFeedback = async (id, data) => {
+    const userDoc = doc(db,'feedback',id);
+    const newFeedback = {data};
+    await updateDoc(userDoc,newFeedback);
+  }
+  const deleteFeedback = async (id, data) => {
+    const userDoc = doc(db,'feedback',id);
+    await deleteDoc(userDoc);
+  }
+
+  console.log(feedbackData,"Testing")
   const validate = (values) => {
     const errors = {};
 
@@ -130,13 +169,13 @@ const FormikBasicFormLevel = () => {
             </Formik>
           </CardBody>
         </Card>
-        <NewComments className="mb-4" displayRate />
+        <NewComments className="mb-4" displayRate feed={feedbackview} />
       </Colxx>
     </Row>
   );
 };
 
-const NewComments = ({ className = '', displayRate = false }) => {
+const NewComments = ({ className = '', displayRate = false ,feed}) => {
   return (
     <Card className={className}>
       <CardBody>
@@ -147,7 +186,7 @@ const NewComments = ({ className = '', displayRate = false }) => {
           <PerfectScrollbar
             options={{ suppressScrollX: true, wheelPropagation: false }}
           >
-            {Feedbacks.map((item, index) => {
+            {feed.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -163,7 +202,7 @@ const NewComments = ({ className = '', displayRate = false }) => {
 
                   <div className="pl-3 pr-2">
                     <NavLink to={`${adminRoot}/pages/product/details`}>
-                      <p className="font-weight-medium mb-0 text-uppercase">{item.name} <span className="font-weight-light text-lowercase">{item.email}</span></p> 
+                      <p className="font-weight-medium mb-0 text-uppercase">{item.name}  <span className="font-weight-light text-lowercase"> {item.email}</span></p> 
                       <p className="text-muted mb-0 text-small">
                         {item.message}
                       </p>

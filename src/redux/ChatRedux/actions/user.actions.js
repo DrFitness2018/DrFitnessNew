@@ -1,7 +1,8 @@
 /*eslint-disable*/
 
 import { userConstants } from "./constants";
-import { firestore } from 'firebase';
+// import { firestore } from '@fire';
+import 'firebase/firestore'
 
 export const getRealtimeUsers = (uid) => {
 

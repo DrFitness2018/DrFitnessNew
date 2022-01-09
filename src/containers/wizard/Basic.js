@@ -18,9 +18,9 @@ import TopNavigation from 'components/wizard/TopNavigation';
 import { Select } from '@material-ui/core';
 import { FormikReactSelect } from 'containers/form-validations/FormikFields';
 import { Link } from 'react-router-dom';
-import { db, signup } from 'firebase';
-import { useDispatch } from 'react-redux';
+import { db, signup } from 'firebase/app';
 import { collection } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
 import { InserCollection } from 'redux/store/actions/exerciseInnerAction';
 
 const Basic = ({ intl }) => {

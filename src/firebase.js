@@ -1,8 +1,12 @@
 // Import the functions you need from the SDKs you need
 /*eslint-disable  */
-import { initializeApp } from "firebase/app";
-import {getFirestore} from '@firebase/firestore'
-import { getAuth , createUserWithEmailAndPassword } from "@firebase/auth";
+import firebase, { initializeApp } from "firebase/app";
+import 'firebase/auth';
+import 'firebase/firestore'
+import 'firebase/database';
+import {getFirestore} from 'firebase/firestore'
+import { getAuth , createUserWithEmailAndPassword } from "firebase/auth";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,10 +21,12 @@ const firebaseConfig = {
 
 
 // Initialize Firebase  
-const firebase = initializeApp(firebaseConfig);
-const auth = getAuth();
+const Firebase = firebase.initializeApp(firebaseConfig);
+const auth = firebase.getAuth();
 
 export function signup(email,password){
-  return createUserWithEmailAndPassword(auth,email,password);
+  return firebase.createUserWithEmailAndPassword(auth,email,password);
 }
-export const db = getFirestore(firebase);
+export const db = firebase.getFirestore(firebase);
+
+export {firebase,auth};

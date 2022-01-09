@@ -1,5 +1,8 @@
 /*eslint-disable*/
-import { auth, firestore } from 'firebase';
+
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import { authConstanst } from './constants';
 import { getRealtimeUsers } from './user.actions';
 

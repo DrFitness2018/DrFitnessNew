@@ -450,14 +450,14 @@ const data = [
     label: 'Feedback',
     to: `${adminRoot}/feedback`,
   },
-  {
-    id: 'ch',
-    icon: 'simple-icon-speech    ',
-    label: 'Chat',
-    // to: `${adminRoot}/chatInbox`,
-    to: `${adminRoot}/applications/chat`,
+  // {
+  //   id: 'ch',
+  //   icon: 'simple-icon-speech    ',
+  //   label: 'Chat',
+  //   // to: `${adminRoot}/chatInbox`,
+  //   to: `${adminRoot}/applications/chat`,
 
-  },
+  // },
   {
     id: 'app',
     icon: 'iconsminds-letter-open    ',

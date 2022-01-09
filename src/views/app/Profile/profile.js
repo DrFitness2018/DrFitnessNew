@@ -93,8 +93,8 @@ export default function Profile({match}) {
         <Formik>
           <Form>
             <Row className="h-100">
-              <Col lg={12} className="mb-3">
-                <div className="d-flex p-3">
+              <Col lg={4} className="mt-5">
+                <div className="text-center">
                   {/* <img
                   src={  
                     user?.display_picture === '' ? logo : user?.display_picture
@@ -107,10 +107,11 @@ export default function Profile({match}) {
                     alt=""
                     width="200px"
                     height="200px"
-                    style={{ objectFit: 'contain', objectFit: 'cover' , borderRadius:'50%'}}
+                    className='rounded-circle'
+                    // style={{ objectFit: 'contain', objectFit: 'cover' , borderRadius:'50%'}}
                   />
                 </div>
-                     <Label>
+                     {/* <Label>
                       Change Profile Picture
                     </Label>
                     <InputGroup className="mb-3">
@@ -120,12 +121,12 @@ export default function Profile({match}) {
                   id="exampleCustomFileBrowser1"
                   name="customFile"
                 />
-              </InputGroup>
+              </InputGroup> */}
               </Col>
-
+<Col lg={8}>
               {thisView ? (
                 <>
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Name
@@ -134,7 +135,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
                 
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Email
@@ -142,7 +143,7 @@ export default function Profile({match}) {
                       <Field className="form-control" name="email" value="Tullu@gmail.com" disabled />
                     </FormGroup>
                   </Col>
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Password
@@ -150,7 +151,7 @@ export default function Profile({match}) {
                       <Field className="form-control" name="password" value="***" disabled />
                     </FormGroup>
                   </Col>
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Age
@@ -159,7 +160,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Height
@@ -168,7 +169,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Weight
@@ -177,7 +178,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         Gender
@@ -186,7 +187,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={4}>
+                  <Col lg={12}>
                   <FormGroup className="form-group has-float-label">
                       <Label>
                         BMI
@@ -197,7 +198,7 @@ export default function Profile({match}) {
                 </>
               ) : (
                 <>
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <Label>
                         <IntlMessages id="Name" />
@@ -215,7 +216,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <label>
                         <IntlMessages id="Select Category" />
@@ -235,7 +236,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <Label>
                         <IntlMessages id="Price" />
@@ -259,7 +260,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <Label>
                         <IntlMessages id="Formula" />
@@ -277,7 +278,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <Label>
                         <IntlMessages id="Description" />
@@ -298,7 +299,7 @@ export default function Profile({match}) {
                     </FormGroup>
                   </Col>
 
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
                       <Label>
                         <IntlMessages id="BarCode" />
@@ -315,16 +316,11 @@ export default function Profile({match}) {
                       />
                     </FormGroup>
                   </Col>
-                  <Col lg={6}>
+                  <Col lg={12}>
                     <FormGroup>
-                      <Label>
-                        <IntlMessages id="Save info" />
-                      </Label>
-
-                      <ButtonGroup>
                         <Button
                           required
-                          className="form-control"
+                          className="mr-3"
                           name="barcode"
                           // value={product?.barcode}
                           // onChange={(e) =>
@@ -340,44 +336,14 @@ export default function Profile({match}) {
                         >
                           Back
                         </Button>
-                      </ButtonGroup>
                     </FormGroup>
                   </Col>
 
-                  {/* <Col lg={6}>
-                    <div className="form-row">
-                      <div className="form-group col-md-9">
-                        <label className="">Select File :</label>
-                        <input
-                          type="file"
-                          className="form-control"
-                          name="upload_file"
-                          // onChange={async (e) => {
-                          //   await setFile(e.target.files);
-                          // }}
-                        />
-                      </div>
-                      <div
-                        className="form-group col-md-3"
-                        style={{ marginTop: '25px' }}
-                      >
-                        <Button
-                          className={`btn-shadow btn-multiple-state ${
-                            loadingFileUpload ? 'show-spinner' : ''
-                          }`}
-                          size="sm"
-                          // onClick={uploadFile}
-                          variant="outlined"
-                        >
-                          Save
-                        </Button>
-                      </div>
-                    </div>
-                  </Col> */}
                 </>
               )}
-            </Row>
 
+
+                  <Col lg={12}>
             {thisView ? (
               <Button
                 style={{ backgroundColor: '#0066b3' }}
@@ -388,19 +354,17 @@ export default function Profile({match}) {
               </Button>
             ) : (
               ''
-              // <Button style={{ backgroundColor: '#0066b3' }} onClick={editData}>
-              //   {loading ? (
-              //     <div className="d-flex justify-content-center">
-              //       <Loader height={18} width={18} type="Oval" color="#fff" />
-              //       &nbsp; Updating
-              //     </div>
-              //   ) : (
-              //     'Save'
-              //   )}
-              // </Button>
+          
             )}
+                  </Col>
+
+</Col>
+
+            </Row>
+
+            
           </Form>
-        </Formik>
+        </Formik> 
 
         <Row className="icon-cards-row my-4 justify-content-center">
           <Colxx xxs="6" sm="4" md="3" lg="2">
@@ -419,7 +383,8 @@ export default function Profile({match}) {
               className="mb-4"
             />
           </Colxx>
-          <Colxx xxs="6" sm="4" md="3" lg="2">
+          <Colxx xxs="6" sm="4" md="3" lg="2
+          ">
             <IconCard
               title="BMI  "
               icon="iconsminds-jump-rope"

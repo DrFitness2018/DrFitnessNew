@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 
 const Vchat = React.lazy(() =>
-  import(/* webpackChunkName: "menu-level-3" */ './videoChat')
+  import(/* webpackChunkName: "menu-level-3" */ './Invoice')
 );
 
 
@@ -14,11 +14,11 @@ const ExerciseMenu = ({ match }) => (
       <Redirect
         exact
         from={`${match.url}/`}
-        to={`${match.url}/videoChat`}
+        to={`${match.url}/Invoices`}
       />
      
       <Route
-        path={`${match.url}/videoChat`}
+        path={`${match.url}/Invoices`}
         render={(props) => <Vchat {...props} />}
       />
       <Redirect to="/error" />

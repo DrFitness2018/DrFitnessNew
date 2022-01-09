@@ -40,7 +40,7 @@ const Consult = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './Consultant')
 );
 const Video = React.lazy(() =>
-  import(/* webpackChunkName: "blank-page" */ './videoChat')
+  import(/* webpackChunkName: "blank-page" */ './Invoices')
 );
 const Feedback = React.lazy(() =>
   import(/* webpackChunkName: "blank-page" */ './feedback')

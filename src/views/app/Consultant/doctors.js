@@ -95,11 +95,12 @@ const Doctors = ({ match }) => {
                       day={item.details}
                       fee={item.fee}
                       rating={item.star}
+                      spe={item.speciality}
                       butt={() => setModalShow(true)}
                       // status={item.status}
-                    />
-                  );
-                })}
+                      />
+                      );
+                    })}
                 {/* </Colxx> */}
               </Row>
             </TabPane>
@@ -112,17 +113,18 @@ const Doctors = ({ match }) => {
                   ).map((item, index) => {
                     return (
                       <UserCards
-                        mainTitle={item.label}
-                        image={item?.imgSrc}
-                        badge="Dr Fitness Recommended"
-                        day={item.details}
-                        fee={item.fee}
-                        rating={item.star}
-                        button={item.btn}
-                        // status={item.status}
+                      mainTitle={item.label}
+                      image={item?.imgSrc}
+                      badge="Dr Fitness Recommended"
+                      day={item.details}
+                      fee={item.fee}
+                      rating={item.star}
+                      spe={item.speciality}
+                      butt={() => setModalShow(true)}
+                      // status={item.status}
                       />
-                    );
-                  })}
+                      );
+                    })}
                 {/* </Colxx> */}
               </Row>
             </TabPane>
@@ -134,13 +136,14 @@ const Doctors = ({ match }) => {
                     (item, index) => {
                       return (
                         <UserCards
-                          mainTitle={item.label}
-                          image={item?.imgSrc}
-                          badge="Dr Fitness Recommended"
-                          day={item.details}
-                          fee={item.fee}
-                          rating={item.star}
-                          button={item.btn}
+                        mainTitle={item.label}
+                        image={item?.imgSrc}
+                        badge="Dr Fitness Recommended"
+                        day={item.details}
+                        fee={item.fee}
+                        rating={item.star}
+                        spe={item.speciality}
+                        butt={() => setModalShow(true)}
 
                           // status={item.status}
                         />
@@ -189,11 +192,15 @@ const UserCards = (props) => {
               />
               <Link>
                 <CardSubtitle className="mb-1">{props.mainTitle}</CardSubtitle>
+                <CardSubtitle className="mb-2 text-small">{props.spe}</CardSubtitle>
                 <RatingExamples star={props.rating} />
               </Link>
               <CardText className="text-muted text-small mb-4">
                 {props.details}
               </CardText>
+              <Button className='mr-3' outline size="sm" color="primary">
+                Details
+              </Button>
               <Button outline size="sm" color="primary" onClick={props.butt}>
                 Book Appointment
               </Button>

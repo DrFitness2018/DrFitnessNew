@@ -20,6 +20,7 @@ export const LabConsultantsData = [
       imgSrc: LabConsultantImg1,
       label: "DR. SHAHEDA ANWAR",
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
+      speciality:'Physio Therapist',
       fee:2000,
       star:1,
       sex:'Female'
@@ -29,6 +30,7 @@ export const LabConsultantsData = [
       label: "DR.TAHMINA JHUMKY",
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
       fee:2000,
+      speciality:'Physio Therapist',
       star:1,
       sex:'Female'
     },
@@ -37,6 +39,7 @@ export const LabConsultantsData = [
       label: "DR. FARAH-SUL-LAIL",
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
       fee:2000,
+      speciality:'Neutritionist',
       sex:'Female',
       star:1,
     },
@@ -45,6 +48,7 @@ export const LabConsultantsData = [
       label: "DR. Tulaib",
       details: "10:00 12:30 1:00 1:30 2:00 2:30 3:00",
       fee:2000,
+      speciality:'General Physician',
       sex:'Male',
       star:5,
     },

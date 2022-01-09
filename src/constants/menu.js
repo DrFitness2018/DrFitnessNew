@@ -438,12 +438,12 @@ const data = [
       },
     ],
   },
-  {
-    id: 'angle',
-    icon: 'iconsminds-bucket',
-    label: 'Angle Checker',
-    to: `${adminRoot}/angleChecker`,
-  },
+  // {
+  //   id: 'angle',
+  //   icon: 'iconsminds-bucket',
+  //   label: 'Angle Checker',
+  //   to: `${adminRoot}/angleChecker`,
+  // },
   {
     id: 'feed',
     icon: 'simple-icon-envelope-open    ',
@@ -466,8 +466,8 @@ const data = [
   },
   {
     id: 'live',
-    icon: 'iconsminds-video-5    ',
-    label: 'Live Consultancy',
+    icon: 'iconsminds-diploma-2',
+    label: 'Invoices',
     to: `${adminRoot}/videoChat`,
   },
   // {

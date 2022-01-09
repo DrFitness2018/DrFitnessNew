@@ -455,7 +455,7 @@ const data = [
     icon: 'simple-icon-speech    ',
     label: 'Chat',
     // to: `${adminRoot}/chatInbox`,
-    to: `${adminRoot}/applications/chat`,
+    to: `${adminRoot}/chatInbox`,
 
   },
   {

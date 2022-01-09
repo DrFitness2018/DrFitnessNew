@@ -450,12 +450,21 @@ const data = [
     label: 'Feedback',
     to: `${adminRoot}/feedback`,
   },
+<<<<<<< HEAD
   // {
   //   id: 'ch',
   //   icon: 'simple-icon-speech    ',
   //   label: 'Chat',
   //   // to: `${adminRoot}/chatInbox`,
   //   to: `${adminRoot}/applications/chat`,
+=======
+  {
+    id: 'ch',
+    icon: 'simple-icon-speech    ',
+    label: 'Chat',
+    // to: `${adminRoot}/chatInbox`,
+    to: `${adminRoot}/chatInbox`,
+>>>>>>> c37d01f4fefb3f3583a401563eb1a488f02605d3
 
   // },
   {

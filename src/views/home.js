@@ -17,18 +17,23 @@ import Headroom from 'react-headroom';
 import GlideComponent from 'components/carousel/GlideComponent';
 import { buyUrl, adminRoot } from 'constants/defaultValues';
 import homeimg from '../assets/img/landing-page/features/main2.png';
+import homemobimg from '../assets/img/landing-page/features/main5.png'
 import img1 from '../assets/img/landing-page/features/bmi-png.png';
 import img2 from '../assets/img/landing-page/features/bmi1.png';
 import img3 from '../assets/img/landing-page/features/live-consult1.png';
 import img4 from '../assets/img/landing-page/features/diet-plan2.png';
 import profileimg1 from '../assets/img/profiles/l-12.jpg';
 import profileimg2 from '../assets/img/profiles/tulaibs.PNG';
-import profileimg3 from '../assets/img/profiles/l-10.jpg';
-import profileimg4 from '../assets/img/profiles/l-4.jpg';
+import profileimg3 from '../assets/img/profiles/Mehmaam1.jpg';
+import profileimg4 from '../assets/img/profiles/shahzaib.PNG';
 import logo from '../assets/logos/logoMuqqa1.png'
 import opsimg from '../assets/img/landing-page/lockdown2.png'
+import lckmobimg from '../assets/img/landing-page/lockdown1.png'
 import WebsiteVisitsChartCard from 'containers/dashboards/WebsiteVisitsChartCard';
 import ConversionRatesChartCard from 'containers/dashboards/ConversionRatesChartCard';
+import exercise from 'assets/img/landing-page/applications/exercise.PNG'
+import chat from 'assets/img/landing-page/applications/chat.PNG'
+import doc from 'assets/img/landing-page/applications/doctor.PNG'
 
 const slideSettings = {
   type: 'carousel',
@@ -208,19 +213,19 @@ const layouts = [
 
 const applications = [
   {
-    title: 'Survey',
-    path: `${adminRoot}/applications/survey`,
-    img: '/assets/img/landing-page/applications/survey.jpg',
-  },
-  {
     title: 'Chat',
     path: `${adminRoot}/applications/chat`,
-    img: '/assets/img/landing-page/applications/chat.jpg',
+    img: chat,
   },
   {
-    title: 'Todo',
+    title: 'Exercises',
+    path: `${adminRoot}/applications/survey`,
+    img:exercise,
+  },
+  {
+    title: 'Consultant',
     path: `${adminRoot}/applications/todo`,
-    img: '/assets/img/landing-page/applications/todo.jpg',
+    img: doc,
   },
 ];
 
@@ -316,7 +321,7 @@ const Home = () => {
             <a
               className="c-pointer"
               href="#scroll"
-              onClick={(event) => scrollTo(event, 'features')}
+              onClick={(event) => scrollTo(event, 'home')}
             >
               HOME
             </a>
@@ -325,7 +330,7 @@ const Home = () => {
             <a
               className="c-pointer"
               href="#scroll"
-              onClick={(event) => scrollTo(event, 'layouts')}
+              onClick={(event) => scrollTo(event, 'features')}
             >
               FEATURES
             </a>
@@ -345,16 +350,16 @@ const Home = () => {
               href="#scroll"
               onClick={(event) => scrollTo(event, 'apps')}
             >
-              SCHEDULES
+              APPLICATIONS
             </a>
           </li>
           <li className="nav-item">
             <a
               className="c-pointer"
               href="#scroll"
-              onClick={(event) => scrollTo(event, 'themes')}
+              onClick={(event) => scrollTo(event, 'layouts')}
             >
-              THEMES
+              ANALYTICS
             </a>
           </li>
           <li className="nav-item">
@@ -382,16 +387,16 @@ const Home = () => {
                 href="#scroll"
                 onClick={(event) => scrollTo(event, 'home')}
               >
-                 {/* <span className="white" />
+                {/* <span className="white" />
                 <span className="dark" />  */}
-                <span><img src={logo}  /></span>
+                <span><img src={logo} /></span>
               </a>
               <ul className="navbar-nav d-none d-lg-flex flex-row">
                 <li className="nav-item">
                   <a
                     className="c-pointer"
                     href="#scroll"
-                    onClick={(event) => scrollTo(event, 'features')}
+                    onClick={(event) => scrollTo(event, 'home')}
                   >
                     HOME
                   </a>
@@ -400,7 +405,7 @@ const Home = () => {
                   <a
                     className="c-pointer"
                     href="#scroll"
-                    onClick={(event) => scrollTo(event, 'layouts')}
+                    onClick={(event) => scrollTo(event, 'features')}
                   >
                     FEATURES
                   </a>
@@ -420,16 +425,16 @@ const Home = () => {
                     href="#scroll"
                     onClick={(event) => scrollTo(event, 'apps')}
                   >
-                    SCHEDULES
+                    APPLICATIONS
                   </a>
                 </li>
                 <li className="nav-item">
                   <a
                     className="c-pointer"
                     href="#scroll"
-                    onClick={(event) => scrollTo(event, 'themes')}
+                    onClick={(event) => scrollTo(event, 'layouts')}
                   >
-                    THEMES
+                    ANALYTICS
                   </a>
                 </li>
                 <li className="nav-item pl-4">
@@ -465,7 +470,7 @@ const Home = () => {
                     <img
                       alt="mobile hero"
                       className="mobile-hero"
-                      src="/assets/img/landing-page/home-hero-mobile.png"
+                      src={homemobimg}
                     />
                   </NavLink>
                 </div>
@@ -473,8 +478,10 @@ const Home = () => {
                 <div className="col-12 col-xl-4 col-lg-5 col-md-6">
                   <div className="home-text">
                     <div className="display-1">
-                      WORK HARDER, <br />
+                      <b>
+                      WORK HARDER <br />
                       GET STRONGER
+                      </b>
                     </div>
                     <p className="white mb-5">
                       Perfect app for starting your Fitness journey
@@ -610,7 +617,7 @@ const Home = () => {
             </div>
           </div>
           <div className="section background">
-            <div className="container" id="components">
+            <div className="container" id="lockdown">
               <div className="row mb-5">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   {/* <h1>Components</h1> */}
@@ -623,7 +630,14 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="col-12 d-block d-md-none">
+              <img
+                alt="mobile hero"
+                className="mobile-hero"
+                src={lckmobimg}
+              />
+            </div>
+            <div className='d-none d-md-block'>
               <img
                 className="components-image mb-5 pb-5"
                 alt="Components"
@@ -640,11 +654,7 @@ const Home = () => {
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>ANALYTICS</h1>
                   <p>
-                    We did our best to create layouts for various needs that
-                    developers might have and best experience for users.
-                    <br />
-                    They are clean and slick. They function well and look good
-                    at the same time.
+                 Calculated Revenue Generated by Consultant
                   </p>
                 </div>
               </div>
@@ -663,7 +673,7 @@ const Home = () => {
                   <ConversionRatesChartCard />
                 </Colxx>
               </Row>
-              
+
 
               {/* <div className="row pt-5">
                 {layouts.map((l, index) => (
@@ -691,9 +701,7 @@ const Home = () => {
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center mb-4">
                   <h1>Applications</h1>
                   <p className="section-text">
-                    With the help of components and layouts, we created four
-                    different applications. They are a good way to get you
-                    started if you want to build something similar.
+                    With the help of this Application you can access.
                   </p>
                 </div>
               </div>
@@ -741,7 +749,7 @@ const Home = () => {
               <div className="row mb-5">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   {/* <h1>Components</h1> */}
-                  <h1>Expert Trainers</h1>
+                  <h1>Team Dr Fitness</h1>
                   {/* <p>
                     We used most popular and well managed open source components
                     with bootstrap components. Combined them into even more
@@ -759,10 +767,7 @@ const Home = () => {
                     well managed open source components with bootstrap components. Combined them into
                     even more useful ones.
                     <br />
-                    <br />
-                    From carousels to charts, switches to list we tried to
-                    provide components that we like to use on our development
-                    processes.
+                   
                   </p>
                 </div>
               </div>
@@ -858,21 +863,21 @@ const Home = () => {
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>Enjoying so Far?</h1>
+                  <h1>Ready to Try Dr. Fitness Workout?</h1>
                   <p>
-                    Purchase Gogo to get a fresh start with your new project.
+                    Fitness is not just a Goal, It's a Lifestyle!
                   </p>
                 </div>
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
                   <div className="text-center mb-3">
-                    <a
-                      className="btn btn-secondary btn-xl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={buyUrl}
+                    <Button
+                    // onClick={buyUrl}
                     >
-                      BUY NOW
-                    </a>
+                      <Link to={buyUrl}
+                      style={{color:'white'}}>
+                      Become Our Member Now
+                      </Link>
+                      </Button>
                   </div>
                 </div>
               </div>

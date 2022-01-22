@@ -41,7 +41,16 @@
 /* eslint-disable */
 // import { NotificationManager } from 'components/common/react-notifications';
 import React, { useEffect } from 'react';
-import {  ButtonGroup, CardBody, Col, CustomInput, InputGroup, InputGroupAddon, Row, Table } from 'reactstrap';
+import {
+  ButtonGroup,
+  CardBody,
+  Col,
+  CustomInput,
+  InputGroup,
+  InputGroupAddon,
+  Row,
+  Table,
+} from 'reactstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import Select from 'react-select';
 import CustomSelectInput from 'components/common/CustomSelectInput';
@@ -53,23 +62,73 @@ import { useDispatch, useSelector } from 'react-redux';
 // import Loader from 'react-loader-spinner';
 // import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import logo from '../../../Images/user.jpg';
-import {  Separator } from 'components/common/CustomBootstrap';
+import { Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
 import IconCards from 'containers/ui/IconCards';
 import { Colxx } from 'components/common/CustomBootstrap';
 import Appoint from '../appointment/appointment';
-export default function Profile({match}) {
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db, storage } from 'firebase';
+import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
+export default function Profile({ match }) {
+  const [user, setUser] = useState();
+  const [img, setImg] = useState('');
+  const [counter, setcounter] = useState(0);
 
+  // useEffect(()=>{
 
+  // },[])
 
-  
+  useEffect(() => {
+    setTimeout(() => {
+      getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
+        if (docSnap.exists) {
+          setUser(docSnap.data());
+        }
+      });
+    }, 2000);
+
+    setcounter(counter + 1);
+    console.log('user == >', user);
+    if (img) {
+      const uploadImg = async () => {
+        const imgRef = ref(
+          storage,
+          `avatar/${new Date().getTime()} - ${img?.name}`
+        );
+        try {
+          if (user.avatarPath) {
+            await deleteObject(ref(storage, user.avatarPath));
+          }
+          const snap = await uploadBytes(imgRef, img);
+          const url = await getDownloadURL(ref(storage, snap.ref.fullPath));
+
+          await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+            avatar: url,
+            avatarPath: snap.ref.fullPath,
+          });
+          console.log('url -> ', url);
+          setImg('');
+        } catch (err) {
+          console.log(err.message);
+        }
+      };
+      uploadImg();
+    }
+    //  onAuthStateChanged(auth,(user)=>{
+    //   setUser(user)
+    //  })
+  }, [img]);
+
+  console.log(user, ' <--user');
+  console.log('img== ', img);
+
   const CurrentProduct = '';
 
-
-  const [act,setact] = useState(false)
+  const [act, setact] = useState(false);
   let [buttonName, setButtonName] = useState();
-
   const [thisView, setThisView] = useState(true);
 
   let [suspendloader, setsuspendloader] = useState(false);
@@ -79,149 +138,179 @@ export default function Profile({match}) {
     setThisView(!thisView);
   };
 
+  const deleteImage = async () => {
+    try {
+      const confirm = window.confirm('Delete avatar?');
+      if (confirm) {
+        await deleteObject(ref(storage, user.avatarPath));
+
+        await updateDoc(doc(db, 'users', auth.currentUser.uid), {
+          avatar: '',
+          avatarPath: '',
+        });
+        history.replace('/');
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <>
-    <Row>
+      <Row>
         <Colxx xxs="12">
           <Breadcrumb heading="My Profile" match={match} />
           <Separator className="mb-5" />
         </Colxx>
       </Row>
-            <Card>
-      <CardBody>
-        <div style={{ marginBottom: '30px' }}></div>
-        <Formik>
-          <Form>
-            <Row className="h-100">
-              <Col lg={12} className="mb-3">
-                <div className="d-flex p-3">
-                  {/* <img
+      <Card>
+        <CardBody>
+          <div style={{ marginBottom: '30px' }}></div>
+          <Formik>
+            <Form>
+              <Row className="h-100">
+                <Col lg={12} className="mb-3">
+                  <div className="d-flex p-3">
+                    {/* <img
                   src={  
                     user?.display_picture === '' ? logo : user?.display_picture
                   }
                   alt=""
                   className="img-fluid"
                 /> */}
-                  <img
-                    src={logo}
-                    alt=""
-                    width="200px"
-                    height="200px"
-                    style={{ objectFit: 'contain', objectFit: 'cover' , borderRadius:'50%'}}
-                  />
-                </div>
-                     <Label>
-                      Change Profile Picture
-                    </Label>
-                    <InputGroup className="mb-3">
-                <InputGroupAddon addonType="prepend">Upload</InputGroupAddon>
-                <CustomInput
-                  type="file"
-                  id="exampleCustomFileBrowser1"
-                  name="customFile"
-                />
-              </InputGroup>
-              </Col>
+                    <img
+                      src={user?.avatar || logo}
+                      alt="avatar"
+                      width="200px"
+                      height="200px"
+                      style={{
+                        objectFit: 'contain',
+                        objectFit: 'cover',
+                        borderRadius: '50%',
+                      }}
+                    />
+                  </div>
+                  <Label>Change Profile Picture</Label>
+                  <InputGroup className="mb-3">
+                    <InputGroupAddon addonType="prepend">
+                      Upload
+                    </InputGroupAddon>
+                    <input
+                      type="file"
+                      id="exampleCustomFileBrowser1"
+                      name="customFile"
+                      accept="image/*"
+                      id="photo"
+                      onChange={(e) => setImg(e.target.files[0])}
+                    />
+                  </InputGroup>
+                </Col>
 
-              {thisView ? (
-                <>
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Name
-                      </Label>
-                      <Field className="form-control" name="name" value="Tulaib" disabled />
-                    </FormGroup>
-                  </Col>
-                
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Email
-                      </Label>
-                      <Field className="form-control" name="email" value="Tullu@gmail.com" disabled />
-                    </FormGroup>
-                  </Col>
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Password
-                      </Label>
-                      <Field className="form-control" name="password" value="***" disabled />
-                    </FormGroup>
-                  </Col>
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Age
-                      </Label>
-                      <Field className="form-control" name="age" value="22" disabled />
-                    </FormGroup>
-                  </Col>
+                {thisView ? (
+                  <>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Name</Label>
+                        <Field
+                          className="form-control"
+                          name="name"
+                          value={user?.name}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Height
-                      </Label>
-                      <Field className="form-control" name="feet" value="5.7 ft" disabled />
-                    </FormGroup>
-                  </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Email</Label>
+                        <Field
+                          className="form-control"
+                          name="email"
+                          value={user?.email}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Password</Label>
+                        <Field
+                          className="form-control"
+                          name="password"
+                          value={user?.password}
+                          
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Age</Label>
+                        <Field
+                          className="form-control"
+                          name="age"
+                          value={user?.age}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Weight
-                      </Label>
-                      <Field className="form-control" name="weight" value="55.5 kg" disabled />
-                    </FormGroup>
-                  </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Height</Label>
+                        <Field
+                          className="form-control"
+                          name="feet"
+                          value={user?.height}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        Gender
-                      </Label>
-                      <Field className="form-control" name="Gender" value="M" disabled />
-                    </FormGroup>
-                  </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Weight</Label>
+                        <Field
+                          className="form-control"
+                          name="weight"
+                          value={user?.weight}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={4}>
-                  <FormGroup className="form-group has-float-label">
-                      <Label>
-                        BMI
-                      </Label>
-                      <Field className="form-control" name="bmi" value="20" disabled />
-                    </FormGroup>
-                  </Col>
-                </>
-              ) : (
-                <>
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="Name" />
-                      </Label>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>Gender</Label>
+                        <Field
+                          className="form-control"
+                          name="Gender"
+                          value={user?.gender}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
 
-                      <Input
-                        required
-                        // value={product?.name}
-                        className="form-control"
-                        name="name"
-                        // onChange={(e) =>
-                        //   setProduct({ ...product, name: e.target.value })
-                        // }
-                      />
-                    </FormGroup>
-                  </Col>
+                    <Col lg={4}>
+                      <FormGroup className="form-group has-float-label">
+                        <Label>BMI</Label>
+                        <Field
+                          className="form-control"
+                          name="bmi"
+                          value={user?.bmi}
+                          disabled
+                        />
+                      </FormGroup>
+                    </Col>
+                  </>
+                ) : (
+                  <>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="Name" />
+                        </Label>
 
-                  <Col lg={6}>
-                    <FormGroup>
-                      <label>
-                        <IntlMessages id="Select Category" />
-                      </label>
-
-                      <>
                         <Input
                           required
                           // value={product?.name}
@@ -231,98 +320,99 @@ export default function Profile({match}) {
                           //   setProduct({ ...product, name: e.target.value })
                           // }
                         />
-                      </>
-                    </FormGroup>
-                  </Col>
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="Price" />
-                      </Label>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <label>
+                          <IntlMessages id="Select Category" />
+                        </label>
 
-                      <Input
-                        required
-                        // value={product?.price}
-                        type="number"
-                        className="radio-in"
-                        name="phone"
-                        // validate={validateEmail}
-                        // onChange={(e) => setNumber()}
-                        // onChange={(e) =>
-                        //   setProduct({
-                        //     ...product,
-                        //     price: Number(e.target.value),
-                        //   })
-                        // }
-                      />
-                    </FormGroup>
-                  </Col>
+                        <>
+                          <Input
+                            required
+                            // value={product?.name}
+                            className="form-control"
+                            name="name"
+                            // onChange={(e) =>
+                            //   setProduct({ ...product, name: e.target.value })
+                            // }
+                          />
+                        </>
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="Formula" />
-                      </Label>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="Price" />
+                        </Label>
 
-                      <Input
-                        required
-                        // value={product?.formula}
-                        className="form-control"
-                        name="formula"
-                        // onChange={(e) =>
-                        //   setProduct({ ...product, formula: e.target.value })
-                        // }
-                      />
-                    </FormGroup>
-                  </Col>
+                        <Input
+                          required
+                          // value={product?.price}
+                          type="number"
+                          className="radio-in"
+                          name="phone"
+                          // validate={validateEmail}
+                          // onChange={(e) => setNumber()}
+                          // onChange={(e) =>
+                          //   setProduct({
+                          //     ...product,
+                          //     price: Number(e.target.value),
+                          //   })
+                          // }
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="Description" />
-                      </Label>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="Formula" />
+                        </Label>
 
-                      <Input
-                        type="textarea"
-                        className="form-control"
-                        // value={product?.description}
-                        name="description"
-                        // onChange={(e) =>
-                        //   setProduct({
-                        //     ...product,
-                        //     description: e.target.value,
-                        //   })
-                        // }
-                      />
-                    </FormGroup>
-                  </Col>
+                        <Input
+                          required
+                          // value={product?.formula}
+                          className="form-control"
+                          name="formula"
+                          // onChange={(e) =>
+                          //   setProduct({ ...product, formula: e.target.value })
+                          // }
+                        />
+                      </FormGroup>
+                    </Col>
 
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="BarCode" />
-                      </Label>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="Description" />
+                        </Label>
 
-                      <Input
-                        required
-                        className="form-control"
-                        name="barcode"
-                        // value={product?.barcode}
-                        // onChange={(e) =>
-                        //   setProduct({ ...product, barcode: e.target.value })
-                        // }
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col lg={6}>
-                    <FormGroup>
-                      <Label>
-                        <IntlMessages id="Save info" />
-                      </Label>
+                        <Input
+                          type="textarea"
+                          className="form-control"
+                          // value={product?.description}
+                          name="description"
+                          // onChange={(e) =>
+                          //   setProduct({
+                          //     ...product,
+                          //     description: e.target.value,
+                          //   })
+                          // }
+                        />
+                      </FormGroup>
+                    </Col>
 
-                      <ButtonGroup>
-                        <Button
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="BarCode" />
+                        </Label>
+
+                        <Input
                           required
                           className="form-control"
                           name="barcode"
@@ -330,21 +420,39 @@ export default function Profile({match}) {
                           // onChange={(e) =>
                           //   setProduct({ ...product, barcode: e.target.value })
                           // }
-                        >
-                          Submit
-                        </Button>
-                        <Button
-                          style={{ backgroundColor: '#0066b3' }}
-                          className="mr-3"
-                          onClick={editProfile}
-                        >
-                          Back
-                        </Button>
-                      </ButtonGroup>
-                    </FormGroup>
-                  </Col>
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={6}>
+                      <FormGroup>
+                        <Label>
+                          <IntlMessages id="Save info" />
+                        </Label>
 
-                  {/* <Col lg={6}>
+                        <ButtonGroup>
+                          <Button
+                            required
+                            className="form-control"
+                            name="barcode"
+                            // value={product?.barcode}
+                            // onChange={(e) =>
+                            //   setProduct({ ...product, barcode: e.target.value })
+                            // }
+                          >
+                            Submit
+                          </Button>
+                          <Button
+                            style={{ backgroundColor: '#0066b3' }}
+                            className="mr-3"
+                            onClick={editProfile}
+                          >
+                            Back
+                          </Button>
+                        </ButtonGroup>
+                      </FormGroup>
+                    </Col>
+
+                    {/* <Col lg={6}>
                     <div className="form-row">
                       <div className="form-group col-md-9">
                         <label className="">Select File :</label>
@@ -374,65 +482,65 @@ export default function Profile({match}) {
                       </div>
                     </div>
                   </Col> */}
-                </>
+                  </>
+                )}
+              </Row>
+
+              {thisView ? (
+                <Button
+                  style={{ backgroundColor: '#0066b3' }}
+                  className="mr-3"
+                  onClick={editProfile}
+                >
+                  Edit Profile
+                </Button>
+              ) : (
+                ''
+                // <Button style={{ backgroundColor: '#0066b3' }} onClick={editData}>
+                //   {loading ? (
+                //     <div className="d-flex justify-content-center">
+                //       <Loader height={18} width={18} type="Oval" color="#fff" />
+                //       &nbsp; Updating
+                //     </div>
+                //   ) : (
+                //     'Save'
+                //   )}
+                // </Button>
               )}
-            </Row>
+            </Form>
+          </Formik>
 
-            {thisView ? (
-              <Button
-                style={{ backgroundColor: '#0066b3' }}
-                className="mr-3"
-                onClick={editProfile}
-              >
-                Edit Profile
-              </Button>
-            ) : (
-              ''
-              // <Button style={{ backgroundColor: '#0066b3' }} onClick={editData}>
-              //   {loading ? (
-              //     <div className="d-flex justify-content-center">
-              //       <Loader height={18} width={18} type="Oval" color="#fff" />
-              //       &nbsp; Updating
-              //     </div>
-              //   ) : (
-              //     'Save'
-              //   )}
-              // </Button>
-            )}
-          </Form>
-        </Formik>
-
-        <Row className="icon-cards-row my-4 justify-content-center">
-          <Colxx xxs="6" sm="4" md="3" lg="2">
-            <IconCard
-              title="Total Appointments"
-              icon="iconsminds-testimonal"
-              value="56"
-              className="mb-4"
-            />
-          </Colxx>
-          <Colxx xxs="6" sm="4" md="3" lg="2">
-            <IconCard
-              title="Total Fees Paid"
-              icon="iconsminds-dollar"
-              value="$100"
-              className="mb-4"
-            />
-          </Colxx>
-          <Colxx xxs="6" sm="4" md="3" lg="2">
-            <IconCard
-              title="BMI  "
-              icon="iconsminds-jump-rope"
-              value="21.1"
-              className="mb-4"
-            />
-          </Colxx>
-        </Row>
-        {/* <Row className='w-100'> */}
+          <Row className="icon-cards-row my-4 justify-content-center">
+            <Colxx xxs="6" sm="4" md="3" lg="2">
+              <IconCard
+                title="Total Appointments"
+                icon="iconsminds-testimonal"
+                value="56"
+                className="mb-4"
+              />
+            </Colxx>
+            <Colxx xxs="6" sm="4" md="3" lg="2">
+              <IconCard
+                title="Total Fees Paid"
+                icon="iconsminds-dollar"
+                value="$100"
+                className="mb-4"
+              />
+            </Colxx>
+            <Colxx xxs="6" sm="4" md="3" lg="2">
+              <IconCard
+                title="BMI  "
+                icon="iconsminds-jump-rope"
+                value="21.1"
+                className="mb-4"
+              />
+            </Colxx>
+          </Row>
+          {/* <Row className='w-100'> */}
           <Appoint />
-        {/* </Row> */}
-      </CardBody>
-    </Card>
+          {/* </Row> */}
+        </CardBody>
+      </Card>
     </>
   );
 }

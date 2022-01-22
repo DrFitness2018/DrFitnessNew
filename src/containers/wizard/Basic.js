@@ -18,10 +18,13 @@ import TopNavigation from 'components/wizard/TopNavigation';
 import { Select } from '@material-ui/core';
 import { FormikReactSelect } from 'containers/form-validations/FormikFields';
 import { Link } from 'react-router-dom';
-import { db, signup } from 'firebase';
+import { auth, db } from 'firebase';
+import { setDoc, doc } from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
-import { collection } from 'firebase/firestore';
+import { collection, Timestamp } from 'firebase/firestore';
 import { InserCollection } from 'redux/store/actions/exerciseInnerAction';
+import { firebaseConfig } from 'constants/defaultValues';
 
 const Basic = ({ intl }) => {
   const [name, setName] = useState('');
@@ -57,8 +60,34 @@ const Basic = ({ intl }) => {
     bmi: bmi,
   };
 
-  const onSubmit = (values) => {
-    dispatch(InserCollection('user', values));
+  const onSubmit = async (values) => {
+    // dispatch(InserCollection('user', values));
+    console.log(apidata, 'api');
+    try {
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      await setDoc(doc(db, 'users', result.user.uid), {
+        uid: result.user.uid,
+        name: name,
+        email: email,
+        password: password,
+        age: age,
+        height: height,
+        weight: weight,
+        disease: disease,
+        injury: injury,
+        gender: gender,
+        bmi: bmi,
+        createAt: Timestamp.fromDate(new Date()),
+        isOnline: true,
+        userType:'user'
+      });
+    } catch (error) {
+      alert('Data Not Sent');
+    }
   };
 
   const topNavClick = (stepItem, push) => {
@@ -436,17 +465,17 @@ function Weight(props) {
           )}
           {props.check === 'yes' || props.chkdisease === 'yes' ? (
             <Link
-              to="/app/Consultant/doctors"
-              className="btn btn-outline-success"
-            >
-              See Cosnultant
-            </Link>
-          ) : (
-            <Link
               to="/app/exercise/exerciseGain"
               className="btn btn-outline-success"
             >
               See Gain Diet Plans and Exercises
+            </Link>
+          ) : (
+            <Link
+              to="/app/Consultant/doctors"
+              className="btn btn-outline-success"
+            >
+              See Cosnultant
             </Link>
           )}
         </CardBody>

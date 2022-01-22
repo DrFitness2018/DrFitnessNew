@@ -14,3 +14,6 @@ export const updateCollection = {
 export const viewCollection = {
         VIEW_COLLECTION:"VIEW_COLLECTION"
 }
+export const CurrentUser = {
+        CURRENT_USER:"CURRENT_USER"
+}

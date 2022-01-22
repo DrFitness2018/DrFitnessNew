@@ -3,6 +3,8 @@ import React from 'react';
 import { Row } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
+import Home from './Home';
+import './chat.css'
 
 const Chat = ({ match }) => {
   return (
@@ -14,11 +16,12 @@ const Chat = ({ match }) => {
         </Colxx>
       </Row>
       <Row>
-        <Colxx xxs="12" className="mb-4">
+        {/* <Colxx xxs="12" className="mb-4">
           <p>
             chat conpo
           </p>
-        </Colxx>
+        </Colxx> */}
+        <Home />
       </Row>
     </>
   );

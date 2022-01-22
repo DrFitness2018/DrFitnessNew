@@ -1,11 +1,14 @@
 /* eslint-disable */
 
 import React, { useState, useEffect } from 'react';
-import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
-import { NavLink,Link } from 'react-router-dom';
+import { Row, Card, CardTitle, Label, FormGroup, Button, Input,Form } from 'reactstrap';
+import { NavLink,Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { updateDoc ,doc} from 'firebase/firestore';
+import { auth, db } from 'firebase';
 
-import { Formik, Form, Field } from 'formik';
+// import { Formik, Form, Field } from 'formik';
 import { NotificationManager } from 'components/common/react-notifications';
 
 import { Colxx } from 'components/common/CustomBootstrap';
@@ -32,9 +35,20 @@ const validateEmail = (value) => {
   return error;
 };
 
-const Login = ({ history, loading, error, loginUserAction }) => {
-  const [email] = useState('demo@gogo.com');
-  const [password] = useState('gogo123');
+
+
+const Login = ({  loading, error, loginUserAction }) => {
+  // const [email] = useState('');
+  // const [password] = useState('');
+
+  const history = useHistory();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const apidata = {
+    email: email,
+    password: password
+  }
 
   useEffect(() => {
     if (error) {
@@ -42,13 +56,34 @@ const Login = ({ history, loading, error, loginUserAction }) => {
     }
   }, [error]);
 
-  const onUserLogin = (values) => {
+  // console.log(p)
+
+  const onUserLogin = async (values) => {
+    
     if (!loading) {
       if (values.email !== '' && values.password !== '') {
-        loginUserAction(values, history);
+        // loginUserAction(values, history);
+        console.log(apidata, 'api');
+        try {
+          const result = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          await updateDoc(doc(db, 'users', result.user.uid), {
+            isOnline: true,
+          });
+          history.replace('/app/profile/Profile')
+        } catch (error) {
+          alert('no user or email pass / or incorrect , '+error);
+        }
       }
     }
+
+    // console.log('val',email," ",password, ' ')
   };
+
+
 
   const initialValues = { email, password };
 
@@ -75,8 +110,39 @@ const Login = ({ history, loading, error, loginUserAction }) => {
             <CardTitle className="mb-4">
               <IntlMessages id="user.login-title" />
             </CardTitle>
-
-            <Formik initialValues={initialValues} onSubmit={onUserLogin}>
+            <Form>
+                  <FormGroup>
+                    {/* <Label>Name</Label>
+                    <Input
+                      type="text"
+                      name="name"
+                      placeholder="Ahmed"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    /> */}
+                    <Label>Email</Label>
+                    <Input
+                      type="text"
+                      name="email"
+                      placeholder="Ahmed@gmail.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Label>password</Label>
+                    <Input
+                      type="password"
+                      name="password"
+                      placeholder="***"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button
+                    onClick={()=>onUserLogin(apidata)}>
+                      Login
+                    </Button>
+                  </FormGroup>
+                </Form>
+            {/* <Formik initialValues={initialValues} onSubmit={onUserLogin}>
               {({ errors, touched }) => (
                 <Form className="av-tooltip tooltip-label-bottom">
                   <FormGroup className="form-group has-float-label">
@@ -135,7 +201,7 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                   </div>
                 </Form>
               )}
-            </Formik>
+            </Formik> */}
           </div>
         </Card>
       </Colxx>

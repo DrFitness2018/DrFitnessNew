@@ -8,16 +8,30 @@ import {
   insertCollection,
   updateCollection,
   viewCollection,
+  CurrentUser,
 } from '../constant/exerciseInnerConst';
-import { Toast, ToastBody } from 'reactstrap';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../firebase';
 
-export const getResetValue = (data) => (dispatch) => {
-  dispatch({ type: exercisesConst.RESET_DAY, payload: data });
-};
+import { Toast, ToastBody } from 'reactstrap';
+import { useEffect, useState } from 'react';
+
+// export const getCurrentUser = (data) => (dispatch) => {
+// onAuthStateChanged(auth, (user) => {
+//     dispatch({
+//       type: CurrentUser.CURRENT_USER,
+//       // payload: response,
+//     });
+//   });
+// };
+
+// export const getCurrentUser = (data) => (dispatch) => {
+//   dispatch({ type: exercisesConst.RESET_DAY, payload: data });
+// };
 export const ViewCollection = (collectionName) => async (dispatch) => {
   const globalCollection = collection(db, collectionName);
   const response = await getDocs(globalCollection);
-  console.log(response,"TestingResponse")
+  console.log(response, 'TestingResponse');
   if (response) {
     dispatch({
       type: viewCollection.VIEW_COLLECTION,

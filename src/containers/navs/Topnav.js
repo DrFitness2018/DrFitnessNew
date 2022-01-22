@@ -3,7 +3,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import imglogo from '../../Images/logoMuqqa.png'
 
@@ -39,6 +39,8 @@ import {
 import TopnavEasyAccess from './Topnav.EasyAccess';
 import TopnavNotifications from './Topnav.Notifications';
 import TopnavDarkSwitch from './Topnav.DarkSwitch';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from 'firebase';
 
 const TopNav = ({
   intl,
@@ -202,6 +204,21 @@ const TopNav = ({
     clickOnMobileMenuAction(_containerClassnames);
   };
 
+  const [user, setUser] = useState();
+  const [img, setImg] = useState('');
+
+  useEffect(()=>{
+    setTimeout(() => {
+      getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
+        if (docSnap.exists) {
+          setUser(docSnap.data());
+        }
+      });
+    }, 2000);
+  },[])
+
+  console.log("navtop -> ",user)
+
   const { messages } = intl;
   return (
     <nav className="navbar fixed-top">
@@ -303,9 +320,11 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Shahzaib Abdul Qadir</span>
+              <span className="name mr-1 py-2">{user?.name}</span>
               <span>
-                <img alt="Profile" src={shahzaib} />
+                <img height="40px" 
+                className='rounded-circle'
+                width="60px" alt="avatar" src={user?.avatar} />
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>

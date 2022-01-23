@@ -25,10 +25,12 @@ const User = ({ user1, user, selectUser, chat }) => {
         <div className="user_info">
           <div className="user_detail">
             <img src={user.avatar || Img} alt="avatar" className="avatar" />
-            <h4>{user.name}</h4>
+            <h4 style={{textTransform:'capitalize',marginRight:'3px'}}>{user.name}</h4>
+            <h6 style={{textTransform:'capitalize',textAlign:'right',paddingLeft:'3px',fontSize:'12px'}}>{user.conType}</h6>
             {data?.from !== user1 && data?.unread && (
               <small className="unread">New</small>
             )}
+
           </div>
           <div
             className={`user_status ${user.isOnline ? "online" : "offline"}`}

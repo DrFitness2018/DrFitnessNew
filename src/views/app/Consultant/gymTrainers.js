@@ -11,6 +11,19 @@ import Rating from 'components/common/Rating';
 const Trainers = ({ match }) => {
   const [selectedRadio, setSelectedRadio] = useState('0');
   const [activeSecondTab, setActiveSecondTab] = useState('1');
+
+  
+  const [modalShow, setModalShow] = useState(false);
+
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(collection(db, 'users'), (snapshot) => {
+      setDoctors(snapshot.docs.map((doc) => doc.data()));
+    });
+  }, []);
+
+
   return (
     <>
       <Row>
@@ -71,24 +84,25 @@ const Trainers = ({ match }) => {
                 </TabPane>
                 <TabPane tabId="1">
                   <Row>
-                    {/* <Colxx sm="12" lg="12 "> */}
-                      {Trainer &&
-                        Trainer.filter(
-                          (item) => item.sex === 'Female'
-                        ).map((item, index) => {
-                          return (
-                            <UserCards
-                              mainTitle={item.label}
-                              image={item?.imgSrc}
-                              badge="Dr Fitness Recommended"
-                              day={item.details}
-                              fee={item.fee}
-                              rating={item.star} 
-                              // status={item.status}
-                            />
-                          );
-                        })}
-                    {/* </Colxx> */}
+                     {/* <Colxx sm="12" lg="12"> */}
+                {doctors &&
+                  doctors.filter((user) => user.userType === 'consultant')
+                  .filter((user)=> user.conType === 'trainer')
+                  .map((user, index) => {
+                    return (
+                      <UserCards
+                        mainTitle={user.name}
+                        image={user?.avatar}
+                        badge="Dr Fitness Recommended"
+                        // day={user.Degree}
+                        day={user.designation}
+                        fee={user.fee}
+                        rating={user.rating}
+                        button={user.btn}
+                        // status={item.status}
+                      />
+                    );
+                  })}
                   </Row>
                 </TabPane>
                 <TabPane tabId="2">

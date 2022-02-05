@@ -17,6 +17,8 @@ import {
   TabPane,
   Modal,
   FormGroup,
+  Col,
+  Label,
 } from 'reactstrap';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import Breadcrumb from 'containers/navs/Breadcrumb';
@@ -31,13 +33,58 @@ import imgs from 'Images/tulaibs.PNG';
 import CustomSelectInput from 'components/common/CustomSelectInput';
 import Select from 'react-select';
 import data from 'data/notifications';
+import { addDoc, collection, doc, getDoc, onSnapshot, setDoc, Timestamp } from 'firebase/firestore';
+import { auth, db } from 'firebase';
+import { Field } from 'formik';
+import { getIdToken } from 'firebase/auth';
 
 const Doctors = ({ match }) => {
   const [selectedRadio, setSelectedRadio] = useState('0');
   const [activeSecondTab, setActiveSecondTab] = useState('1');
 
-  const [modalShow, setModalShow] = useState(false);
+  const [modalShow1, setModal1Show] = useState(false);
+  const [modalShow2, setModal2Show] = useState(false);
 
+  const [doctors, setDoctors] = useState([]);
+
+  const [docID,setDocid] = useState([]);
+
+  const [curruser,setcurruser] =useState([])
+
+  // const [id,setid] = useState('')
+
+  useEffect(() => {   
+    onSnapshot(collection(db, 'users'), (snapshot) => {
+      setDoctors(snapshot.docs.map((doc) => ({...doc.data() , id: doc.id})));
+    });
+  }, []);
+  useEffect(() => {
+    getDoc(doc(db, 'users', auth?.currentUser?.uid)).then((docSnap) => {
+      if (docSnap.exists) {
+        setcurruser(docSnap.data());
+      }
+    });
+  }, []);
+  
+// console.log('suer,,,,,...',curruser)
+  const handleid = async(ids) => {   
+    getDoc(doc(db, 'users', ids)).then((docSnap) => {
+      if (docSnap.exists) {
+        setDocid(docSnap.data());
+      }
+    });
+  };
+
+
+  // const getId = async(id)=>{
+  //   setid(id)
+    
+  //   console.log(id)
+  // }
+
+  // console.log('docid-<>',id)
+  console.log('docidcomplete-<>',docID)
+  console.log('doc form consultant page ->', doctors);
   return (
     <>
       <Row>
@@ -49,8 +96,15 @@ const Doctors = ({ match }) => {
       <Row>
         <Colxx xxs="12" className="mb-4">
           <AddAppointments
-            show={modalShow}
-            onHide={() => setModalShow(false)}
+            show={modalShow1}
+            onHide={() => setModal1Show(false)}
+            doc = {docID}
+            current={curruser}
+          />
+          <ConsultantDetails
+            show={modalShow2}
+            onHide={() => setModal2Show(false)}
+            // doc = {docID}  
           />
         </Colxx>
         <Colxx>
@@ -86,67 +140,92 @@ const Doctors = ({ match }) => {
             <TabPane tabId="0">
               <Row className="flex-direction-row">
                 {/* <Colxx sm="12" lg="12"> */}
-                {LabConsultantsData.map((item, index) => {
-                  return (
-                    <UserCards
-                      mainTitle={item.label}
-                      image={item?.imgSrc}
-                      badge="Dr Fitness Recommended"
-                      day={item.details}
-                      fee={item.fee}
-                      rating={item.star}
-                      butt={() => setModalShow(true)}
-                      // status={item.status}
-                    />
-                  );
-                })}
+                {/* <Colxx sm="12" lg="12"> */}
+                {doctors &&
+                  doctors
+                    .filter((user) => user.userType === 'consultant')
+                    .filter((user) => user.conType === 'doctor')
+                    // .filter((user)=> user.gender === 'male'  )
+                    .map((user, index) => {
+                      return (
+                        <UserCards
+                          mainTitle={user.name}
+                          image={user?.avatar}
+                          badge="Dr Fitness Recommended"
+                          // day={user.Degree}
+                          day={user.Degree}
+                          fee={user.fee}
+                          rating={user.rating}
+                          button={user.btn}
+                          butt1={() => {setModal1Show(true), handleid(user.id)}}
+                          butt2={() => {setModal2Show(true), handleid(user.id)}}
+                          // idbut = {()=>{ handleid(user.id)}}
+                          // id={user.id}
+                          // status={item.status}
+                        />
+                      );
+                    })}
                 {/* </Colxx> */}
               </Row>
             </TabPane>
             <TabPane tabId="1">
               <Row>
                 {/* <Colxx sm="12" lg="12"> */}
-                {LabConsultantsData &&
-                  LabConsultantsData.filter(
-                    (item) => item.sex === 'Female'
-                  ).map((item, index) => {
-                    return (
-                      <UserCards
-                        mainTitle={item.label}
-                        image={item?.imgSrc}
-                        badge="Dr Fitness Recommended"
-                        day={item.details}
-                        fee={item.fee}
-                        rating={item.star}
-                        button={item.btn}
-                        // status={item.status}
-                      />
-                    );
-                  })}
+                {doctors &&
+                  doctors
+                    .filter((user) => user.userType === 'consultant')
+                    .filter((user) => user.conType === 'doctor')
+                    .filter((user) => user.gender === 'female')
+                    .map((user, index) => {
+                      return (
+                        <UserCards
+                          mainTitle={user.name}
+                          image={user?.avatar}
+                          badge="Dr Fitness Recommended"
+                          // day={user.Degree}
+                          day={user.Degree}
+                          fee={user.fee}
+                          rating={user.rating}
+                          button={user.btn}
+                          butt1={() => setModal1Show(true)}
+                          butt2={() => setModal2Show(true)}
+                          id={user.uid}
+
+                          // status={item.status}
+                        />
+                      );
+                    })}
                 {/* </Colxx> */}
               </Row>
             </TabPane>
             <TabPane tabId="2">
               <Row>
                 {/* <Colxx sm="12" lg="12"> */}
-                {LabConsultantsData &&
-                  LabConsultantsData.filter((item) => item.sex === 'Male').map(
-                    (item, index) => {
+                {/* <Colxx sm="12" lg="12"> */}
+                {doctors &&
+                  doctors
+                    .filter((user) => user.userType === 'consultant')
+                    .filter((user) => user.conType === 'doctor')
+                    .filter((user) => user.gender === 'male')
+                    .map((user, index) => {
                       return (
                         <UserCards
-                          mainTitle={item.label}
-                          image={item?.imgSrc}
+                          mainTitle={user.name}
+                          image={user?.avatar}
                           badge="Dr Fitness Recommended"
-                          day={item.details}
-                          fee={item.fee}
-                          rating={item.star}
-                          button={item.btn}
+                          // day={user.Degree}
+                          day={user.Degree}
+                          fee={user.fee}
+                          rating={user.rating}
+                          button={user.btn}
+                          butt1={() => setModal1Show(true)}
+                          butt2={() => setModal2Show(true)}
+                          id={user.uid}
 
                           // status={item.status}
                         />
                       );
-                    }
-                  )}{' '}
+                    })}
                 {/* </Colxx> */}
               </Row>
             </TabPane>
@@ -191,12 +270,44 @@ const UserCards = (props) => {
                 <CardSubtitle className="mb-1">{props.mainTitle}</CardSubtitle>
                 <RatingExamples star={props.rating} />
               </Link>
-              <CardText className="text-muted text-small mb-4">
-                {props.details}
+              <CardText className="text-muted text-small ">
+                {props.day}
               </CardText>
-              <Button outline size="sm" color="primary" onClick={props.butt}>
-                Book Appointment
-              </Button>
+              <ButtonGroup
+                outline
+                size="sm"
+                color="primary"
+                onClick={props.butt}
+              >
+                <Button
+                  outline
+                  size="sm"
+                  color="secondary"
+                  className="mt-1"
+                  onClick={props.butt1}
+
+                >
+                  Book Appointment
+                </Button>
+                <Button
+                  outline
+                  size="sm"
+                  color="primary"
+                  className="mt-1"
+                  onClick={props.butt2}
+                >
+                  Details
+                </Button>
+                {/* <Button
+                  outline
+                  size="sm"
+                  color="primary"
+                  className="mt-1"
+                  onClick={props.idbut}
+                >
+                  id get
+                </Button> */}
+              </ButtonGroup>
             </div>
           </CardBody>
         </Card>
@@ -217,17 +328,66 @@ const RatingExamples = (props) => {
 
 // import React, { useEffect, useState } from "react";
 
+const ConsultantDetails = (props) => {
+  return (
+    <>
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        isOpen={props.show}
+        style={{ boxShadow: 'none' }}
+      >
+        <ModalHeader closeButton>
+          Doctor Details
+          <Button
+            onClick={props.onHide}
+            outline
+            style={{ marginLeft: '40px', color: 'red', borderColor: 'red' }}
+          >
+            Close
+          </Button>
+        </ModalHeader>
+        <ModalBody>
+          <Row className="h-100">
+            <Col lg={4}>
+              <FormGroup className="form-group has-float-label">
+                <Label>Picture</Label>
+                <h3>abc</h3>
+              </FormGroup>
+            </Col>
+          </Row>
+        </ModalBody>
+      </Modal>
+    </>
+  );
+};
 const AddAppointments = (props) => {
   const [singleSelections, setSingleSelections] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState('0');
   const [doctor, setDoctor] = useState([]);
   const [slot, setSlot] = useState([]);
+  const [reason, setreason] = useState('');
 
   const answerTypes = [
     { label: '10:00 PM  ', value: '1', id: 1 },
     { label: '11:00 AM', value: '2', id: 2 },
     { label: '12:00 AM', value: '3', id: 3 },
   ];
+  const selectDay = [
+    { label: 'monday', value: 'monday', key: 1 },
+    { label: 'tuesday', value: 'tuesday', key: 2 },
+    { label: 'wednesday', value: 'wednesday', key: 3 },
+    { label: 'thursday', value: 'thursday', key: 4 },
+    { label: 'friday', value: 'friday', key: 5 },
+    { label: 'saturday', value: 'saturday', key: 6 },
+    { label: 'sunday', value: 'sunday', key: 7 },
+  ];
+  const [Day, setDay] = useState('');
+  const [slotTime, setslotTime] = useState('');
+  const [selectedDate, setselectedDate] = useState('');
+  const [slotselectedTime, setslotselectedTime] = useState('');
 
   const changeHanler = (selected) => {
     if (selected.length > 0) {
@@ -293,6 +453,46 @@ const AddAppointments = (props) => {
     const yyyy = today.getFullYear();
     return yyyy + '-' + mm + '-' + dd;
   };
+
+
+  // const [slotTime, setslotTime] = useState('');
+
+
+  // const [doctorsDataGet,setdoctorsDataGet] = useState(props.doc)
+  var Doctorsget = props.doc
+  var crr = props.current
+  crr = crr.avatar
+console.log("user" , crr)
+
+  console.log('getted data -aa > ',Doctorsget.name)
+
+  const AddSlotsInDB = async (values) => {
+
+    try {
+      await addDoc(collection(db, 'appointment' ), {
+        uid: auth?.currentUser?.uid,
+        mypic: auth?.currentUser?.photoURL,
+        DocID:Doctorsget.uid,
+        DocName:Doctorsget.name,
+        fee:Doctorsget.fee,
+        // avatar:`${crr}`,
+        Day: Day,
+        status:'pending',
+        slotTime: slotselectedTime,
+        reason:reason,
+        selectedDate: selectedDate,
+        createAt: Timestamp.fromDate(new Date()),
+      }
+      );
+      alert('Appointment Added')
+    } catch (error) {
+      alert('Data Not Sent' + error);
+    }
+  };
+  console.log("val op" , Day)
+  console.log("datepicker" , selectedDate)
+
+
   return (
     <>
       <Modal
@@ -306,7 +506,10 @@ const AddAppointments = (props) => {
         <TabContent activeTab={selectedRadio}>
           <TabPane tabId="0">
             <ModalHeader closeButton>
-              Add Appointment
+              Add Appointment with {" "}
+              <span style={{color:'green',textTransform:'capitalize'}}>
+              {Doctorsget.name}
+              </span>
               <Button
                 onClick={props.onHide}
                 outline
@@ -328,13 +531,15 @@ const AddAppointments = (props) => {
                         className="input-login-modal"
                         type="date"
                         min={disablePastDate()}
-                        onChange={() => changeDoctorHanler(doctor)}
-                        {...register('date', {
-                          required: {
-                            value: true,
-                            message: 'this field is required field',
-                          },
-                        })}
+                        // onChange={() => changeDoctorHanler(doctor)} 
+                        onChange={(e) => setselectedDate(e.target.value)} 
+                        // {...register('date', {
+                        //   required: {
+                        //     value: true,
+                        //     message: 'this field is required field',
+                        //   },
+                        // })}
+                        value={selectedDate}
                       />
                       {errors?.date?.message ? (
                         <div className="text-error">
@@ -344,7 +549,68 @@ const AddAppointments = (props) => {
                         ''
                       )}
                     </div>
-                    <div className="col-lg-12">
+                    <div>
+                      <span className="label-name-login">Select Day</span>
+                      <select
+                        className="input-login-modal"
+                        defaultValue={selectDay[0]}
+                        onChange={(e) => setDay(e.target.value)}
+                        // custom
+                        // {...register('day', {})}
+                      >
+                        {selectDay?.map((item, index) => (
+                          <option value={item?.label} key={index + 1}>
+                            {item?.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <span className="label-name-login">Select Slot</span>
+                      <select
+                        className="input-login-modal"
+                        // defaultValue={selectDay[0]}
+                        // custom
+                        // {...register('day', {})}
+                        onChange={(e) => setslotTime(e.target.value)}
+                      >
+                        <option value="8am-2pm">8am-2pm</option>
+                        <option value="2pm-8pm">2pm-8pm</option>
+                      </select>
+                    </div>
+                    <div>
+                      <span className="label-name-login">Select Time</span>
+                      <select
+                        className="input-login-modal"
+                        // defaultValue={selectDay[0]}
+                        // custom
+                        // {...register('day', {})}
+                        onChange={(e) => setslotselectedTime(e.target.value)}
+                      >
+                        {slotTime === '8am-2pm' ? (
+                          <>
+                            <option value="8am-9am">8am-9am</option>
+                            <option value="9am-10am">9am-10am</option>
+                            <option value="10am-11am">10am-11am</option>
+                            <option value="11am-12pm">11am-12pm</option>
+                            <option value="12pm-1pm">12pm-1pm</option>
+                            <option value="1pm-2pm">1pm-2pm</option>
+                          </>
+                        ) : slotTime === '2pm-8pm' ? (
+                          <>
+                            <option value="2pm-3pm">2pm-3pm</option>
+                            <option value="3pm-4pm">3pm-4pm</option>
+                            <option value="4pm-5pm">4pm-5pm</option>
+                            <option value="5pm-6pm">5pm-6pm</option>
+                            <option value="6pm-7pm">6pm-7pm</option>
+                            <option value="7pm-8pm">7pm-8pm</option>
+                          </>
+                        ) : (
+                          ''
+                        )}
+                      </select>
+                    </div>
+                    {/* <div className="col-lg-12">
                       <span className="label-name-login">Slots</span>
                       <FormGroup>
                         <Select
@@ -357,19 +623,21 @@ const AddAppointments = (props) => {
                           onChange={(t) => setSlot(t)}
                         />
                       </FormGroup>
-                    </div>
+                    </div> */}
                     <div className="col-lg-12">
                       <span className="label-name-login">Reason</span>
                       <textarea
                         className="input-login-modal"
                         style={{ minHeight: '100px' }}
                         type="text"
-                        {...register('description', {
-                          required: {
-                            value: false,
-                            message: 'this field is required field',
-                          },
-                        })}
+                        value={reason}
+                        onChange ={(e)=>setreason(e.target.value)}
+                        // {...register('description', {
+                        //   required: {
+                        //     value: false,
+                        //     message: 'this field is required field',
+                        //   },
+                        // })}
                       />
                       {errors?.description?.message ? (
                         <div className="text-error">
@@ -380,19 +648,10 @@ const AddAppointments = (props) => {
                       )}
                     </div>{' '}
                   </div>
-                  <Button
-                    variant="success"
-                    outline
-                    type="submit"
-                    onClick={() => {
-                      setSelectedRadio('1');
-                    }}
-                    // value="Add Appointment"
-                    className=" btn-block mx-auto"
-                    // style={{ width: '85%', textAlign: 'center' }}
-                  >
-                    Proceeed To Pay
-                  </Button>
+                  <Button 
+                  onClick={() => {AddSlotsInDB(),setSelectedRadio('1')}}
+                  >Proceed to Pay</Button>
+
                 </form>
               </div>
             </ModalBody>

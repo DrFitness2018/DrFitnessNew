@@ -1,5 +1,5 @@
 /*eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Badge,
   Button,
@@ -19,89 +19,111 @@ import Breadcrumb from 'containers/navs/Breadcrumb';
 import src from '../../../Images/lap-consul/1.JPG';
 import src1 from '../../../Images/lap-consul/2.JPG';
 import src2 from '../../../Images/lap-consul/3.JPG';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { auth, db } from 'firebase';
 
 const Appointment = ({ match }) => {
   const [selectedRadio, setSelectedRadio] = useState('1');
   const [activeSecondTab, setActiveSecondTab] = useState('1');
 
-  const Appointments = [
-    {
-      id: 1,
-      imgSrc: src,
-      label: 'DR. SHAHEDA ANWAR',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 2000,
-      star: 1,
-      sex: 'Female',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'pending',
-    },
-    {
-      id: 2,
-      imgSrc: src1,
-      label: 'DR. ASLAM PATHAN',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 10000,
-      star: 1,
-      sex: 'Male',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'approved',
-    },
-    {
-      id: 3,
-      imgSrc: src1,
-      label: 'DR. ASLAM PATHAN',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 10000,
-      star: 1,
-      sex: 'Male',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'approved',
-    },
-    {
-      id: 1,
+  // const Appointments = [
+  //   {
+  //     id: 1,
+  //     imgSrc: src,
+  //     label: 'DR. SHAHEDA ANWAR',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 2000,
+  //     star: 1,
+  //     sex: 'Female',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'pending',
+  //   },
+  //   {
+  //     id: 2,
+  //     imgSrc: src1,
+  //     label: 'DR. ASLAM PATHAN',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 10000,
+  //     star: 1,
+  //     sex: 'Male',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'approved',
+  //   },
+  //   {
+  //     id: 3,
+  //     imgSrc: src1,
+  //     label: 'DR. ASLAM PATHAN',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 10000,
+  //     star: 1,
+  //     sex: 'Male',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'approved',
+  //   },
+  //   {
+  //     id: 1,
 
-      imgSrc: src1,
-      label: 'DR. ASLAM PATHAN',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 10000,
-      star: 1,
-      sex: 'Male',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'approved',
-    },
-    {
-      id: 1,
+  //     imgSrc: src1,
+  //     label: 'DR. ASLAM PATHAN',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 10000,
+  //     star: 1,
+  //     sex: 'Male',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'approved',
+  //   },
+  //   {
+  //     id: 1,
 
-      imgSrc: src2,
-      label: 'DR. Tullu ',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 4000,
-      star: 1,
-      sex: 'Male',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'rejected',
-    },
-    {
-      id: 1,
+  //     imgSrc: src2,
+  //     label: 'DR. Tullu ',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 4000,
+  //     star: 1,
+  //     sex: 'Male',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'rejected',
+  //   },
+  //   {
+  //     id: 1,
 
-      imgSrc: src2,
-      label: 'DR. Tullu ',
-      details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
-      fee: 4000,
-      star: 1,
-      sex: 'Male',
-      Day: 'monday',
-      time: '2:00-2:00pm',
-      status: 'rejected',
-    },
-  ];
+  //     imgSrc: src2,
+  //     label: 'DR. Tullu ',
+  //     details: '10:00 12:30 1:00 1:30 2:00 2:30 3:00',
+  //     fee: 4000,
+  //     star: 1,
+  //     sex: 'Male',
+  //     Day: 'monday',
+  //     time: '2:00-2:00pm',
+  //     status: 'rejected',
+  //   },
+  // ];
+
+  const [Appointments, setAppointments] = useState([]);
+  const [userID,setUserID] = useState(auth?.currentUser?.uid)
+
+  useEffect(() => {
+    GetDataofAppointment();
+    // setUserID(auth?.currentUser?.uid)
+  }, []);
+
+  console.log('id ',userID)
+  const GetDataofAppointment = async () => {
+    const collectionRef = collection(db, 'appointment');
+
+    const q = query(collectionRef, where('uid', '==',`${auth?.currentUser?.uid}` ));
+    const snapshot = await getDocs(q);
+    const result = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    setAppointments(result);
+  };
+  console.log('result --- >', Appointments);
+
   return (
     <>
       {/* <Row>
@@ -146,7 +168,7 @@ const Appointment = ({ match }) => {
               <TabContent activeTab={selectedRadio}>
                 <TabPane tabId="1">
                   <Row>
-                  <Colxx sm="12" lg="12">
+                    <Colxx sm="12" lg="12">
                       <Card className="mb-4">
                         <CardBody>
                           <CardTitle>Pending Appointments</CardTitle>
@@ -174,23 +196,45 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.imgSrc}
+                                            src={item?.avatar}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
                                           />
                                         </td>
-                                        <td className="pt-50">{item.label}</td>
-                                        <td>{item.Day}</td>
-                                        <td>{item.time}</td>
+                                        <td className="pt-50">
+                                          {item.DocName}
+                                        </td>
+                                        <td>
+                                          {item.selectedDate} {item?.Day}
+                                        </td>
+                                        <td>{item.slotTime}</td>
                                         <td>{item.status}</td>
                                         <td>{item.fee}</td>
-                                        <td>{
-                                          item.status === 'pending' ? (
-                                            <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Cancel</Button>
-                                            ) :
-                                          <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Chat</Button>
-                                        }
+                                        <td>
+                                          {item.status === 'pending' ? (
+                                            <Button
+                                              style={{
+                                                height: '20px',
+                                                padding: 10,
+                                                paddingTop: 0,
+                                              }}
+                                              outline
+                                            >
+                                              Cancel
+                                            </Button>
+                                          ) : (
+                                            <Button
+                                              style={{
+                                                height: '20px',
+                                                padding: 10,
+                                                paddingTop: 0,
+                                              }}
+                                              outline
+                                            >
+                                              Chat
+                                            </Button>
+                                          )}
                                         </td>
                                       </tr>
                                     </tbody>
@@ -233,23 +277,38 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.imgSrc}
+                                            src={item?.avatar}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
                                           />
                                         </td>
-                                        <td className="pt-50">{item.label}</td>
-                                        <td>{item.Day}</td>
-                                        <td>{item.time}</td>
+                                        <td className="pt-50">
+                                          {item.DocName}
+                                        </td>
+                                        <td>
+                                          {item.selectedDate} {item?.Day}
+                                        </td>
+                                        <td>{item.slotTime}</td>
                                         <td>{item.status}</td>
                                         <td>{item.fee}</td>
-                                        <td>{
-                                          item.status === 'pending' ? (
+                                        <td>
+                                          {item.status === 'pending' ? (
                                             <Button>Cancel</Button>
-                                          ) :
-                                          <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Chat</Button>
-                                        }
+                                          ) : (
+                                            <Link to="/app/chatInbox">
+                                              <Button
+                                                style={{
+                                                  height: '20px',
+                                                  padding: 10,
+                                                  paddingTop: 0,
+                                                }}
+                                                outline
+                                              >
+                                                Chat
+                                              </Button>
+                                            </Link>
+                                          )}
                                         </td>
                                       </tr>
                                     </tbody>
@@ -264,7 +323,7 @@ const Appointment = ({ match }) => {
                 </TabPane>
                 <TabPane tabId="3">
                   <Row>
-                  <Colxx sm="12" lg="12">
+                    <Colxx sm="12" lg="12">
                       <Card className="mb-4">
                         <CardBody>
                           <CardTitle>Rejected By Doctor/Trainer</CardTitle>
@@ -292,24 +351,45 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.imgSrc}
+                                            src={item?.avatar}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
                                           />
                                         </td>
-                                        <td className="pt-50">{item.label}</td>
-                                        <td>{item.Day}</td>
-                                        <td>{item.time}</td>
+                                        <td className="pt-50">
+                                          {item.DocName}
+                                        </td>
+                                        <td>
+                                          {item.selectedDate} {item?.Day}
+                                        </td>
+                                        <td>{item.slotTime}</td>
                                         <td>{item.status}</td>
                                         <td>{item.fee}</td>
-                                        <td>{
-                                          item.status === 'rejected' ? (
-                                            <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Reason</Button>
-
-                                          ) :
-                                          <Button style={{height:"20px",padding:10,paddingTop:0}} outline>Chat</Button>
-                                        }
+                                        <td>
+                                          {item.status === 'rejected' ? (
+                                            <Button
+                                              style={{
+                                                height: '20px',
+                                                padding: 10,
+                                                paddingTop: 0,
+                                              }}
+                                              outline
+                                            >
+                                              Reason
+                                            </Button>
+                                          ) : (
+                                            <Button
+                                              style={{
+                                                height: '20px',
+                                                padding: 10,
+                                                paddingTop: 0,
+                                              }}
+                                              outline
+                                            >
+                                              Chat
+                                            </Button>
+                                          )}
                                         </td>
                                       </tr>
                                     </tbody>

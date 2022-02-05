@@ -209,7 +209,7 @@ const TopNav = ({
 
   useEffect(()=>{
     setTimeout(() => {
-      getDoc(doc(db, 'users', auth.currentUser.uid)).then((docSnap) => {
+      getDoc(doc(db, 'users', auth?.currentUser?.uid)).then((docSnap) => {
         if (docSnap.exists) {
           setUser(docSnap.data());
         }
@@ -217,7 +217,7 @@ const TopNav = ({
     }, 2000);
   },[])
 
-  console.log("navtop -> ",user)
+  // console.log("navtop -> ",user)
 
   const { messages } = intl;
   return (

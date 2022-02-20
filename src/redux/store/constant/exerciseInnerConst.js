@@ -17,3 +17,6 @@ export const viewCollection = {
 export const CurrentUser = {
         CURRENT_USER:"CURRENT_USER"
 }
+export const CurrentPrice = {
+        CURRENT_PRICE:"CURRENT_PRICE"
+}

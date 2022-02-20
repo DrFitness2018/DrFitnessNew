@@ -9,6 +9,7 @@ import {
   updateCollection,
   viewCollection,
   CurrentUser,
+  CurrentPrice,
 } from '../constant/exerciseInnerConst';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../firebase';
@@ -52,4 +53,17 @@ export const InserCollection = (collectionName, data) => async (dispatch) => {
       <ToastBody>Not add</ToastBody>
     </Toast>;
   }
+};
+
+export const getCurrentPrice = (data) => (dispatch) => {
+    dispatch({
+      type: CurrentPrice.CURRENT_PRICE,
+      payload: data,
+    });
+};
+export const getCurrentUser = (data) => (dispatch) => {
+    dispatch({
+      type: CurrentUser.CURRENT_USER,
+      payload: data,
+    });
 };

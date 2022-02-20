@@ -91,7 +91,7 @@ export default function Profile({ match }) {
     }, 2000);
 
     setcounter(counter + 1);
-    console.log('user == >', user);
+    // console.log('user == >', user);
     if (img) {
       const uploadImg = async () => {
         const imgRef = ref(
@@ -122,8 +122,8 @@ export default function Profile({ match }) {
     //  })
   }, [img]);
 
-  console.log(user, ' <--user');
-  console.log('img== ', img);
+  // console.log(user, ' <--user');
+  // console.log('img== ', img);
 
   const CurrentProduct = '';
 

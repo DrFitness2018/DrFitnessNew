@@ -22,6 +22,7 @@ import src2 from '../../../Images/lap-consul/3.JPG';
 import { Link, NavLink } from 'react-router-dom';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { auth, db } from 'firebase';
+import moment from 'moment';
 
 const Appointment = ({ match }) => {
   const [selectedRadio, setSelectedRadio] = useState('1');
@@ -116,7 +117,6 @@ const Appointment = ({ match }) => {
   console.log('id ',userID)
   const GetDataofAppointment = async () => {
     const collectionRef = collection(db, 'appointment');
-
     const q = query(collectionRef, where('uid', '==',`${auth?.currentUser?.uid}` ));
     const snapshot = await getDocs(q);
     const result = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -164,6 +164,14 @@ const Appointment = ({ match }) => {
                     Rejected{' '}
                   </Button>
                 </ButtonGroup>
+                <Button
+                    color="success"
+                    outline
+                    onClick={() => setSelectedRadio('4')}
+                    active={selectedRadio === '4'}
+                  >
+                    See My Subscriptions
+                  </Button>
               </div>
               <TabContent activeTab={selectedRadio}>
                 <TabPane tabId="1">
@@ -196,7 +204,7 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.avatar}
+                                            src={item?.Docpic}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
@@ -277,7 +285,7 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.avatar}
+                                            src={item?.Docpic}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
@@ -351,7 +359,7 @@ const Appointment = ({ match }) => {
                                         <th scope="row">{item.id}</th>
                                         <td>
                                           <img
-                                            src={item?.avatar}
+                                            src={item?.Docpic}
                                             width="50px"
                                             height="50px"
                                             style={{ borderRadius: '50%' }}
@@ -389,6 +397,79 @@ const Appointment = ({ match }) => {
                                             >
                                               Chat
                                             </Button>
+                                          )}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </>
+                                );
+                              })}{' '}
+                          </Table>
+                        </CardBody>
+                      </Card>
+                    </Colxx>
+                  </Row>
+                </TabPane>
+                <TabPane tabId="4">
+                  <Row>
+                    <Colxx sm="12" lg="12">
+                      <Card className="mb-4">
+                        <CardBody>
+                          <CardTitle>Subscriptions with Trainers</CardTitle>
+                          <Table hover responsive>
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Trainer Name</th>
+                                <th>Subscription plan</th>
+                                <th>Paid Fee</th>
+                                <th>Month</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            {Appointments &&
+                              Appointments.filter(
+                                (item) => item.appointmentType === 'trainer'
+                              ).map((item, index) => {
+                                // var epoc= new Date(item.createAt.seconds*1000)
+                                return (
+                                  <>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">{item.id}</th>
+                                        <td>
+                                          <img
+                                            src={item?.Docpic}
+                                            width="50px"
+                                            height="50px"
+                                            style={{ borderRadius: '50%' }}
+                                          />
+                                        </td>
+                                        <td className="pt-50">
+                                          {item.DocName}
+                                        </td>
+                                        <td>
+                                          {item.plan} 
+                                        </td>
+                                        <td>{item.price}</td>
+                                        <td>{item.createAt*1000}</td>
+                                        <td>
+                                          {item.status === 'pending' ? (
+                                            <Button>Cancel</Button>
+                                          ) : (
+                                            <Link to="/app/chatInbox">
+                                              <Button
+                                                style={{
+                                                  height: '20px',
+                                                  padding: 10,
+                                                  paddingTop: 0,
+                                                }}
+                                                outline
+                                              >
+                                                Chat
+                                              </Button>
+                                            </Link>
                                           )}
                                         </td>
                                       </tr>

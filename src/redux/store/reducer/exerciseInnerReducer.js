@@ -1,12 +1,13 @@
 /*eslint-disable*/
-import { exercisesConst,deleteCollection,insertCollection,updateCollection,viewCollection, CurrentUser } from "../constant/exerciseInnerConst";
+import { exercisesConst,deleteCollection,insertCollection,updateCollection,viewCollection, CurrentUser, CurrentPrice } from "../constant/exerciseInnerConst";
 const initialState = {
     reset:1,
     insert:[],
     update:[],
     delete:[],
     view:[],
-    crruser:''
+    crruser:[],
+    crrpayinfo:[]
 }
 const ExercisesReducer = (state=initialState,{type,payload})=>{
     switch (type) {
@@ -22,6 +23,8 @@ const ExercisesReducer = (state=initialState,{type,payload})=>{
             return {...state,view:payload}
         case CurrentUser.CURRENT_USER:
             return {...state,crruser:payload}
+        case CurrentPrice.CURRENT_PRICE:
+            return {...state,crrpayinfo:payload}
         default:
             return state            
     }
